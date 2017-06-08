@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
     if (a.setSingleInstance("engine-dict"))
     {
         a.setTheme("dark");
+        a.setWindowIcon(QIcon(":/image/logo.svg"));
 
         MainWindow w;
         w.setFixedSize(660, 500);
