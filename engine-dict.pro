@@ -27,3 +27,5 @@ HEADERS  += main_window.h \
     home_page.h \
     loading_page.h \
     dict_page.h
+
+RESOURCES = engine-dict.qrc

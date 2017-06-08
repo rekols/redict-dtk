@@ -9,10 +9,18 @@ ToolBar::ToolBar(QWidget *parent)
     QHBoxLayout *layout = new QHBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
 
+    QPixmap iconPixmap = QPixmap(":/image/logo.svg");
+    QLabel *iconLabel = new QLabel();
+    iconLabel->setFixedSize(24, 24);
+    iconLabel->setScaledContents(true);
+    iconLabel->setPixmap(iconPixmap);
+
     searchEdit = new DSearchEdit();
     searchEdit->setPlaceHolder("查单词");
     searchEdit->setFixedWidth(280);
 
+    layout->addWidget(iconLabel);
+    layout->addSpacing(90);
     layout->addStretch();
     layout->addWidget(searchEdit, 0, Qt::AlignHCenter);
     layout->addStretch();
