@@ -21,6 +21,8 @@ MainWindow::MainWindow(QWidget *parent)
     this->titleBar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
     this->setCentralWidget(mainWidget);
 
+    setBorderColor("#404244");
+
     connect(toolbar, SIGNAL(searchWord(QString)), this, SLOT(searchWord(QString)));
 }
 

@@ -15,6 +15,11 @@ HomePage::HomePage(QWidget *parent)
     QLabel *tips = new QLabel("每日一句");
     tips->setStyleSheet("font-size: 20px; color:#2CA7F8;");
 
+    contentLabel->setStyleSheet("font-size: 14px;");
+    noteLabel->setStyleSheet("font-size: 14px;");
+    timeLabel->setStyleSheet("font-size: 12px;");
+
+
     http = new QNetworkAccessManager(this);
     http2 = new QNetworkAccessManager(this);
 

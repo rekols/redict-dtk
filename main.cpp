@@ -1,6 +1,7 @@
 #include "main_window.h"
 #include <DApplication>
 #include <dutility.h>
+#include <QFont>
 
 DWIDGET_USE_NAMESPACE
 
@@ -12,11 +13,10 @@ int main(int argc, char *argv[])
 
     if (a.setSingleInstance("engine-dict"))
     {
-        a.setTheme("light");
+        a.setTheme("dark");
 
         MainWindow w;
-        w.setMinimumSize(660, 500);
-        w.resize(660, 500);
+        w.setFixedSize(660, 500);
         w.show();
 
         DUtility::moveToCenter(&w);
