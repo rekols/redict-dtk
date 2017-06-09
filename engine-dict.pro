@@ -20,12 +20,14 @@ SOURCES += main.cpp\
     toolbar.cpp \
     home_page.cpp \
     loading_page.cpp \
-    dict_page.cpp
+    dict_page.cpp \
+    load_progress.cpp
 
 HEADERS  += main_window.h \
     toolbar.h \
     home_page.h \
     loading_page.h \
-    dict_page.h
+    dict_page.h \
+    load_progress.h
 
 RESOURCES = engine-dict.qrc

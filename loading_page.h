@@ -1,15 +1,9 @@
 #ifndef INDICATORTAB_H
 #define INDICATORTAB_H
 
-#include <QLabel>
-#include <QPushButton>
-#include <QVBoxLayout>
+#include <QWidget>
 
-#include "dloadingindicator.h"
-
-DWIDGET_USE_NAMESPACE
-
-class LoadingPage : public QLabel
+class LoadingPage : public QWidget
 {
     Q_OBJECT
 
