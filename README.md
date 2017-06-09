@@ -4,7 +4,7 @@ A simple dictionary.
 
 ### Build dependencies
 
-`sudo apt install g++ qt5-default libdtkbase-dev libdtkwidget libdtkutil-dev`
+`sudo apt install g++ qt5-default libdtkbase-dev libdtkwidget-dev libdtkutil-dev`
 
 ### Runtime dependencies
 
