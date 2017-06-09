@@ -63,10 +63,6 @@ void DictPage::replyfinished(QNetworkReply *reply)
         m_pron = m_data.value("pronunciations").toObject();
         m_audio = m_data.value("audio_addresses").toObject();
 
-        /*
-        ukAudio = m_audio.value("uk").toString();
-        usAudio = m_audio.value("us").toString();
-        */
         nameLabel->setText(m_data.value("content").toString());
         ukPron->setText(QString("英 [%1]").arg( m_pron.value("uk").toString()));
         usPron->setText(QString("美 [%1]").arg( m_pron.value("us").toString()));
