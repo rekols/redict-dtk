@@ -8,7 +8,7 @@ QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = engine-dict
+TARGET = rekols-dict
 TEMPLATE = app
 
 CONFIG += link_pkgconfig
@@ -30,4 +30,4 @@ HEADERS  += main_window.h \
     dict_page.h \
     load_progress.h
 
-RESOURCES = engine-dict.qrc
+RESOURCES = rekols-dict.qrc
