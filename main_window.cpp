@@ -24,6 +24,10 @@ MainWindow::MainWindow(QWidget *parent)
     setBorderColor("#404244");
 
     connect(toolbar, SIGNAL(searchWord(QString)), this, SLOT(searchWord(QString)));
+
+    connect(dictPage->returnButton, &DLinkButton::clicked, this, [=]{
+        mainWidget->setCurrentIndex(1);
+    });
 }
 
 MainWindow::~MainWindow()

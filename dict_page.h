@@ -15,6 +15,9 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <dlinkbutton.h>
+
+DWIDGET_USE_NAMESPACE
 
 class DictPage : public QWidget
 {
@@ -28,6 +31,7 @@ public:
     QNetworkAccessManager *http;
 
     QVBoxLayout *layout;
+    QHBoxLayout *topLayout;
     QHBoxLayout *wordLayout;
     QHBoxLayout *pronLayout;
     QHBoxLayout *infoLayout;
@@ -35,6 +39,8 @@ public:
     QLabel *ukPron;
     QLabel *usPron;
     QLabel *infoLabel;
+
+    DLinkButton *returnButton;
 
 
 private slots:

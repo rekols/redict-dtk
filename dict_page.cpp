@@ -5,6 +5,7 @@ DictPage::DictPage(QWidget *parent)
 {
     http = new QNetworkAccessManager(this);
     layout = new QVBoxLayout(this);
+    topLayout = new QHBoxLayout();
     wordLayout = new QHBoxLayout();
     pronLayout = new QHBoxLayout();
     infoLayout = new QHBoxLayout();
@@ -12,11 +13,15 @@ DictPage::DictPage(QWidget *parent)
     ukPron = new QLabel("");
     usPron = new QLabel("");
     infoLabel = new QLabel("");
+    returnButton = new DLinkButton("返回主页");
 
     nameLabel->setStyleSheet("font-size: 25px; color:#2CA7F8;");
     ukPron->setStyleSheet("font-size: 12px");
     usPron->setStyleSheet("font-size: 12px");
     infoLabel->setStyleSheet("font-size: 18px");
+
+    topLayout->addSpacing(5);
+    topLayout->addWidget(returnButton, 0, Qt::AlignLeft);
 
     wordLayout->addSpacing(30);
     wordLayout->addWidget(nameLabel);
@@ -30,7 +35,8 @@ DictPage::DictPage(QWidget *parent)
     pronLayout->addWidget(usPron);
     pronLayout->addStretch();
 
-    layout->addSpacing(30);
+    layout->addLayout(topLayout);
+    layout->addSpacing(20);
     layout->addLayout(wordLayout);
     layout->addLayout(pronLayout);
     layout->addSpacing(10);

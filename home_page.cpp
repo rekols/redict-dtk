@@ -92,8 +92,6 @@ void HomePage::replyfinished(QNetworkReply *reply)
         http2->get(request);
     }
 
-    tips->setText("每日一句");
-
     contentLabel->setText(m_content);
     noteLabel->setText(m_note);
     timeLabel->setText(m_dateline);
@@ -105,4 +103,6 @@ void HomePage::loadImagefinished(QNetworkReply *reply)
     QPixmap pixmap;
     pixmap.loadFromData(data);
     imageLabel->setPixmap(pixmap);
+
+    tips->setText("每日一句");
 }
