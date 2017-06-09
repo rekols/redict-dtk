@@ -12,7 +12,7 @@ HomePage::HomePage(QWidget *parent)
     noteLabel = new QLabel();
     timeLabel = new QLabel();
 
-    QLabel *tips = new QLabel("每日一句");
+    tips = new QLabel("加载中...");
     tips->setStyleSheet("font-size: 20px; color:#2CA7F8;");
 
     contentLabel->setStyleSheet("font-size: 14px;");
@@ -91,6 +91,8 @@ void HomePage::replyfinished(QNetworkReply *reply)
         request.setUrl(QUrl(m_picture));
         http2->get(request);
     }
+
+    tips->setText("每日一句");
 
     contentLabel->setText(m_content);
     noteLabel->setText(m_note);

@@ -28,6 +28,7 @@ private:
     QVBoxLayout *layout;
     QHBoxLayout *topLayout;
     QVBoxLayout *rightLayout;
+    QLabel *tips;
     QLabel *imageLabel;
     QLabel *contentLabel;
     QLabel *noteLabel;
