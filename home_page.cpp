@@ -33,7 +33,6 @@ HomePage::HomePage(QWidget *parent)
     topLayout->addLayout(rightLayout);
     topLayout->addStretch();
 
-    layout->addSpacing(25);
     layout->addWidget(tips);
     layout->addSpacing(25);
     layout->addLayout(topLayout);
@@ -48,8 +47,8 @@ HomePage::HomePage(QWidget *parent)
     request.setUrl(QUrl("http://open.iciba.com/dsapi/"));
     http->get(request);
 
-    imageLabel->setFixedWidth(300);
-    imageLabel->setFixedHeight(220);
+    imageLabel->setFixedWidth(250);
+    imageLabel->setFixedHeight(180);
     imageLabel->setScaledContents(true);
 
     contentLabel->setWordWrap(true);

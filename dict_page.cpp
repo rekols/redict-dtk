@@ -9,7 +9,7 @@ DictPage::DictPage(QWidget *parent)
     wordLayout = new QHBoxLayout();
     pronLayout = new QHBoxLayout();
     infoLayout = new QHBoxLayout();
-    nameLabel = new QLabel("");
+    nameLabel = new QLabel("加载中...");
     ukPron = new QLabel("");
     usPron = new QLabel("");
     infoLabel = new QLabel("");
