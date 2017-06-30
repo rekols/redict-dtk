@@ -5,6 +5,7 @@
 #include <QHBoxLayout>
 #include <QTimer>
 #include <dsearchedit.h>
+#include <dlineedit.h>
 
 DWIDGET_USE_NAMESPACE
 
@@ -16,9 +17,9 @@ public:
     ToolBar(QWidget *parent = 0);
     ~ToolBar();
 
-private:
-    DSearchEdit *searchEdit;
+    DLineEdit *searchEdit;
 
+private:
     void keyPressEvent(QKeyEvent *event);
 
 signals:

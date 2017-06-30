@@ -19,13 +19,15 @@ MainWindow::MainWindow(QWidget *parent)
     mainWidget->setCurrentIndex(1);
 
     this->titleBar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
+    this->titleBar()->setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
     this->setCentralWidget(mainWidget);
-
-    setBorderColor("#404244");
 
     connect(toolbar, SIGNAL(searchWord(QString)), this, SLOT(searchWord(QString)));
 
     connect(dictPage->returnButton, &DLinkButton::clicked, this, [=]{
+        toolbar->searchEdit->setText("");
+        toolbar->searchEdit->setFocus();
+
         mainWidget->setCurrentIndex(1);
     });
 }

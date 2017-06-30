@@ -84,7 +84,7 @@ void DictPage::replyfinished(QNetworkReply *reply)
 
         infoLabel->setText(explains);
 
-        if (m_data.value("us-phonetic").toString().isEmpty())
+        if (m_data.value("us-phonetic").toString().isEmpty() && m_data.value("uk-phonetic").toString().isEmpty())
         {
             usPron->setText("");
             ukPron->setText("");

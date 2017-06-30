@@ -12,12 +12,12 @@ int main(int argc, char *argv[])
 
     if (a.setSingleInstance("rekols-dict"))
     {
-        a.setTheme("dark");
+        a.setTheme("light");
         a.setWindowIcon(QIcon(":/image/logo.svg"));
 
         MainWindow w;
         w.setMinimumSize(550, 400);
-        w.resize(550, 400);
+        w.setFixedSize(550, 400);
         w.show();
 
         DUtility::moveToCenter(&w);

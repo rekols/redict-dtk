@@ -15,9 +15,8 @@ ToolBar::ToolBar(QWidget *parent)
     iconLabel->setScaledContents(true);
     iconLabel->setPixmap(iconPixmap);
 
-    searchEdit = new DSearchEdit();
-    searchEdit->setPlaceHolder("查单词");
-    searchEdit->setFixedWidth(280);
+    searchEdit = new DLineEdit();
+    searchEdit->setFixedWidth(270);
 
     layout->addWidget(iconLabel);
     layout->addSpacing(90);
