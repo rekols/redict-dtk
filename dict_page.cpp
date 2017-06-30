@@ -70,13 +70,13 @@ void DictPage::replyfinished(QNetworkReply *reply)
         m_data = m_object.value("basic").toObject();
 
         QJsonArray array = m_data.value("explains").toArray();
-        QString explains;
+        QString explains = "";
 
         nameLabel->setText(m_object.value("query").toString());
         usPron->setText(QString("美 [%1]").arg(m_data.value("us-phonetic").toString()));
         ukPron->setText(QString("英 [%1]").arg(m_data.value("uk-phonetic").toString()));
 
-        for (int i=0; i<=explains.size(); ++i)
+        for (int i=0; i<array.size(); ++i)
         {
             explains.append(array.at(i).toString());
             explains.append("\n");
