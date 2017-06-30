@@ -19,7 +19,6 @@ HomePage::HomePage(QWidget *parent)
     noteLabel->setStyleSheet("font-size: 14px;");
     timeLabel->setStyleSheet("font-size: 12px;");
 
-
     http = new QNetworkAccessManager(this);
     http2 = new QNetworkAccessManager(this);
 

@@ -17,6 +17,8 @@ DictPage::DictPage(QWidget *parent)
     infoLabel = new QLabel("");
     returnButton = new DLinkButton("返回主页");
 
+    infoLabel->setWordWrap(true);
+
     nameLabel->setStyleSheet("font-size: 22px; color:#2CA7F8;");
     ukPron->setStyleSheet("font-size: 11px");
     usPron->setStyleSheet("font-size: 11px");
@@ -70,11 +72,9 @@ void DictPage::replyfinished(QNetworkReply *reply)
         m_data = m_object.value("basic").toObject();
 
         QJsonArray array = m_data.value("explains").toArray();
-        QString explains = "";
+        QString explains = NULL;
 
         nameLabel->setText(m_object.value("query").toString());
-        usPron->setText(QString("美 [%1]").arg(m_data.value("us-phonetic").toString()));
-        ukPron->setText(QString("英 [%1]").arg(m_data.value("uk-phonetic").toString()));
 
         for (int i=0; i<array.size(); ++i)
         {
@@ -83,5 +83,17 @@ void DictPage::replyfinished(QNetworkReply *reply)
         }
 
         infoLabel->setText(explains);
+
+        if (m_data.value("us-phonetic").toString().isEmpty())
+        {
+            usPron->setText("");
+            ukPron->setText("");
+        }
+        else
+        {
+            usPron->setText(QString("美 [%1]").arg(m_data.value("us-phonetic").toString()));
+            ukPron->setText(QString("英 [%1]").arg(m_data.value("uk-phonetic").toString()));
+        }
+
     }
 }
