@@ -2,8 +2,6 @@
 #define MAIN_WINDOW_H
 
 #include <DMainWindow>
-#include <QSystemTrayIcon>
-#include <QMenu>
 #include "toolbar.h"
 #include "loading_page.h"
 #include "home_page.h"
@@ -20,11 +18,6 @@ public:
     ~MainWindow();
 
 private:
-    QSystemTrayIcon* trayIcon;
-    QMenu *trayMenu;
-    QAction *showAction;
-    QAction *quitAction;
-
     QTabWidget *mainWidget;
     ToolBar *toolbar;
     LoadingPage *loadingPage;
