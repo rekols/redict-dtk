@@ -1,4 +1,6 @@
 #include "dict_page.h"
+#include <QDebug>
+#include <QByteArray>
 
 DictPage::DictPage(QWidget *parent)
     : QWidget(parent)
@@ -15,10 +17,10 @@ DictPage::DictPage(QWidget *parent)
     infoLabel = new QLabel("");
     returnButton = new DLinkButton("返回主页");
 
-    nameLabel->setStyleSheet("font-size: 25px; color:#2CA7F8;");
-    ukPron->setStyleSheet("font-size: 12px");
-    usPron->setStyleSheet("font-size: 12px");
-    infoLabel->setStyleSheet("font-size: 18px");
+    nameLabel->setStyleSheet("font-size: 22px; color:#2CA7F8;");
+    ukPron->setStyleSheet("font-size: 11px");
+    usPron->setStyleSheet("font-size: 11px");
+    infoLabel->setStyleSheet("font-size: 15px");
 
     topLayout->addSpacing(5);
     topLayout->addWidget(returnButton, 0, Qt::AlignLeft);
@@ -49,14 +51,14 @@ DictPage::DictPage(QWidget *parent)
 void DictPage::queryWord(const QString &word)
 {
     QNetworkRequest request;
-    request.setUrl(QUrl("http://www.shanbay.com/api/v1/bdc/search/?word=" + word));
+    request.setUrl(QUrl("http://fanyi.youdao.com/openapi.do?keyfrom=YouDaoCV&key=659600698&type=data&doctype=json&version=1.1&q=" + word));
     http->get(request);
 }
 
 void DictPage::replyfinished(QNetworkReply *reply)
 {
     QJsonDocument m_json;
-    QJsonObject m_object, m_data, m_pron, m_audio;
+    QJsonObject m_object, m_data;
 
     QByteArray wordInformation = reply->readAll();
 
@@ -65,26 +67,21 @@ void DictPage::replyfinished(QNetworkReply *reply)
     if (!m_json.isNull())
     {
         m_object = m_json.object();
-        m_data = m_object.value("data").toObject();
-        m_pron = m_data.value("pronunciations").toObject();
-        m_audio = m_data.value("audio_addresses").toObject();
+        m_data = m_object.value("basic").toObject();
 
-        nameLabel->setText(m_data.value("content").toString());
-        ukPron->setText(QString("英 [%1]").arg(m_pron.value("uk").toString()));
-        usPron->setText(QString("美 [%1]").arg(m_pron.value("us").toString()));
-        infoLabel->setText(m_data.value("definition").toString());
-    }
+        QJsonArray array = m_data.value("explains").toArray();
+        QString explains;
 
-    QString message = m_object.value("msg").toString();
+        nameLabel->setText(m_object.value("query").toString());
+        usPron->setText(QString("美 [%1]").arg(m_data.value("us-phonetic").toString()));
+        ukPron->setText(QString("英 [%1]").arg(m_data.value("uk-phonetic").toString()));
 
-    if (message != "SUCCESS")
-    {
-        nameLabel->setText(message);
+        for (int i=0; i<=explains.size(); ++i)
+        {
+            explains.append(array.at(i).toString());
+            explains.append("\n");
+        }
 
-        ukPron->setText("");
-        usPron->setText("");
-        infoLabel->setText("");
-
-        return;
+        infoLabel->setText(explains);
     }
 }

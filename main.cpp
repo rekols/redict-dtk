@@ -1,7 +1,6 @@
 #include "main_window.h"
 #include <DApplication>
 #include <dutility.h>
-#include <QFont>
 
 DWIDGET_USE_NAMESPACE
 
@@ -11,7 +10,7 @@ int main(int argc, char *argv[])
 
     DApplication a(argc, argv);
 
-    if (a.setSingleInstance("engine-dict"))
+    if (a.setSingleInstance("rekols-dict"))
     {
         a.setTheme("dark");
         a.setWindowIcon(QIcon(":/image/logo.svg"));
