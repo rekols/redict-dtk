@@ -19,10 +19,10 @@ DictPage::DictPage(QWidget *parent)
 
     infoLabel->setWordWrap(true);
 
-    nameLabel->setStyleSheet("font-size: 22px; color:#2CA7F8;");
-    ukPron->setStyleSheet("font-size: 11px");
-    usPron->setStyleSheet("font-size: 11px");
-    infoLabel->setStyleSheet("font-size: 15px");
+    nameLabel->setStyleSheet("font-size: 20px; color:#2CA7F8;");
+    ukPron->setStyleSheet("font-size: 12px");
+    usPron->setStyleSheet("font-size: 12px");
+    infoLabel->setStyleSheet("font-size: 13px");
 
     topLayout->addSpacing(5);
     topLayout->addWidget(returnButton, 0, Qt::AlignLeft);
@@ -30,8 +30,9 @@ DictPage::DictPage(QWidget *parent)
     wordLayout->addSpacing(30);
     wordLayout->addWidget(nameLabel);
 
-    infoLayout->addSpacing(27);
+    infoLayout->addSpacing(30);
     infoLayout->addWidget(infoLabel);
+    infoLayout->addSpacing(30);
 
     pronLayout->addSpacing(30);
     pronLayout->addWidget(ukPron);

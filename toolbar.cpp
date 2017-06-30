@@ -4,7 +4,7 @@
 ToolBar::ToolBar(QWidget *parent)
     : QWidget(parent)
 {
-    setFixedHeight(24);
+    setFixedHeight(25);
 
     QHBoxLayout *layout = new QHBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
@@ -19,7 +19,6 @@ ToolBar::ToolBar(QWidget *parent)
     searchEdit->setFixedWidth(270);
 
     layout->addWidget(iconLabel);
-    layout->addSpacing(90);
     layout->addStretch();
     layout->addWidget(searchEdit, 0, Qt::AlignHCenter);
     layout->addStretch();

@@ -6,6 +6,10 @@
 MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent)
 {
+    trayIcon = new QSystemTrayIcon(this);
+    trayMenu = new QMenu();
+    showAction = new QAction("显示", this);
+    quitAction = new QAction("退出", this);
     mainWidget = new QTabWidget();
     toolbar = new ToolBar();
     loadingPage = new LoadingPage();
@@ -29,6 +33,20 @@ MainWindow::MainWindow(QWidget *parent)
         toolbar->searchEdit->setFocus();
 
         mainWidget->setCurrentIndex(1);
+    });
+
+    trayMenu->addAction(showAction);
+    trayMenu->addAction(quitAction);
+
+    trayIcon->setIcon(QIcon(":/image/logo.svg"));
+    trayIcon->setContextMenu(trayMenu);
+    trayIcon->show();
+
+    connect(showAction, &QAction::triggered, this, [=]{
+        this->show();
+    });
+    connect(quitAction, &QAction::triggered, this, [=]{
+        this->close();
     });
 }
 
