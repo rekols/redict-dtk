@@ -1,5 +1,6 @@
 <!DOCTYPE RCC><RCC version="1.0">
   <qresource>
     <file>image/logo.svg</file>
+    <file>image/youdao-dict.svg</file>
   </qresource>
 </RCC>
