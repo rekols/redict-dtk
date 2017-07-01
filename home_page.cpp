@@ -1,5 +1,4 @@
 #include "home_page.h"
-#include <QDebug>
 
 HomePage::HomePage(QWidget *parent)
     : QWidget(parent)

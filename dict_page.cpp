@@ -1,5 +1,4 @@
 #include "dict_page.h"
-#include <QDebug>
 #include <QByteArray>
 
 DictPage::DictPage(QWidget *parent)
