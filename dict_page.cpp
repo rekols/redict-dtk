@@ -11,6 +11,7 @@ DictPage::DictPage(QWidget *parent)
     wordLayout = new QHBoxLayout();
     pronLayout = new QHBoxLayout();
     infoLayout = new QHBoxLayout();
+    youdaoLayout = new QHBoxLayout();
     nameLabel = new QLabel("加载中...");
     ukPron = new QLabel("");
     usPron = new QLabel("");
@@ -46,9 +47,27 @@ DictPage::DictPage(QWidget *parent)
     layout->addLayout(pronLayout);
     layout->addSpacing(10);
     layout->addLayout(infoLayout);
+    layout->addLayout(youdaoLayout);
     layout->addStretch();
 
     connect(http, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyfinished(QNetworkReply *)));
+
+    init();
+}
+
+void DictPage::init()
+{
+    QPixmap iconPixmap = QPixmap(":/image/youdao-dict.svg");
+    QLabel *iconLabel = new QLabel;
+    iconLabel->setFixedSize(24, 24);
+    iconLabel->setScaledContents(true);
+    iconLabel->setPixmap(iconPixmap);
+
+    QLabel *tips = new QLabel("数据来自有道词典");
+
+    youdaoLayout->addSpacing(30);
+    youdaoLayout->addWidget(iconLabel);
+    youdaoLayout->addWidget(tips);
 }
 
 void DictPage::queryWord(const QString &word)

@@ -35,12 +35,15 @@ public:
     QHBoxLayout *wordLayout;
     QHBoxLayout *pronLayout;
     QHBoxLayout *infoLayout;
+    QHBoxLayout *youdaoLayout;
     QLabel *nameLabel;
     QLabel *ukPron;
     QLabel *usPron;
     QLabel *infoLabel;
-
     DLinkButton *returnButton;
+
+private:
+    void init();
 
 
 private slots:
