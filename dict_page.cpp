@@ -41,11 +41,12 @@ DictPage::DictPage(QWidget *parent)
     pronLayout->addStretch();
 
     layout->addLayout(topLayout);
-    layout->addSpacing(20);
+    layout->addSpacing(30);
     layout->addLayout(wordLayout);
     layout->addLayout(pronLayout);
     layout->addSpacing(10);
     layout->addLayout(infoLayout);
+    layout->addSpacing(20);
     layout->addLayout(youdaoLayout);
     layout->addStretch();
 
