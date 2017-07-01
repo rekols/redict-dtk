@@ -100,13 +100,19 @@ void DictPage::replyfinished(QNetworkReply *reply)
             explains.append("\n");
         }
 
-        infoLabel->setText(explains);
         nameLabel->setText(m_object.value("query").toString());
+        infoLabel->setText(explains);
 
         if (m_data.value("us-phonetic").toString().isEmpty() && m_data.value("uk-phonetic").toString().isEmpty())
         {
             usPron->setText("");
             ukPron->setText("");
+        
+            for (int i=0; i<m_object.value("translation").toArray().size(); ++i)
+            {
+                infoLabel->setText(m_object.value("translation").toArray().at(i).toString());
+                infoLabel->setText(infoLabel->text() + "\n");
+            }
         }
         else
         {
