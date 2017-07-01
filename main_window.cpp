@@ -19,7 +19,6 @@ MainWindow::MainWindow(QWidget *parent)
     mainWidget->setCurrentIndex(1);
 
     this->titleBar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
-    this->titleBar()->setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
     this->setCentralWidget(mainWidget);
 
     connect(toolbar, SIGNAL(searchWord(QString)), this, SLOT(searchWord(QString)));

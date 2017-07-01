@@ -17,6 +17,7 @@ DictPage::DictPage(QWidget *parent)
     infoLabel = new QLabel("");
     returnButton = new DLinkButton("返回主页");
 
+    nameLabel->setWordWrap(true);
     infoLabel->setWordWrap(true);
 
     nameLabel->setStyleSheet("font-size: 22px; color:#2CA7F8;");
@@ -29,6 +30,7 @@ DictPage::DictPage(QWidget *parent)
 
     wordLayout->addSpacing(30);
     wordLayout->addWidget(nameLabel);
+    wordLayout->addSpacing(30);
 
     infoLayout->addSpacing(30);
     infoLayout->addWidget(infoLabel);
