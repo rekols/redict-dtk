@@ -19,10 +19,10 @@ DictPage::DictPage(QWidget *parent)
 
     infoLabel->setWordWrap(true);
 
-    nameLabel->setStyleSheet("font-size: 20px; color:#2CA7F8;");
-    ukPron->setStyleSheet("font-size: 12px");
-    usPron->setStyleSheet("font-size: 12px");
-    infoLabel->setStyleSheet("font-size: 13px");
+    nameLabel->setStyleSheet("font-size: 22px; color:#2CA7F8;");
+    ukPron->setStyleSheet("font-size: 13px");
+    usPron->setStyleSheet("font-size: 13px");
+    infoLabel->setStyleSheet("font-size: 17px");
 
     topLayout->addSpacing(5);
     topLayout->addWidget(returnButton, 0, Qt::AlignLeft);
@@ -75,8 +75,6 @@ void DictPage::replyfinished(QNetworkReply *reply)
         QJsonArray array = m_data.value("explains").toArray();
         QString explains = NULL;
 
-        nameLabel->setText(m_object.value("query").toString());
-
         for (int i=0; i<array.size(); ++i)
         {
             explains.append(array.at(i).toString());
@@ -84,6 +82,7 @@ void DictPage::replyfinished(QNetworkReply *reply)
         }
 
         infoLabel->setText(explains);
+        nameLabel->setText(m_object.value("query").toString());
 
         if (m_data.value("us-phonetic").toString().isEmpty() && m_data.value("uk-phonetic").toString().isEmpty())
         {

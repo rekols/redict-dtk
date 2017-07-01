@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 
     if (a.setSingleInstance("rekols-dict"))
     {
-        a.setTheme("light");
+        a.setTheme("dark");
         a.setWindowIcon(QIcon(":/image/logo.svg"));
 
         MainWindow w;
