@@ -26,6 +26,10 @@ MainWindow::MainWindow(QWidget *parent)
         mainWidget->setCurrentIndex(0);
 
         toolbar->showIcon();
+
+        dictPage->nameLabel->setText("加载中...");
+        dictPage->ukPron->setText("");
+        dictPage->usPron->setText("");
     });
 }
 
