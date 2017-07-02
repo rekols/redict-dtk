@@ -1,5 +1,6 @@
 #include "toolbar.h"
 #include <QKeyEvent>
+#include <QLabel>
 
 ToolBar::ToolBar(QWidget *parent)
     : QWidget(parent)
@@ -15,24 +16,12 @@ ToolBar::ToolBar(QWidget *parent)
     iconLabel->setScaledContents(true);
     iconLabel->setPixmap(iconPixmap);
 
-    searchEdit = new DLineEdit();
-    searchEdit->setFixedWidth(270);
-
     layout->addWidget(iconLabel);
     layout->addStretch();
-    layout->addWidget(searchEdit, 0, Qt::AlignHCenter);
     layout->addStretch();
 }
 
 ToolBar::~ToolBar()
 {
-    delete searchEdit;
-}
 
-void ToolBar::keyPressEvent(QKeyEvent *event)
-{
-    if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
-    {
-        emit searchWord(searchEdit->text());
-    }
 }
