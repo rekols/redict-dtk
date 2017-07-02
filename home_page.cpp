@@ -73,6 +73,8 @@ HomePage::~HomePage()
 
 void HomePage::searchEmit()
 {
+    searchEdit->setFocus();
+
     if (!searchEdit->text().isEmpty())
         emit searchWord(searchEdit->text());
 }
