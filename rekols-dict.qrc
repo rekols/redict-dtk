@@ -2,5 +2,8 @@
   <qresource>
     <file>image/logo.svg</file>
     <file>image/youdao-dict.svg</file>
+    <file>image/return_normal.png</file>
+    <file>image/return_hover.png</file>
+    <file>image/return_press.png</file>
   </qresource>
 </RCC>
