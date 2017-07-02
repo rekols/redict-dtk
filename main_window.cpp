@@ -20,10 +20,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(homePage, SIGNAL(searchWord(QString)), this, SLOT(searchWord(QString)));
 
-    connect(dictPage->returnButton, &DLinkButton::clicked, this, [=]{
+    connect(toolbar->returnButton, &DImageButton::clicked, this, [=]{
         homePage->searchEdit->setText("");
         homePage->searchEdit->setFocus();
         mainWidget->setCurrentIndex(0);
+
+        toolbar->showIcon();
     });
 }
 
@@ -36,4 +38,6 @@ void MainWindow::searchWord(QString word)
 {
     mainWidget->setCurrentIndex(1);
     dictPage->queryWord(word);
+
+    toolbar->showReturn();
 }

@@ -3,7 +3,9 @@
 
 #include <QWidget>
 #include <QHBoxLayout>
-#include <QTimer>
+#include <dimagebutton.h>
+
+DWIDGET_USE_NAMESPACE
 
 class ToolBar : public QWidget
 {
@@ -12,6 +14,15 @@ class ToolBar : public QWidget
 public:
     ToolBar(QWidget *parent = 0);
     ~ToolBar();
-};
 
+    void showReturn();
+    void showIcon();
+
+    DImageButton *returnButton;
+
+private:
+    QHBoxLayout *layout;
+    QLabel *iconLabel;
+    QLabel *title;
+};
 #endif // TOOLBAR_H

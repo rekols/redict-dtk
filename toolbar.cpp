@@ -7,21 +7,44 @@ ToolBar::ToolBar(QWidget *parent)
 {
     setFixedHeight(25);
 
-    QHBoxLayout *layout = new QHBoxLayout(this);
+    layout = new QHBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
 
     QPixmap iconPixmap = QPixmap(":/image/logo.svg");
-    QLabel *iconLabel = new QLabel();
+    iconLabel = new QLabel();
     iconLabel->setFixedSize(24, 24);
     iconLabel->setScaledContents(true);
     iconLabel->setPixmap(iconPixmap);
 
-    QLabel *title = new QLabel("Rekols词典");
+    returnButton = new DImageButton(
+        ":/image/return_normal.png",
+        ":/image/return_hover.png",
+        ":/image/return_press.png"
+        );
+    returnButton->setFixedSize(24, 24);
+
+    title = new QLabel("Rekols词典");
 
     layout->addWidget(iconLabel);
     layout->addWidget(title);
+    layout->addWidget(returnButton);
     layout->addStretch();
-    layout->addStretch();
+
+    returnButton->setVisible(false);
+}
+
+void ToolBar::showReturn()
+{
+    iconLabel->setVisible(false);
+    title->setVisible(false);
+    returnButton->setVisible(true);
+}
+
+void ToolBar::showIcon()
+{
+    iconLabel->setVisible(true);
+    title->setVisible(true);
+    returnButton->setVisible(false);
 }
 
 ToolBar::~ToolBar()
