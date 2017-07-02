@@ -16,6 +16,8 @@ HomePage::HomePage(QWidget *parent)
     tips = new QLabel("加载中...");
     tips->setStyleSheet("font-size: 20px; color:#2CA7F8;");
 
+    searchButton->setFixedWidth(120);
+
     contentLabel->setStyleSheet("font-size: 14px;");
     noteLabel->setStyleSheet("font-size: 14px;");
     timeLabel->setStyleSheet("font-size: 12px;");
