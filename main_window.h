@@ -3,7 +3,6 @@
 
 #include <DMainWindow>
 #include "toolbar.h"
-#include "loading_page.h"
 #include "home_page.h"
 #include "dict_page.h"
 
@@ -20,7 +19,6 @@ public:
 private:
     QTabWidget *mainWidget;
     ToolBar *toolbar;
-    LoadingPage *loadingPage;
     HomePage *homePage;
     DictPage *dictPage;
 
