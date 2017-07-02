@@ -9,6 +9,7 @@ ToolBar::ToolBar(QWidget *parent)
 
     layout = new QHBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
+    search = new QLineEdit();
 
     QPixmap iconPixmap = QPixmap(":/image/logo.svg");
     iconLabel = new QLabel();
@@ -28,9 +29,11 @@ ToolBar::ToolBar(QWidget *parent)
     layout->addWidget(iconLabel);
     layout->addWidget(title);
     layout->addWidget(returnButton);
+    layout->addWidget(search);
     layout->addStretch();
 
     returnButton->setVisible(false);
+    search->setVisible(false);
 }
 
 void ToolBar::showReturn()
@@ -38,6 +41,7 @@ void ToolBar::showReturn()
     iconLabel->setVisible(false);
     title->setVisible(false);
     returnButton->setVisible(true);
+    search->setVisible(true);
 }
 
 void ToolBar::showIcon()
@@ -45,6 +49,7 @@ void ToolBar::showIcon()
     iconLabel->setVisible(true);
     title->setVisible(true);
     returnButton->setVisible(false);
+    search->setVisible(false);
 }
 
 ToolBar::~ToolBar()

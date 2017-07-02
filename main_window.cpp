@@ -30,6 +30,11 @@ MainWindow::MainWindow(QWidget *parent)
         dictPage->nameLabel->setText("加载中...");
         dictPage->ukPron->setText("");
         dictPage->usPron->setText("");
+        toolbar->search->setText("");
+    });
+
+    connect(toolbar->search, &QLineEdit::returnPressed, this, [=]{
+        dictPage->queryWord(toolbar->search->text());
     });
 }
 
@@ -44,4 +49,6 @@ void MainWindow::searchWord(QString word)
     dictPage->queryWord(word);
 
     toolbar->showReturn();
+    toolbar->search->setFocus();
+    toolbar->search->setText(word);
 }

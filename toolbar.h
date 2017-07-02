@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QHBoxLayout>
 #include <dimagebutton.h>
+#include <QLineEdit>
 
 DWIDGET_USE_NAMESPACE
 
@@ -18,6 +19,7 @@ public:
     void showReturn();
     void showIcon();
 
+    QLineEdit *search;
     DImageButton *returnButton;
 
 private:
