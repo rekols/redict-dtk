@@ -46,7 +46,7 @@ DictPage::DictPage(QWidget *parent)
     layout->addLayout(infoLayout);
     layout->addStretch();
     layout->addLayout(youdaoLayout);
-    layout->addSpacing(5);
+    layout->addSpacing(20);
 
     connect(http, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyfinished(QNetworkReply *)));
 
@@ -64,10 +64,9 @@ void DictPage::init()
     QLabel *tips = new QLabel("数据来自有道词典");
     tips->setStyleSheet("QLabel {font-size: 12px; }");
 
-    youdaoLayout->addStretch();
+    youdaoLayout->addSpacing(30);
     youdaoLayout->addWidget(iconLabel);
     youdaoLayout->addWidget(tips);
-    youdaoLayout->addStretch();
 }
 
 void DictPage::queryWord(const QString &word)
