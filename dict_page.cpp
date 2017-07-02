@@ -23,6 +23,7 @@ DictPage::DictPage(QWidget *parent)
     usPron->setStyleSheet("font-size: 13px");
     infoLabel->setStyleSheet("font-size: 17px");
 
+
     wordLayout->addSpacing(30);
     wordLayout->addWidget(nameLabel);
     wordLayout->addSpacing(30);
@@ -55,11 +56,12 @@ void DictPage::init()
 {
     QPixmap iconPixmap = QPixmap(":/image/youdao-dict.svg");
     QLabel *iconLabel = new QLabel;
-    iconLabel->setFixedSize(24, 24);
+    iconLabel->setFixedSize(20, 20);
     iconLabel->setScaledContents(true);
     iconLabel->setPixmap(iconPixmap);
 
     QLabel *tips = new QLabel("数据来自有道词典");
+    tips->setStyleSheet("QLabel {color:#DDDDDD; font-size: 12px; }");
 
     youdaoLayout->addSpacing(30);
     youdaoLayout->addWidget(iconLabel);
