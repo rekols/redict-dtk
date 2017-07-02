@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->titleBar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
     this->setCentralWidget(mainWidget);
 
-    connect(toolbar, SIGNAL(searchWord(QString)), this, SLOT(searchWord(QString)));
+    connect(homePage, SIGNAL(searchWord(QString)), this, SLOT(searchWord(QString)));
 
     connect(dictPage->returnButton, &DLinkButton::clicked, this, [=]{
         mainWidget->setCurrentIndex(1);

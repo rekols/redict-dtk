@@ -62,12 +62,20 @@ HomePage::HomePage(QWidget *parent)
 
     timeLabel->setWordWrap(true);
     timeLabel->setAlignment(Qt::AlignTop);
+
+    connect(searchButton, SIGNAL(clicked()), this, SLOT(searchEmit()));
+    connect(searchEdit, SIGNAL(returnPressed()), this, SLOT(searchEmit()));
 }
 
 HomePage::~HomePage()
 {
     delete http;
     delete http2;
+}
+
+void HomePage::searchEmit()
+{
+    emit searchWord(searchEdit->text());
 }
 
 void HomePage::replyfinished(QNetworkReply *reply)

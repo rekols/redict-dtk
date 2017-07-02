@@ -49,8 +49,12 @@ private:
 
     void loadImage();
 
+signals:
+    void searchWord(QString word);
+
 
 private slots:
+    void searchEmit();
     void replyfinished(QNetworkReply *reply);
     void loadImagefinished(QNetworkReply *reply);
 };
