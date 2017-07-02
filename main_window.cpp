@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(homePage, SIGNAL(searchWord(QString)), this, SLOT(searchWord(QString)));
 
     connect(dictPage->returnButton, &DLinkButton::clicked, this, [=]{
+        homePage->searchEdit->setText("");
         mainWidget->setCurrentIndex(1);
     });
 }

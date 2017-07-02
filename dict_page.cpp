@@ -112,8 +112,6 @@ void DictPage::replyfinished(QNetworkReply *reply)
 
             if (array.isEmpty())
             {
-                infoLabel->setText("");
-
                 for (int i=0; i<object.value("translation").toArray().size(); ++i)
                 {
                     infoLabel->setText(object.value("translation").toArray().at(i).toString());

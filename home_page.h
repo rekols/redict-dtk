@@ -26,12 +26,13 @@ public:
     HomePage(QWidget *parent = 0);
     ~HomePage();
 
+    QLineEdit *searchEdit;
+
 private:
     QVBoxLayout *layout;
     QHBoxLayout *searchLayout;
     QHBoxLayout *topLayout;
     QVBoxLayout *rightLayout;
-    QLineEdit *searchEdit;
     QPushButton *searchButton;
     QLabel *tips;
     QLabel *imageLabel;
