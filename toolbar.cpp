@@ -16,7 +16,10 @@ ToolBar::ToolBar(QWidget *parent)
     iconLabel->setScaledContents(true);
     iconLabel->setPixmap(iconPixmap);
 
+    QLabel *title = new QLabel("Rekols词典");
+
     layout->addWidget(iconLabel);
+    layout->addWidget(title);
     layout->addStretch();
     layout->addStretch();
 }
