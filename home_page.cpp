@@ -73,7 +73,8 @@ HomePage::~HomePage()
 
 void HomePage::searchEmit()
 {
-    emit searchWord(searchEdit->text());
+    if (!searchEdit->text().isEmpty())
+        emit searchWord(searchEdit->text());
 }
 
 void HomePage::replyfinished(QNetworkReply *reply)
