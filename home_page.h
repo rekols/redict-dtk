@@ -15,6 +15,8 @@
 #include <QJsonValue>
 
 #include <QLabel>
+#include <QLineEdit>
+#include <QPushButton>
 
 class HomePage : public QWidget
 {
@@ -26,8 +28,11 @@ public:
 
 private:
     QVBoxLayout *layout;
+    QHBoxLayout *searchLayout;
     QHBoxLayout *topLayout;
     QVBoxLayout *rightLayout;
+    QLineEdit *searchEdit;
+    QPushButton *searchButton;
     QLabel *tips;
     QLabel *imageLabel;
     QLabel *contentLabel;

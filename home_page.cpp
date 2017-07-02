@@ -4,13 +4,15 @@ HomePage::HomePage(QWidget *parent)
     : QWidget(parent)
 {
     layout = new QVBoxLayout(this);
+    searchLayout = new QHBoxLayout();
     topLayout = new QHBoxLayout();
     rightLayout = new QVBoxLayout();
     imageLabel = new QLabel();
     contentLabel = new QLabel();
     noteLabel = new QLabel();
     timeLabel = new QLabel();
-
+    searchEdit = new QLineEdit();
+    searchButton = new QPushButton("搜索");
     tips = new QLabel("加载中...");
     tips->setStyleSheet("font-size: 20px; color:#2CA7F8;");
 
@@ -21,17 +23,19 @@ HomePage::HomePage(QWidget *parent)
     http = new QNetworkAccessManager(this);
     http2 = new QNetworkAccessManager(this);
 
+    searchLayout->addWidget(searchEdit);
+    searchLayout->addWidget(searchButton);
+
     rightLayout->addWidget(contentLabel);
     rightLayout->addWidget(noteLabel);
     rightLayout->addWidget(timeLabel);
 
-    //topLayout->addStretch();
     topLayout->addWidget(imageLabel);
     topLayout->addSpacing(20);
     topLayout->addLayout(rightLayout);
-    //topLayout->addStretch();
 
-    layout->addSpacing(40);
+    layout->addLayout(searchLayout);
+    layout->addSpacing(20);
     layout->addWidget(tips);
     layout->addSpacing(25);
     layout->addLayout(topLayout);
