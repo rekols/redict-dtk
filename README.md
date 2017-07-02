@@ -1,6 +1,6 @@
-## Engine Dict
+## Rekols Dictionary
 
-A simple dictionary.
+A simple dictionary for deepin.
 
 ### Build dependencies
 
@@ -18,6 +18,6 @@ A simple dictionary.
 
 ## License
 
-Engine-Dict is licensed under [GPLv3](LICENSE).
+Rekols-Dict is licensed under [GPLv3](LICENSE).
 
 
