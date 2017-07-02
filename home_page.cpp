@@ -37,9 +37,9 @@ HomePage::HomePage(QWidget *parent)
     topLayout->addLayout(rightLayout);
 
     layout->addLayout(searchLayout);
-    layout->addSpacing(20);
+    layout->addSpacing(30);
     layout->addWidget(tips);
-    layout->addSpacing(25);
+    layout->addSpacing(5);
     layout->addLayout(topLayout);
     layout->addStretch();
 
