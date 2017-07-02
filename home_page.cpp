@@ -12,8 +12,10 @@ HomePage::HomePage(QWidget *parent)
     noteLabel = new QLabel();
     timeLabel = new QLabel();
     searchEdit = new QLineEdit();
-    searchButton = new QPushButton("搜索");
+    searchButton = new DBaseButton("搜索");
 
+    searchEdit->setFixedHeight(35);
+    searchButton->setFixedHeight(35);
     searchButton->setFixedWidth(100);
 
     contentLabel->setStyleSheet("font-size: 14px;");
@@ -24,6 +26,7 @@ HomePage::HomePage(QWidget *parent)
     http2 = new QNetworkAccessManager(this);
 
     searchLayout->addWidget(searchEdit);
+    searchLayout->addSpacing(10);
     searchLayout->addWidget(searchButton);
 
     rightLayout->addWidget(contentLabel);

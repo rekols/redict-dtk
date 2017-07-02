@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
         a.setApplicationDescription(DApplication::translate("MainWindow", descriptionText) + "\n");
         a.setApplicationAcknowledgementPage(acknowledgementLink);
 
-        a.setTheme("dark");
+        a.setTheme("light");
         a.setWindowIcon(QIcon(":/image/logo.svg"));
 
         MainWindow w;

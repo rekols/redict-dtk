@@ -18,6 +18,10 @@
 #include <QLineEdit>
 #include <QPushButton>
 
+#include <dbasebutton.h>
+
+DWIDGET_USE_NAMESPACE
+
 class HomePage : public QWidget
 {
     Q_OBJECT
@@ -33,7 +37,7 @@ private:
     QHBoxLayout *searchLayout;
     QHBoxLayout *topLayout;
     QVBoxLayout *rightLayout;
-    QPushButton *searchButton;
+    DBaseButton *searchButton;
     QLabel *imageLabel;
     QLabel *contentLabel;
     QLabel *noteLabel;

@@ -11,7 +11,7 @@ ToolBar::ToolBar(QWidget *parent)
     layout->setContentsMargins(0, 0, 0, 0);
     search = new QLineEdit();
 
-    search->setFixedWidth(330);
+    search->setFixedWidth(340);
 
     QPixmap iconPixmap = QPixmap(":/image/logo.svg");
     iconLabel = new QLabel();
