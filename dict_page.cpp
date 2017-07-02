@@ -1,5 +1,6 @@
 #include "dict_page.h"
 #include <QByteArray>
+#include <QDebug>
 
 DictPage::DictPage(QWidget *parent)
     : QWidget(parent)
@@ -106,13 +107,18 @@ void DictPage::replyfinished(QNetworkReply *reply)
             usPron->setText("");
             ukPron->setText("");
 
-            if (array.isEmpty())
+            if (array.isEmpty()) //如果没有解释，那就翻译
             {
                 for (int i=0; i<object.value("translation").toArray().size(); ++i)
                 {
                     infoLabel->setText(object.value("translation").toArray().at(i).toString());
                     infoLabel->setText(infoLabel->text() + "\n");
                 }
+            }
+
+            if (!data.value("phonetic").toString().isEmpty()) //显示中文拼音
+            {
+                nameLabel->setText(nameLabel->text() + " [" +data.value("phonetic").toString() + "]");
             }
         }
         else
