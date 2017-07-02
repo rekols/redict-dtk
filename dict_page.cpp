@@ -106,6 +106,8 @@ void DictPage::replyfinished(QNetworkReply *reply)
         {
             usPron->setText("");
             ukPron->setText("");
+            ukPron->setVisible(false);
+            usPron->setVisible(false);
 
             if (array.isEmpty()) //如果没有解释，那就翻译
             {
@@ -123,6 +125,9 @@ void DictPage::replyfinished(QNetworkReply *reply)
         }
         else
         {
+            ukPron->setVisible(true);
+            usPron->setVisible(true);
+
             usPron->setText(QString("美 [%1]").arg(data.value("us-phonetic").toString()));
             ukPron->setText(QString("英 [%1]").arg(data.value("uk-phonetic").toString()));
         }
