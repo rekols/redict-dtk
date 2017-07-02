@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(dictPage->returnButton, &DLinkButton::clicked, this, [=]{
         homePage->searchEdit->setText("");
+        homePage->searchEdit->setFocus();
         mainWidget->setCurrentIndex(1);
     });
 }
