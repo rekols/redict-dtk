@@ -46,7 +46,7 @@ DictPage::DictPage(QWidget *parent)
     layout->addLayout(infoLayout);
     layout->addStretch();
     layout->addLayout(youdaoLayout);
-    layout->addSpacing(20);
+    layout->addSpacing(5);
 
     connect(http, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyfinished(QNetworkReply *)));
 
