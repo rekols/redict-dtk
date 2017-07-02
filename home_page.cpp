@@ -25,12 +25,13 @@ HomePage::HomePage(QWidget *parent)
     rightLayout->addWidget(noteLabel);
     rightLayout->addWidget(timeLabel);
 
-    topLayout->addStretch();
+    //topLayout->addStretch();
     topLayout->addWidget(imageLabel);
     topLayout->addSpacing(20);
     topLayout->addLayout(rightLayout);
-    topLayout->addStretch();
+    //topLayout->addStretch();
 
+    layout->addSpacing(40);
     layout->addWidget(tips);
     layout->addSpacing(25);
     layout->addLayout(topLayout);
