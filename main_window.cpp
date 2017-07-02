@@ -1,6 +1,10 @@
 #include "main_window.h"
 #include <DTitlebar>
 #include <QTabBar>
+#include <QApplication>
+#include <QClipboard>
+#include <QTextCursor>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent)
@@ -36,6 +40,14 @@ MainWindow::MainWindow(QWidget *parent)
     connect(toolbar->search, &QLineEdit::returnPressed, this, [=]{
         dictPage->queryWord(toolbar->search->text());
     });
+
+    connect(qApp->clipboard(), &QClipboard::changed, this, [=]{
+        if (qApp->clipboard()->ownsSelection() == false)
+            qDebug() << "退出了";
+        else
+            qDebug() << "刚刚";
+    });
+
 }
 
 MainWindow::~MainWindow()

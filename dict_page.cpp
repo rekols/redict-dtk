@@ -25,15 +25,15 @@ DictPage::DictPage(QWidget *parent)
     infoLabel->setStyleSheet("font-size: 17px");
 
 
-    wordLayout->addSpacing(20);
+    wordLayout->addSpacing(25);
     wordLayout->addWidget(nameLabel);
-    wordLayout->addSpacing(20);
+    wordLayout->addSpacing(25);
 
-    infoLayout->addSpacing(20);
+    infoLayout->addSpacing(25);
     infoLayout->addWidget(infoLabel);
-    infoLayout->addSpacing(20);
+    infoLayout->addSpacing(25);
 
-    pronLayout->addSpacing(20);
+    pronLayout->addSpacing(25);
     pronLayout->addWidget(ukPron);
     pronLayout->addSpacing(20);
     pronLayout->addWidget(usPron);
@@ -64,7 +64,7 @@ void DictPage::init()
     QLabel *tips = new QLabel("数据来自有道词典");
     tips->setStyleSheet("QLabel {font-size: 12px; }");
 
-    youdaoLayout->addSpacing(20);
+    youdaoLayout->addSpacing(25);
     youdaoLayout->addWidget(iconLabel);
     youdaoLayout->addWidget(tips);
 }

@@ -5,13 +5,14 @@
 ToolBar::ToolBar(QWidget *parent)
     : QWidget(parent)
 {
-    setFixedHeight(25);
+    setFixedHeight(30);
 
     layout = new QHBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
     search = new QLineEdit();
 
     search->setFixedWidth(340);
+    search->setFixedHeight(25);
 
     QPixmap iconPixmap = QPixmap(":/image/logo.svg");
     iconLabel = new QLabel();
