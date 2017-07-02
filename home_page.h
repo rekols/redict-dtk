@@ -34,7 +34,6 @@ private:
     QHBoxLayout *topLayout;
     QVBoxLayout *rightLayout;
     QPushButton *searchButton;
-    QLabel *tips;
     QLabel *imageLabel;
     QLabel *contentLabel;
     QLabel *noteLabel;

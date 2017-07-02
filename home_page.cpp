@@ -13,8 +13,6 @@ HomePage::HomePage(QWidget *parent)
     timeLabel = new QLabel();
     searchEdit = new QLineEdit();
     searchButton = new QPushButton("搜索");
-    tips = new QLabel("加载中...");
-    tips->setStyleSheet("font-size: 20px; color:#2CA7F8;");
 
     searchButton->setFixedWidth(120);
 
@@ -37,9 +35,7 @@ HomePage::HomePage(QWidget *parent)
     topLayout->addLayout(rightLayout);
 
     layout->addLayout(searchLayout);
-    layout->addSpacing(30);
-    layout->addWidget(tips);
-    layout->addSpacing(5);
+    layout->addSpacing(50);
     layout->addLayout(topLayout);
     layout->addStretch();
 
@@ -115,6 +111,4 @@ void HomePage::loadImagefinished(QNetworkReply *reply)
     QPixmap pixmap;
     pixmap.loadFromData(data);
     imageLabel->setPixmap(pixmap);
-
-    tips->setText("每日一句");
 }
