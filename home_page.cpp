@@ -14,7 +14,7 @@ HomePage::HomePage(QWidget *parent)
     searchEdit = new QLineEdit();
     searchButton = new QPushButton("搜索");
 
-    searchButton->setFixedWidth(120);
+    searchButton->setFixedWidth(100);
 
     contentLabel->setStyleSheet("font-size: 14px;");
     noteLabel->setStyleSheet("font-size: 14px;");
