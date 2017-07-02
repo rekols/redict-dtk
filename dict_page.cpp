@@ -81,19 +81,19 @@ void DictPage::queryWord(const QString &word)
 
 void DictPage::replyfinished(QNetworkReply *reply)
 {
-    QJsonDocument m_json;
-    QJsonObject m_object, m_data;
+    QJsonDocument json;
+    QJsonObject object, data;
 
     QByteArray wordInformation = reply->readAll();
 
-    m_json = QJsonDocument::fromJson(wordInformation);
+    json = QJsonDocument::fromJson(wordInformation);
 
-    if (!m_json.isNull())
+    if (!json.isNull())
     {
-        m_object = m_json.object();
-        m_data = m_object.value("basic").toObject();
+        object = json.object();
+        data = object.value("basic").toObject();
 
-        QJsonArray array = m_data.value("explains").toArray();
+        QJsonArray array = data.value("explains").toArray();
         QString explains = NULL;
 
         for (int i=0; i<array.size(); ++i)
@@ -102,25 +102,31 @@ void DictPage::replyfinished(QNetworkReply *reply)
             explains.append("\n");
         }
 
-        nameLabel->setText(m_object.value("query").toString());
+        nameLabel->setText(object.value("query").toString());
         infoLabel->setText(explains);
 
-        if (m_data.value("us-phonetic").toString().isEmpty() && m_data.value("uk-phonetic").toString().isEmpty())
+        if (data.value("us-phonetic").toString().isEmpty() && data.value("uk-phonetic").toString().isEmpty())
         {
             usPron->setText("");
             ukPron->setText("");
-        
-            for (int i=0; i<m_object.value("translation").toArray().size(); ++i)
+
+            if (array.isEmpty())
             {
-                infoLabel->setText(m_object.value("translation").toArray().at(i).toString());
-                infoLabel->setText(infoLabel->text() + "\n");
+                infoLabel->setText("");
+
+                for (int i=0; i<object.value("translation").toArray().size(); ++i)
+                {
+                    infoLabel->setText(object.value("translation").toArray().at(i).toString());
+                    infoLabel->setText(infoLabel->text() + "\n");
+                }
             }
         }
         else
         {
-            usPron->setText(QString("美 [%1]").arg(m_data.value("us-phonetic").toString()));
-            ukPron->setText(QString("英 [%1]").arg(m_data.value("uk-phonetic").toString()));
+            usPron->setText(QString("美 [%1]").arg(data.value("us-phonetic").toString()));
+            ukPron->setText(QString("英 [%1]").arg(data.value("uk-phonetic").toString()));
         }
+
 
     }
 }
