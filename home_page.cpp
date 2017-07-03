@@ -12,7 +12,7 @@ HomePage::HomePage(QWidget *parent)
     noteLabel = new QLabel();
     timeLabel = new QLabel();
     searchEdit = new QLineEdit();
-    searchButton = new DBaseButton("搜索");
+    searchButton = new QPushButton("搜索");
 
     searchEdit->setFixedHeight(35);
     searchButton->setFixedHeight(35);

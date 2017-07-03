@@ -39,7 +39,7 @@ DictPage::DictPage(QWidget *parent)
     pronLayout->addWidget(usPron);
     pronLayout->addStretch();
 
-    layout->addSpacing(10);
+    layout->addSpacing(20);
     layout->addLayout(wordLayout);
     layout->addLayout(pronLayout);
     layout->addSpacing(10);
