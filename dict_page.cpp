@@ -35,9 +35,9 @@ DictPage::DictPage(QWidget *parent)
     wordLayout->addWidget(nameLabel);
     wordLayout->addSpacing(32);
 
-    infoLayout->addSpacing(35);
+    infoLayout->addSpacing(34);
     infoLayout->addWidget(infoLabel);
-    infoLayout->addSpacing(35);
+    infoLayout->addSpacing(34);
 
     pronLayout->addSpacing(32);
     pronLayout->addWidget(pronButton1);

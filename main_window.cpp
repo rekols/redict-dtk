@@ -32,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
         dictPage->queryWord(toolbar->search->text());
     });
 
+    setBorderColor("#5D5D5D");
 }
 
 MainWindow::~MainWindow()
