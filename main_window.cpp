@@ -26,6 +26,13 @@ MainWindow::MainWindow(QWidget *parent)
         mainWidget->setCurrentIndex(0);
 
         toolbar->showIcon();
+
+        dictPage->nameLabel->setText("加载中...");
+        dictPage->pronLabel1->setText("");
+        dictPage->pronLabel2->setText("");
+        dictPage->infoLabel->setText("");
+        dictPage->pronButton1->setVisible(false);
+        dictPage->pronButton2->setVisible(false);
     });
 
     connect(toolbar->search, &QLineEdit::returnPressed, this, [=]{
