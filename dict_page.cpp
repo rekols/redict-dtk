@@ -31,21 +31,20 @@ DictPage::DictPage(QWidget *parent)
     pronLabel2->setStyleSheet("font-size: 13px");
     infoLabel->setStyleSheet("font-size: 17px");
 
-    wordLayout->addSpacing(35);
+    wordLayout->addSpacing(32);
     wordLayout->addWidget(nameLabel);
-    wordLayout->addSpacing(35);
+    wordLayout->addSpacing(32);
 
     infoLayout->addSpacing(35);
     infoLayout->addWidget(infoLabel);
     infoLayout->addSpacing(35);
 
-    pronLayout->addSpacing(35);
+    pronLayout->addSpacing(32);
     pronLayout->addWidget(pronButton1);
     pronLayout->addWidget(pronLabel1);
     pronLayout->addSpacing(5);
     pronLayout->addWidget(pronButton2);
     pronLayout->addWidget(pronLabel2);
-    pronLayout->addSpacing(35);
 
     layout->addSpacing(20);
     layout->addLayout(wordLayout);
