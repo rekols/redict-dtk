@@ -15,8 +15,8 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>
-
 #include <dimagebutton.h>
+#include <QMediaPlayer>
 
 DWIDGET_USE_NAMESPACE
 
@@ -44,6 +44,8 @@ public:
 
     DImageButton *pronButton1;
     DImageButton *pronButton2;
+
+    QMediaPlayer *audio;
 
 private:
     void init();

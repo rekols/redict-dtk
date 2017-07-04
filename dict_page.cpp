@@ -4,6 +4,7 @@
 DictPage::DictPage(QWidget *parent)
     : QWidget(parent)
 {
+    audio = new QMediaPlayer;
     http = new QNetworkAccessManager(this);
     layout = new QVBoxLayout(this);
     wordLayout = new QHBoxLayout();
@@ -55,6 +56,16 @@ DictPage::DictPage(QWidget *parent)
     layout->addSpacing(20);
 
     connect(http, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyfinished(QNetworkReply *)));
+
+    connect(pronButton1, &DImageButton::clicked, this, [=]{
+        audio->setMedia(QUrl("http://dict.youdao.com/dictvoice?type=1&audio=" + nameLabel->text()));
+        audio->play();
+    });
+
+    connect(pronButton2, &DImageButton::clicked, this, [=]{
+        audio->setMedia(QUrl("http://dict.youdao.com/dictvoice?type=2&audio=" + nameLabel->text()));
+        audio->play();
+    });
 
     init();
 }
