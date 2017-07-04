@@ -16,6 +16,10 @@
 #include <QHBoxLayout>
 #include <QLabel>
 
+#include <dimagebutton.h>
+
+DWIDGET_USE_NAMESPACE
+
 class DictPage : public QWidget
 {
     Q_OBJECT
@@ -34,8 +38,12 @@ public:
     QHBoxLayout *youdaoLayout;
 
     QLabel *nameLabel;
-    QLabel *pronLabel;
+    QLabel *pronLabel1;
+    QLabel *pronLabel2;
     QLabel *infoLabel;
+
+    DImageButton *pronButton1;
+    DImageButton *pronButton2;
 
 private:
     void init();

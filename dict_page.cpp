@@ -11,14 +11,22 @@ DictPage::DictPage(QWidget *parent)
     infoLayout = new QHBoxLayout();
     youdaoLayout = new QHBoxLayout();
     nameLabel = new QLabel("加载中...");
-    pronLabel = new QLabel("");
+    pronLabel1 = new QLabel("");
+    pronLabel2 = new QLabel("");
     infoLabel = new QLabel("");
+
+    pronButton1 = new DImageButton(":/image/play.svg", NULL, NULL);
+    pronButton2 = new DImageButton(":/image/play.svg", NULL, NULL);
+
+    pronButton1->setFixedSize(24, 24);
+    pronButton2->setFixedSize(24, 24);
 
     nameLabel->setWordWrap(true);
     infoLabel->setWordWrap(true);
 
     nameLabel->setStyleSheet("font-size: 22px; color:#2CA7F8;");
-    pronLabel->setStyleSheet("font-size: 13px");
+    pronLabel1->setStyleSheet("font-size: 13px");
+    pronLabel2->setStyleSheet("font-size: 13px");
     infoLabel->setStyleSheet("font-size: 17px");
 
     wordLayout->addSpacing(35);
@@ -30,7 +38,11 @@ DictPage::DictPage(QWidget *parent)
     infoLayout->addSpacing(35);
 
     pronLayout->addSpacing(35);
-    pronLayout->addWidget(pronLabel);
+    pronLayout->addWidget(pronButton1);
+    pronLayout->addWidget(pronLabel1);
+    pronLayout->addSpacing(5);
+    pronLayout->addWidget(pronButton2);
+    pronLayout->addWidget(pronLabel2);
     pronLayout->addSpacing(35);
 
     layout->addSpacing(20);
@@ -61,6 +73,11 @@ void DictPage::init()
     youdaoLayout->addSpacing(35);
     youdaoLayout->addWidget(iconLabel);
     youdaoLayout->addWidget(tips);
+
+    pronLabel1->setVisible(false);
+    pronLabel2->setVisible(false);
+    pronButton1->setVisible(false);
+    pronButton2->setVisible(false);
 }
 
 void DictPage::queryWord(const QString &word)
@@ -93,13 +110,22 @@ void DictPage::replyfinished(QNetworkReply *reply)
         nameLabel->setText(object.value("query").toString());
 
         if (uk_phonetic.isEmpty() && us_phonetic.isEmpty()) {
-            pronLabel->setVisible(false);
+            pronLabel1->setVisible(false);
+            pronLabel2->setVisible(false);
+            pronButton1->setVisible(false);
+            pronButton2->setVisible(false);
+
             if (!data.value("phonetic").toString().isEmpty()) {
                 nameLabel->setText(nameLabel->text() + " [" + data.value("phonetic").toString() + "]");
             }
         }else {
-            pronLabel->setVisible(true);
-            pronLabel->setText(QString("英[%1]        美[%2]").arg(uk_phonetic).arg(us_phonetic));
+            pronLabel1->setVisible(true);
+            pronLabel2->setVisible(true);
+            pronButton1->setVisible(true);
+            pronButton2->setVisible(true);
+
+            pronLabel1->setText(QString("英[%1]").arg(uk_phonetic));
+            pronLabel2->setText(QString("美[%1]").arg(us_phonetic));
         }
 
         if (explain.isEmpty()) {

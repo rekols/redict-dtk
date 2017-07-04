@@ -5,5 +5,6 @@
     <file>image/return_normal.png</file>
     <file>image/return_hover.png</file>
     <file>image/return_press.png</file>
+    <file>image/play.svg</file>
   </qresource>
 </RCC>
