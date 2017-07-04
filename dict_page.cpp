@@ -4,7 +4,8 @@
 DictPage::DictPage(QWidget *parent)
     : QWidget(parent)
 {
-    audio = new QMediaPlayer;
+    audio1 = new QMediaPlayer;
+    audio2 = new QMediaPlayer;
     http = new QNetworkAccessManager(this);
     layout = new QVBoxLayout(this);
     wordLayout = new QHBoxLayout();
@@ -58,13 +59,11 @@ DictPage::DictPage(QWidget *parent)
     connect(http, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyfinished(QNetworkReply *)));
 
     connect(pronButton1, &DImageButton::clicked, this, [=]{
-        audio->setMedia(QUrl("http://dict.youdao.com/dictvoice?type=1&audio=" + nameLabel->text()));
-        audio->play();
+        audio1->play();
     });
 
     connect(pronButton2, &DImageButton::clicked, this, [=]{
-        audio->setMedia(QUrl("http://dict.youdao.com/dictvoice?type=2&audio=" + nameLabel->text()));
-        audio->play();
+        audio2->play();
     });
 
     init();
@@ -137,6 +136,9 @@ void DictPage::replyfinished(QNetworkReply *reply)
 
             pronLabel1->setText(QString("英[%1]").arg(uk_phonetic));
             pronLabel2->setText(QString("美[%1]").arg(us_phonetic));
+
+            audio1->setMedia(QUrl("http://dict.youdao.com/dictvoice?type=1&audio=" + nameLabel->text()));
+            audio2->setMedia(QUrl("http://dict.youdao.com/dictvoice?type=2&audio=" + nameLabel->text()));
         }
 
         if (explain.isEmpty()) {
