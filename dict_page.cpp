@@ -1,6 +1,5 @@
 #include "dict_page.h"
 #include <QByteArray>
-#include <QDebug>
 
 DictPage::DictPage(QWidget *parent)
     : QWidget(parent)
@@ -12,37 +11,32 @@ DictPage::DictPage(QWidget *parent)
     infoLayout = new QHBoxLayout();
     youdaoLayout = new QHBoxLayout();
     nameLabel = new QLabel("加载中...");
-    ukPron = new QLabel("");
-    usPron = new QLabel("");
+    pronLabel = new QLabel("");
     infoLabel = new QLabel("");
 
     nameLabel->setWordWrap(true);
     infoLabel->setWordWrap(true);
 
     nameLabel->setStyleSheet("font-size: 22px; color:#2CA7F8;");
-    ukPron->setStyleSheet("font-size: 13px");
-    usPron->setStyleSheet("font-size: 13px");
+    pronLabel->setStyleSheet("font-size: 13px");
     infoLabel->setStyleSheet("font-size: 17px");
 
-
-    wordLayout->addSpacing(25);
+    wordLayout->addSpacing(35);
     wordLayout->addWidget(nameLabel);
-    wordLayout->addSpacing(25);
+    wordLayout->addSpacing(35);
 
-    infoLayout->addSpacing(25);
+    infoLayout->addSpacing(35);
     infoLayout->addWidget(infoLabel);
-    infoLayout->addSpacing(25);
+    infoLayout->addSpacing(35);
 
-    pronLayout->addSpacing(25);
-    pronLayout->addWidget(ukPron);
-    pronLayout->addSpacing(20);
-    pronLayout->addWidget(usPron);
-    pronLayout->addStretch();
+    pronLayout->addSpacing(35);
+    pronLayout->addWidget(pronLabel);
+    pronLayout->addSpacing(35);
 
     layout->addSpacing(20);
     layout->addLayout(wordLayout);
     layout->addLayout(pronLayout);
-    layout->addSpacing(10);
+    layout->addSpacing(12);
     layout->addLayout(infoLayout);
     layout->addStretch();
     layout->addLayout(youdaoLayout);
@@ -64,7 +58,7 @@ void DictPage::init()
     QLabel *tips = new QLabel("数据来自有道词典");
     tips->setStyleSheet("QLabel {font-size: 12px; }");
 
-    youdaoLayout->addSpacing(25);
+    youdaoLayout->addSpacing(35);
     youdaoLayout->addWidget(iconLabel);
     youdaoLayout->addWidget(tips);
 }
@@ -90,48 +84,36 @@ void DictPage::replyfinished(QNetworkReply *reply)
         object = json.object();
         data = object.value("basic").toObject();
 
-        QJsonArray array = data.value("explains").toArray();
-        QString explains = NULL;
+        QString uk_phonetic = data.value("uk-phonetic").toString();
+        QString us_phonetic = data.value("us-phonetic").toString();
+        QString text = NULL;
 
-        for (int i=0; i<array.size(); ++i)
-        {
-            explains.append(array.at(i).toString());
-            explains.append("\n");
-        }
+        QJsonArray explain = data.value("explains").toArray();
 
         nameLabel->setText(object.value("query").toString());
-        infoLabel->setText(explains);
 
-        if (data.value("us-phonetic").toString().isEmpty() && data.value("uk-phonetic").toString().isEmpty())
-        {
-            usPron->setText("");
-            ukPron->setText("");
-            ukPron->setVisible(false);
-            usPron->setVisible(false);
-
-            if (array.isEmpty()) //如果没有解释，那就翻译
-            {
-                for (int i=0; i<object.value("translation").toArray().size(); ++i)
-                {
-                    infoLabel->setText(object.value("translation").toArray().at(i).toString());
-                    infoLabel->setText(infoLabel->text() + "\n");
-                }
+        if (uk_phonetic.isEmpty() && us_phonetic.isEmpty()) {
+            pronLabel->setVisible(false);
+            if (!data.value("phonetic").toString().isEmpty()) {
+                nameLabel->setText(nameLabel->text() + " [" + data.value("phonetic").toString() + "]");
             }
-
-            if (!data.value("phonetic").toString().isEmpty()) //显示中文拼音
-            {
-                nameLabel->setText(nameLabel->text() + " [" +data.value("phonetic").toString() + "]");
-            }
-        }
-        else
-        {
-            ukPron->setVisible(true);
-            usPron->setVisible(true);
-
-            usPron->setText(QString("美 [%1]").arg(data.value("us-phonetic").toString()));
-            ukPron->setText(QString("英 [%1]").arg(data.value("uk-phonetic").toString()));
+        }else {
+            pronLabel->setVisible(true);
+            pronLabel->setText(QString("英[%1]        美[%2]").arg(uk_phonetic).arg(us_phonetic));
         }
 
+        if (explain.isEmpty()) {
+            for (int i=0; i<object.value("translation").toArray().size(); ++i) {
+                text.append(object.value("translation").toArray().at(i).toString());
+                text.append("\n");
+            }
+        }else {
+            for (int i=0; i<explain.size(); ++i) {
+                text.append(explain.at(i).toString());
+                text.append("\n");
+            }
+        }
 
+        infoLabel->setText(text);
     }
 }

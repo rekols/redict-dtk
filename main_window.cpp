@@ -28,8 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
         toolbar->showIcon();
 
         dictPage->nameLabel->setText("加载中...");
-        dictPage->ukPron->setText("");
-        dictPage->usPron->setText("");
+        dictPage->pronLabel->setText("");
         toolbar->search->setText("");
     });
 

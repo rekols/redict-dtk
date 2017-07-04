@@ -32,9 +32,9 @@ public:
     QHBoxLayout *pronLayout;
     QHBoxLayout *infoLayout;
     QHBoxLayout *youdaoLayout;
+
     QLabel *nameLabel;
-    QLabel *ukPron;
-    QLabel *usPron;
+    QLabel *pronLabel;
     QLabel *infoLabel;
 
 private:
