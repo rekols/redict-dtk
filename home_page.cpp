@@ -4,8 +4,6 @@ HomePage::HomePage(QWidget *parent)
     : QWidget(parent)
 {
     layout = new QVBoxLayout(this);
-    topLayout = new QHBoxLayout();
-    rightLayout = new QVBoxLayout();
     imageLabel = new QLabel();
     contentLabel = new QLabel();
     noteLabel = new QLabel();
@@ -18,17 +16,13 @@ HomePage::HomePage(QWidget *parent)
     http = new QNetworkAccessManager(this);
     http2 = new QNetworkAccessManager(this);
 
-    rightLayout->addWidget(contentLabel);
-    rightLayout->addWidget(noteLabel);
-    rightLayout->addWidget(timeLabel);
-
-    topLayout->addWidget(imageLabel);
-    topLayout->addSpacing(20);
-    topLayout->addLayout(rightLayout);
-
-    layout->setMargin(25);
+    layout->setMargin(20);
     layout->addStretch();
-    layout->addLayout(topLayout);
+    layout->addWidget(imageLabel);
+    layout->addSpacing(10);
+    layout->addWidget(contentLabel);
+    layout->addWidget(noteLabel);
+    layout->addWidget(timeLabel);
     layout->addStretch();
 
     connect(http, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyfinished(QNetworkReply *)));
@@ -38,8 +32,7 @@ HomePage::HomePage(QWidget *parent)
     request.setUrl(QUrl("http://open.iciba.com/dsapi/"));
     http->get(request);
 
-    imageLabel->setFixedWidth(250);
-    imageLabel->setFixedHeight(180);
+    imageLabel->setFixedHeight(200);
     imageLabel->setScaledContents(true);
 
     contentLabel->setWordWrap(true);

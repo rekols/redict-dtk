@@ -29,7 +29,7 @@ TranslatorPage::TranslatorPage(QWidget *parent)
 
     setLayout(layout);
 
-    this->setStyleSheet("QPlainTextEdit { border: 1px solid #505050; }");
+    this->setStyleSheet("QPlainTextEdit { border: 1px solid #505050;}");
 
     connect(http, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyfinished(QNetworkReply *)));
     connect(trBtn, SIGNAL(clicked()), this, SLOT(on_translator_clicked()));

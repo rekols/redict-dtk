@@ -25,8 +25,7 @@ int main(int argc, char *argv[])
         a.setWindowIcon(QIcon(":/image/logo.svg"));
 
         MainWindow w;
-        w.setMinimumSize(550, 420);
-        w.resize(550, 420);
+        w.setFixedSize(550, 420);
         w.show();
 
         DUtility::moveToCenter(&w);

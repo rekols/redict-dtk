@@ -1,5 +1,4 @@
 #include "tabbar.h"
-#include <QDebug>
 
 TabBar::TabBar(QWidget *parent)
     :QWidget(parent)
@@ -15,15 +14,6 @@ TabBar::TabBar(QWidget *parent)
 
     layout = new QHBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
-
-    QPixmap iconPixmap = QPixmap(":/image/logo.svg");
-    iconLabel = new QLabel();
-    iconLabel->setFixedSize(24, 24);
-    iconLabel->setScaledContents(true);
-    iconLabel->setPixmap(iconPixmap);
-
-    //layout->addWidget(iconLabel);
-    //layout->addStretch();
 
     tabNames.insert(0, "首页");
     tabNameWidths.insert(0, fontMetrics->width("首页"));

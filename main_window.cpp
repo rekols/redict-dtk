@@ -13,11 +13,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     mainWidget->addTab(homePage, "Home");
     mainWidget->addTab(dictPage, "Dictionary");
-     mainWidget->addTab(trPage, "Translator");
+    mainWidget->addTab(trPage, "Translator");
     mainWidget->tabBar()->hide();
     mainWidget->setCurrentIndex(0);
 
     this->titleBar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
+    this->titleBar()->setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
     this->setCentralWidget(mainWidget);
 
     connect(toolbar, SIGNAL(switchTab(int)), this, SLOT(switchTab(int)));
