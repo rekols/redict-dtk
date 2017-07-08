@@ -5,6 +5,16 @@
 #include <QVBoxLayout>
 #include <QPlainTextEdit>
 
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QNetworkCookie>
+#include <QNetworkCookieJar>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonValue>
+
 class TranslatorPage : public QWidget
 {
     Q_OBJECT
@@ -17,6 +27,12 @@ private:
     QHBoxLayout *hLayout;
     QPlainTextEdit *original;
     QPlainTextEdit *translator;
+
+    QNetworkAccessManager *http;
+
+private slots:
+    void replyfinished(QNetworkReply *reply);
+    void on_translator_clicked();
 };
 
 #endif // TRANSLATORPAGE_H
