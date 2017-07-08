@@ -4,19 +4,12 @@ HomePage::HomePage(QWidget *parent)
     : QWidget(parent)
 {
     layout = new QVBoxLayout(this);
-    searchLayout = new QHBoxLayout();
     topLayout = new QHBoxLayout();
     rightLayout = new QVBoxLayout();
     imageLabel = new QLabel();
     contentLabel = new QLabel();
     noteLabel = new QLabel();
     timeLabel = new QLabel();
-    searchEdit = new QLineEdit();
-    searchButton = new QPushButton("搜索");
-
-    searchEdit->setFixedHeight(35);
-    searchButton->setFixedHeight(35);
-    searchButton->setFixedWidth(100);
 
     contentLabel->setStyleSheet("font-size: 14px;");
     noteLabel->setStyleSheet("font-size: 14px;");
@@ -24,10 +17,6 @@ HomePage::HomePage(QWidget *parent)
 
     http = new QNetworkAccessManager(this);
     http2 = new QNetworkAccessManager(this);
-
-    searchLayout->addWidget(searchEdit);
-    searchLayout->addSpacing(10);
-    searchLayout->addWidget(searchButton);
 
     rightLayout->addWidget(contentLabel);
     rightLayout->addWidget(noteLabel);
@@ -37,12 +26,10 @@ HomePage::HomePage(QWidget *parent)
     topLayout->addSpacing(20);
     topLayout->addLayout(rightLayout);
 
-    layout->addLayout(searchLayout);
-    layout->addSpacing(50);
+    layout->setMargin(25);
+    layout->addStretch();
     layout->addLayout(topLayout);
     layout->addStretch();
-
-    layout->setMargin(25);
 
     connect(http, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyfinished(QNetworkReply *)));
     connect(http2, SIGNAL(finished(QNetworkReply *)), this, SLOT(loadImagefinished(QNetworkReply *)));
@@ -63,23 +50,12 @@ HomePage::HomePage(QWidget *parent)
 
     timeLabel->setWordWrap(true);
     timeLabel->setAlignment(Qt::AlignTop);
-
-    connect(searchButton, SIGNAL(clicked()), this, SLOT(searchEmit()));
-    connect(searchEdit, SIGNAL(returnPressed()), this, SLOT(searchEmit()));
 }
 
 HomePage::~HomePage()
 {
     delete http;
     delete http2;
-}
-
-void HomePage::searchEmit()
-{
-    searchEdit->setFocus();
-
-    if (!searchEdit->text().isEmpty())
-        emit searchWord(searchEdit->text());
 }
 
 void HomePage::replyfinished(QNetworkReply *reply)

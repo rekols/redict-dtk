@@ -5,6 +5,7 @@
 #include "tabbar.h"
 #include "home_page.h"
 #include "dict_page.h"
+#include "translator_page.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -21,9 +22,10 @@ private:
     TabBar *toolbar;
     HomePage *homePage;
     DictPage *dictPage;
+    TranslatorPage *trPage;
 
 private slots:
-    void searchWord(QString word);
+    void switchTab(int index);
 };
 
 #endif // MAIN_WINDOW_H

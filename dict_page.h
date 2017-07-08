@@ -18,6 +18,9 @@
 #include <dimagebutton.h>
 #include <QMediaPlayer>
 
+#include <QLineEdit>
+#include <QPushButton>
+
 DWIDGET_USE_NAMESPACE
 
 class DictPage : public QWidget
@@ -32,11 +35,14 @@ public:
     QNetworkAccessManager *http;
 
     QVBoxLayout *layout;
+    QHBoxLayout *searchLayout;
     QHBoxLayout *wordLayout;
     QHBoxLayout *pronLayout;
     QHBoxLayout *infoLayout;
     QHBoxLayout *youdaoLayout;
 
+    QLineEdit *searchEdit;
+    QPushButton *searchButton;
     QLabel *nameLabel;
     QLabel *pronLabel1;
     QLabel *pronLabel2;
@@ -54,6 +60,7 @@ private:
 
 private slots:
     void replyfinished(QNetworkReply *reply);
+    void start();
 };
 
 #endif // DICTPAGE_H

@@ -47,6 +47,8 @@ void TabBar::mousePressEvent(QMouseEvent *e)
     }
 
     if (currentTabIndex != prevActiveIndex) {
+        emit switchTab(currentTabIndex);
+
         repaint();
     }
 }

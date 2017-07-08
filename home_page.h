@@ -15,8 +15,6 @@
 #include <QJsonValue>
 
 #include <QLabel>
-#include <QLineEdit>
-#include <QPushButton>
 
 class HomePage : public QWidget
 {
@@ -26,14 +24,10 @@ public:
     HomePage(QWidget *parent = 0);
     ~HomePage();
 
-    QLineEdit *searchEdit;
-
 private:
     QVBoxLayout *layout;
-    QHBoxLayout *searchLayout;
     QHBoxLayout *topLayout;
     QVBoxLayout *rightLayout;
-    QPushButton *searchButton;
     QLabel *imageLabel;
     QLabel *contentLabel;
     QLabel *noteLabel;
@@ -52,9 +46,7 @@ private:
 signals:
     void searchWord(QString word);
 
-
 private slots:
-    void searchEmit();
     void replyfinished(QNetworkReply *reply);
     void loadImagefinished(QNetworkReply *reply);
 };

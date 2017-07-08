@@ -28,6 +28,9 @@ private:
     QFontMetrics *fontMetrics;
     int currentTabIndex;
     int tabNameSize;
+
+signals:
+    void switchTab(int index);
 };
 
 #endif // TABBAR_H

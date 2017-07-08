@@ -8,11 +8,14 @@ DictPage::DictPage(QWidget *parent)
     audio2 = new QMediaPlayer;
     http = new QNetworkAccessManager(this);
     layout = new QVBoxLayout(this);
+    searchLayout = new QHBoxLayout();
     wordLayout = new QHBoxLayout();
     pronLayout = new QHBoxLayout();
     infoLayout = new QHBoxLayout();
     youdaoLayout = new QHBoxLayout();
-    nameLabel = new QLabel("加载中...");
+    searchEdit = new QLineEdit();
+    searchButton = new QPushButton("查询");
+    nameLabel = new QLabel("");
     pronLabel1 = new QLabel("");
     pronLabel2 = new QLabel("");
     infoLabel = new QLabel("");
@@ -31,6 +34,11 @@ DictPage::DictPage(QWidget *parent)
     pronLabel2->setStyleSheet("font-size: 13px");
     infoLabel->setStyleSheet("font-size: 17px");
 
+    searchLayout->addSpacing(32);
+    searchLayout->addWidget(searchEdit);
+    searchLayout->addWidget(searchButton);
+    searchLayout->addSpacing(32);
+
     wordLayout->addSpacing(32);
     wordLayout->addWidget(nameLabel);
     wordLayout->addSpacing(32);
@@ -46,6 +54,8 @@ DictPage::DictPage(QWidget *parent)
     pronLayout->addWidget(pronButton2);
     pronLayout->addWidget(pronLabel2);
 
+    layout->addSpacing(10);
+    layout->addLayout(searchLayout);
     layout->addSpacing(20);
     layout->addLayout(wordLayout);
     layout->addLayout(pronLayout);
@@ -65,7 +75,18 @@ DictPage::DictPage(QWidget *parent)
         audio2->play();
     });
 
+    connect(searchEdit, SIGNAL(returnPressed()), this, SLOT(start()));
+    connect(searchButton, SIGNAL(clicked()), this, SLOT(start()));
+
     init();
+}
+
+void DictPage::start()
+{
+    if (!searchEdit->text().isEmpty())
+        this->queryWord(searchEdit->text());
+    else
+        searchEdit->setFocus();
 }
 
 void DictPage::init()
@@ -87,6 +108,8 @@ void DictPage::init()
     pronLabel2->setVisible(false);
     pronButton1->setVisible(false);
     pronButton2->setVisible(false);
+
+    searchEdit->setFocus();
 }
 
 void DictPage::queryWord(const QString &word)
