@@ -19,11 +19,13 @@ SOURCES += main.cpp\
     main_window.cpp \
     home_page.cpp \
     dict_page.cpp \
-    tabbar.cpp
+    tabbar.cpp \
+    translator_page.cpp
 
 HEADERS  += main_window.h \
     home_page.h \
     dict_page.h \
-    tabbar.h
+    tabbar.h \
+    translator_page.h
 
 RESOURCES = rekols-dict.qrc

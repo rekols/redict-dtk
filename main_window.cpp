@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     mainWidget->addTab(homePage, "HomePage");
     mainWidget->addTab(dictPage, "DictPage");
-    mainWidget->tabBar()->hide();
+    //mainWidget->tabBar()->hide();
     mainWidget->setCurrentIndex(0);
 
     this->titleBar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
