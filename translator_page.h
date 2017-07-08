@@ -2,6 +2,8 @@
 #define TRANSLATORPAGE_H
 
 #include <QWidget>
+#include <QVBoxLayout>
+#include <QPlainTextEdit>
 
 class TranslatorPage : public QWidget
 {
@@ -9,6 +11,12 @@ class TranslatorPage : public QWidget
 
 public:
     TranslatorPage(QWidget *parent = 0);
+
+private:
+    QVBoxLayout *layout;
+    QHBoxLayout *hLayout;
+    QPlainTextEdit *original;
+    QPlainTextEdit *translator;
 };
 
 #endif // TRANSLATORPAGE_H

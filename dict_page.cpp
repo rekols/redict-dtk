@@ -25,6 +25,7 @@ DictPage::DictPage(QWidget *parent)
 
     pronButton1->setFixedSize(24, 24);
     pronButton2->setFixedSize(24, 24);
+    searchButton->setFixedWidth(100);
 
     nameLabel->setWordWrap(true);
     infoLabel->setWordWrap(true);
@@ -34,10 +35,10 @@ DictPage::DictPage(QWidget *parent)
     pronLabel2->setStyleSheet("font-size: 13px");
     infoLabel->setStyleSheet("font-size: 17px");
 
-    searchLayout->addSpacing(32);
+    searchLayout->addSpacing(10);
     searchLayout->addWidget(searchEdit);
     searchLayout->addWidget(searchButton);
-    searchLayout->addSpacing(32);
+    searchLayout->addSpacing(10);
 
     wordLayout->addSpacing(32);
     wordLayout->addWidget(nameLabel);
