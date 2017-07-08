@@ -2,7 +2,7 @@
 #define MAIN_WINDOW_H
 
 #include <DMainWindow>
-#include "toolbar.h"
+#include "tabbar.h"
 #include "home_page.h"
 #include "dict_page.h"
 
@@ -18,7 +18,7 @@ public:
 
 private:
     QTabWidget *mainWidget;
-    ToolBar *toolbar;
+    TabBar *toolbar;
     HomePage *homePage;
     DictPage *dictPage;
 

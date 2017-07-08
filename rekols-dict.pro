@@ -17,13 +17,13 @@ PKGCONFIG += dtkwidget dtkbase dtkutil
 
 SOURCES += main.cpp\
     main_window.cpp \
-    toolbar.cpp \
     home_page.cpp \
-    dict_page.cpp
+    dict_page.cpp \
+    tabbar.cpp
 
 HEADERS  += main_window.h \
-    toolbar.h \
     home_page.h \
-    dict_page.h
+    dict_page.h \
+    tabbar.h
 
 RESOURCES = rekols-dict.qrc
