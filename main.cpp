@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 
     if (a.setSingleInstance("rekols-dict"))
     {
-        a.setApplicationVersion("0.1");
+        a.setApplicationVersion("0.3");
 
         a.setProductIcon(QPixmap::fromImage(QImage(":/image/logo.svg")));
         a.setApplicationDescription(DApplication::translate("MainWindow", descriptionText) + "\n");
