@@ -3,7 +3,7 @@
 TabBar::TabBar(QWidget *parent)
     :QWidget(parent)
 {
-    setFixedHeight(30);
+    setFixedHeight(35);
 
     currentTabIndex = 0;
     tabNameSize = 11;
@@ -26,13 +26,12 @@ TabBar::TabBar(QWidget *parent)
 void TabBar::mousePressEvent(QMouseEvent *e)
 {
     int prevActiveIndex = currentTabIndex;
-    int width = 44 + tabNameWidths[0];
 
-    if (e->x() < width) {
+    if (e->x() > 30 && e->x() < 80) {
         currentTabIndex = 0;
-    }else if (e->x() < width * 2) {
+    }else if (e->x() > 30 && e->x() < 130) {
         currentTabIndex = 1;
-    }else if (e->x() < width * 3) {
+    }else if (e->x() > 30 && e->x() < 185) {
         currentTabIndex = 2;
     }
 

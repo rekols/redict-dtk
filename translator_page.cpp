@@ -1,6 +1,7 @@
 #include "translator_page.h"
 #include <QLabel>
 #include <QPushButton>
+#include <QDebug>
 
 TranslatorPage::TranslatorPage(QWidget *parent)
     :QWidget(parent)
@@ -29,7 +30,9 @@ TranslatorPage::TranslatorPage(QWidget *parent)
 
     setLayout(layout);
 
-    this->setStyleSheet("QPlainTextEdit { border: 1px solid #505050;}");
+    tips1->setStyleSheet("color: #BCBCBC");
+    tips2->setStyleSheet("color: #BCBCBC");
+    this->setStyleSheet("QPlainTextEdit { border: 1px solid #505050; font-size: 17px; padding: 5px;}");
 
     connect(http, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyfinished(QNetworkReply *)));
     connect(trBtn, SIGNAL(clicked()), this, SLOT(on_translator_clicked()));
@@ -55,13 +58,6 @@ void TranslatorPage::replyfinished(QNetworkReply *reply)
     {
         object = json.object();
 
-        QString text;
-
-        for (int i=0; i<object.value("translation").toArray().size(); ++i) {
-            text.append(object.value("translation").toArray().at(i).toString());
-            text.append("\n");
-        }
-
-        translator->setPlainText(text);
+        translator->setPlainText(object.value("translation").toArray().at(0).toString());
     }
 }
