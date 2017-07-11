@@ -34,4 +34,8 @@ MainWindow::~MainWindow()
 void MainWindow::switchTab(int index)
 {
     mainWidget->setCurrentIndex(index);
+
+    if (index == 1) {
+        dictPage->searchEdit->setFocus();
+    }
 }
