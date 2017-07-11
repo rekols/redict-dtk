@@ -38,5 +38,7 @@ void MainWindow::switchTab(int index)
 
     if (index == 1) {
         dictPage->searchEdit->setFocus();
+    }else if (index == 2) {
+        trPage->original->setFocus();
     }
 }

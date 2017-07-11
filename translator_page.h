@@ -15,6 +15,8 @@
 #include <QJsonArray>
 #include <QJsonValue>
 
+#include <QKeyEvent>
+
 class TranslatorPage : public QWidget
 {
     Q_OBJECT
@@ -22,13 +24,15 @@ class TranslatorPage : public QWidget
 public:
     TranslatorPage(QWidget *parent = 0);
 
-private:
     QVBoxLayout *layout;
     QHBoxLayout *hLayout;
     QPlainTextEdit *original;
     QPlainTextEdit *translator;
 
     QNetworkAccessManager *http;
+
+protected:
+    void keyPressEvent(QKeyEvent *);
 
 private slots:
     void replyfinished(QNetworkReply *reply);
