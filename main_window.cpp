@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(toolbar, SIGNAL(switchTab(int)), this, SLOT(switchTab(int)));
 
     setBorderColor("#5D5D5D");
+
 }
 
 MainWindow::~MainWindow()

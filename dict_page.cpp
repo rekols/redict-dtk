@@ -101,7 +101,7 @@ void DictPage::init()
     QLabel *tips = new QLabel("数据来自有道词典");
     tips->setStyleSheet("QLabel {font-size: 12px; }");
 
-    youdaoLayout->addSpacing(35);
+    youdaoLayout->addSpacing(10);
     youdaoLayout->addWidget(iconLabel);
     youdaoLayout->addWidget(tips);
 
