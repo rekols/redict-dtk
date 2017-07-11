@@ -20,8 +20,9 @@ HomePage::HomePage(QWidget *parent)
     infoLayout->addWidget(infoLabel);
     infoLayout->addSpacing(15);
 
+    layout->addSpacing(10);
     layout->addLayout(imageLayout);
-    layout->addSpacing(20);
+    layout->addSpacing(10);
     layout->addLayout(infoLayout);
 
     imageLabel->setFixedHeight(200);
@@ -70,7 +71,7 @@ void HomePage::replyfinished(QNetworkReply *reply)
 
     QString info = NULL;
     info.append(m_content);
-    info.append("\n\n");
+    info.append("\n");
     info.append(m_note);
     info.append("\n\n");
     info.append(m_dateline);

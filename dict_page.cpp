@@ -41,15 +41,15 @@ DictPage::DictPage(QWidget *parent)
     searchLayout->addWidget(searchButton);
     searchLayout->addSpacing(15);
 
-    wordLayout->addSpacing(32);
+    wordLayout->addSpacing(25);
     wordLayout->addWidget(nameLabel);
-    wordLayout->addSpacing(32);
+    wordLayout->addSpacing(25);
 
-    infoLayout->addSpacing(34);
+    infoLayout->addSpacing(28);
     infoLayout->addWidget(infoLabel);
-    infoLayout->addSpacing(34);
+    infoLayout->addSpacing(28);
 
-    pronLayout->addSpacing(32);
+    pronLayout->addSpacing(25);
     pronLayout->addWidget(pronButton1);
     pronLayout->addWidget(pronLabel1);
     pronLayout->addSpacing(5);
