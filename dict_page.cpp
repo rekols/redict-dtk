@@ -84,8 +84,10 @@ DictPage::DictPage(QWidget *parent)
 
 void DictPage::start()
 {
-    if (!searchEdit->text().isEmpty())
+    if (!searchEdit->text().isEmpty()) {
         this->queryWord(searchEdit->text());
+        searchEdit->setFocus();
+    }
     else
         searchEdit->setFocus();
 }
