@@ -54,8 +54,7 @@ public:
     DImageButton *pronButton1;
     DImageButton *pronButton2;
 
-    QMediaPlayer *audio1;
-    QMediaPlayer *audio2;
+    QMediaPlayer *audio;
 
 private:
     void init();

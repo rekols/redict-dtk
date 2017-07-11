@@ -5,8 +5,7 @@ DictPage::DictPage(QWidget *parent)
     : QWidget(parent)
 {
     dialog = new DDialog("提示", "请输入您要查询的单词", this);
-    audio1 = new QMediaPlayer;
-    audio2 = new QMediaPlayer;
+    audio = new QMediaPlayer;
     http = new QNetworkAccessManager(this);
     layout = new QVBoxLayout(this);
     searchLayout = new QHBoxLayout();
@@ -70,11 +69,13 @@ DictPage::DictPage(QWidget *parent)
     connect(http, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyfinished(QNetworkReply *)));
 
     connect(pronButton1, &DImageButton::clicked, this, [=]{
-        audio1->play();
+        audio->setMedia(QUrl("http://dict.youdao.com/dictvoice?type=1&audio=" + nameLabel->text()));
+        audio->play();
     });
 
     connect(pronButton2, &DImageButton::clicked, this, [=]{
-        audio2->play();
+        audio->setMedia(QUrl("http://dict.youdao.com/dictvoice?type=2&audio=" + nameLabel->text()));
+        audio->play();
     });
 
     connect(searchEdit, SIGNAL(returnPressed()), this, SLOT(start()));
@@ -167,9 +168,6 @@ void DictPage::replyfinished(QNetworkReply *reply)
 
             pronLabel1->setText(QString("英[%1]").arg(uk_phonetic));
             pronLabel2->setText(QString("美[%1]").arg(us_phonetic));
-
-            audio1->setMedia(QUrl("http://dict.youdao.com/dictvoice?type=1&audio=" + nameLabel->text()));
-            audio2->setMedia(QUrl("http://dict.youdao.com/dictvoice?type=2&audio=" + nameLabel->text()));
         }
 
         if (explain.isEmpty()) {
