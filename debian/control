@@ -3,7 +3,7 @@ Section: base
 Priority: optional
 Maintainer: rekols <rekols@foxmail.com>
 Build-Depends: debhelper (>= 9), pkg-config, qt5-default, dpkg-dev, qt5-qmake, qtbase5-dev, libdtkbase-dev, libdtkwidget-dev, libdtkutil-dev
-Standards-Version: 0.1
+Standards-Version: 0.3
 Homepage: https://github.com/rekols
 
 Package: rekols-dict
