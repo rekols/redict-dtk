@@ -4,45 +4,38 @@ HomePage::HomePage(QWidget *parent)
     : QWidget(parent)
 {
     layout = new QVBoxLayout(this);
+    imageLayout = new QHBoxLayout;
+    infoLayout = new QHBoxLayout;
     imageLabel = new QLabel();
-    contentLabel = new QLabel();
-    noteLabel = new QLabel();
-    timeLabel = new QLabel();
-
-    contentLabel->setStyleSheet("font-size: 14px;");
-    noteLabel->setStyleSheet("font-size: 14px;");
-    timeLabel->setStyleSheet("font-size: 12px;");
+    infoLabel = new QLabel();
 
     http = new QNetworkAccessManager(this);
     http2 = new QNetworkAccessManager(this);
 
-    layout->setMargin(20);
-    layout->addStretch();
-    layout->addWidget(imageLabel);
-    layout->addSpacing(10);
-    layout->addWidget(contentLabel);
-    layout->addWidget(noteLabel);
-    layout->addWidget(timeLabel);
-    layout->addStretch();
+    imageLayout->addSpacing(15);
+    imageLayout->addWidget(imageLabel);
+    imageLayout->addSpacing(15);
 
-    connect(http, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyfinished(QNetworkReply *)));
-    connect(http2, SIGNAL(finished(QNetworkReply *)), this, SLOT(loadImagefinished(QNetworkReply *)));
+    infoLayout->addSpacing(15);
+    infoLayout->addWidget(infoLabel);
+    infoLayout->addSpacing(15);
+
+    layout->addLayout(imageLayout);
+    layout->addSpacing(20);
+    layout->addLayout(infoLayout);
+
+    imageLabel->setFixedHeight(200);
+    imageLabel->setScaledContents(true);
+
+    infoLabel->setStyleSheet("font-size: 14px;");
+    infoLabel->setWordWrap(true);
 
     QNetworkRequest request;
     request.setUrl(QUrl("http://open.iciba.com/dsapi/"));
     http->get(request);
 
-    imageLabel->setFixedHeight(200);
-    imageLabel->setScaledContents(true);
-
-    contentLabel->setWordWrap(true);
-    contentLabel->setAlignment(Qt::AlignTop);
-
-    noteLabel->setWordWrap(true);
-    noteLabel->setAlignment(Qt::AlignTop);
-
-    timeLabel->setWordWrap(true);
-    timeLabel->setAlignment(Qt::AlignTop);
+    connect(http, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyfinished(QNetworkReply *)));
+    connect(http2, SIGNAL(finished(QNetworkReply *)), this, SLOT(loadImagefinished(QNetworkReply *)));
 }
 
 HomePage::~HomePage()
@@ -75,9 +68,14 @@ void HomePage::replyfinished(QNetworkReply *reply)
         http2->get(request);
     }
 
-    contentLabel->setText(m_content);
-    noteLabel->setText(m_note);
-    timeLabel->setText(m_dateline);
+    QString info = NULL;
+    info.append(m_content);
+    info.append("\n\n");
+    info.append(m_note);
+    info.append("\n\n");
+    info.append(m_dateline);
+
+    infoLabel->setText(info);
 }
 
 void HomePage::loadImagefinished(QNetworkReply *reply)

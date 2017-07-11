@@ -20,6 +20,7 @@
 
 #include <QLineEdit>
 #include <QPushButton>
+#include <ddialog.h>
 
 DWIDGET_USE_NAMESPACE
 
@@ -33,6 +34,8 @@ public:
     void queryWord(const QString &word);
 
     QNetworkAccessManager *http;
+
+    DDialog *dialog;
 
     QVBoxLayout *layout;
     QHBoxLayout *searchLayout;

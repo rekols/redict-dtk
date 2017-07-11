@@ -4,6 +4,7 @@
 DictPage::DictPage(QWidget *parent)
     : QWidget(parent)
 {
+    dialog = new DDialog("提示", "请输入您要查询的单词", this);
     audio1 = new QMediaPlayer;
     audio2 = new QMediaPlayer;
     http = new QNetworkAccessManager(this);
@@ -35,10 +36,10 @@ DictPage::DictPage(QWidget *parent)
     pronLabel2->setStyleSheet("font-size: 13px");
     infoLabel->setStyleSheet("font-size: 17px");
 
-    searchLayout->addSpacing(10);
+    searchLayout->addSpacing(15);
     searchLayout->addWidget(searchEdit);
     searchLayout->addWidget(searchButton);
-    searchLayout->addSpacing(10);
+    searchLayout->addSpacing(15);
 
     wordLayout->addSpacing(32);
     wordLayout->addWidget(nameLabel);
@@ -88,8 +89,10 @@ void DictPage::start()
         this->queryWord(searchEdit->text());
         searchEdit->setFocus();
     }
-    else
+    else {
+        dialog->exec();
         searchEdit->setFocus();
+    }
 }
 
 void DictPage::init()
@@ -103,7 +106,7 @@ void DictPage::init()
     QLabel *tips = new QLabel("数据来自有道词典");
     tips->setStyleSheet("QLabel {font-size: 12px; }");
 
-    youdaoLayout->addSpacing(10);
+    youdaoLayout->addSpacing(15);
     youdaoLayout->addWidget(iconLabel);
     youdaoLayout->addWidget(tips);
 
@@ -113,6 +116,9 @@ void DictPage::init()
     pronButton2->setVisible(false);
 
     searchEdit->setFocus();
+
+    dialog->addButton("确定", true);
+    dialog->setIcon(QIcon(":/image/logo.svg"));
 }
 
 void DictPage::queryWord(const QString &word)

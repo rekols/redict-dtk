@@ -26,10 +26,10 @@ public:
 
 private:
     QVBoxLayout *layout;
+    QHBoxLayout *imageLayout;
+    QHBoxLayout *infoLayout;
     QLabel *imageLabel;
-    QLabel *contentLabel;
-    QLabel *noteLabel;
-    QLabel *timeLabel;
+    QLabel *infoLabel;
 
     QNetworkAccessManager *http;
     QNetworkAccessManager *http2;
