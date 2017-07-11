@@ -29,3 +29,12 @@ HEADERS  += main_window.h \
     translator_page.h
 
 RESOURCES = rekols-dict.qrc
+
+isEmpty(BINDIR):BINDIR=/usr/bin
+isEmpty(APPDIR):APPDIR=/usr/share/applications
+
+target.path = $$INSTROOT$$BINDIR
+desktop.path = $$INSTROOT$$APPDIR
+desktop.files = rekols-dict.desktop
+
+INSTALLS += target desktop
