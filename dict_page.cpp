@@ -2,9 +2,9 @@
 #include <QByteArray>
 
 DictPage::DictPage(QWidget *parent)
-    : QWidget(parent)
+    : QWidget(parent),
+      api(new YoudaoAPI(this))
 {
-    api = new YoudaoAPI(this);
     dialog = new DDialog("提示", "请输入您要查询的单词", this);
     audio = new QMediaPlayer;
     layout = new QVBoxLayout(this);
@@ -79,7 +79,7 @@ DictPage::DictPage(QWidget *parent)
     connect(searchEdit, SIGNAL(returnPressed()), this, SLOT(start()));
     connect(searchButton, SIGNAL(clicked()), this, SLOT(start()));
 
-    connect(api, SIGNAL(sendData(QString, QString, QString, QString)), this, SLOT(processingData(QString, QString, QString, QString)));
+    connect(api, SIGNAL(searchWordFinished(QString, QString, QString, QString)), this, SLOT(processingData(QString, QString, QString, QString)));
 
     init();
 }
