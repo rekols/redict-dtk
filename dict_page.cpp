@@ -4,9 +4,9 @@
 DictPage::DictPage(QWidget *parent)
     : QWidget(parent)
 {
+    api = new YoudaoAPI(this);
     dialog = new DDialog("提示", "请输入您要查询的单词", this);
     audio = new QMediaPlayer;
-    http = new QNetworkAccessManager(this);
     layout = new QVBoxLayout(this);
     searchLayout = new QHBoxLayout();
     wordLayout = new QHBoxLayout();
@@ -66,8 +66,6 @@ DictPage::DictPage(QWidget *parent)
     layout->addLayout(youdaoLayout);
     layout->addSpacing(20);
 
-    connect(http, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyfinished(QNetworkReply *)));
-
     connect(pronButton1, &DImageButton::clicked, this, [=]{
         audio->setMedia(QUrl("http://dict.youdao.com/dictvoice?type=1&audio=" + nameLabel->text()));
         audio->play();
@@ -81,19 +79,42 @@ DictPage::DictPage(QWidget *parent)
     connect(searchEdit, SIGNAL(returnPressed()), this, SLOT(start()));
     connect(searchButton, SIGNAL(clicked()), this, SLOT(start()));
 
+    connect(api, SIGNAL(sendData(QString, QString, QString, QString)), this, SLOT(processingData(QString, QString, QString, QString)));
+
     init();
 }
 
 void DictPage::start()
 {
     if (!searchEdit->text().isEmpty()) {
-        this->queryWord(searchEdit->text());
         searchEdit->setFocus();
+        api->searchWord(searchEdit->text());
     }
     else {
         dialog->exec();
         searchEdit->setFocus();
     }
+}
+
+void DictPage::processingData(QString name, QString uk_phonetic, QString us_phonetic, QString text)
+{
+    if (uk_phonetic.isEmpty() && us_phonetic.isEmpty()) {
+        pronLabel1->setVisible(false);
+        pronLabel2->setVisible(false);
+        pronButton1->setVisible(false);
+        pronButton2->setVisible(false);
+    }else {
+        pronLabel1->setVisible(true);
+        pronLabel2->setVisible(true);
+        pronButton1->setVisible(true);
+        pronButton2->setVisible(true);
+
+        pronLabel1->setText(QString("英[%1]").arg(uk_phonetic));
+        pronLabel2->setText(QString("美[%1]").arg(us_phonetic));
+    }
+
+    nameLabel->setText(name);
+    infoLabel->setText(text);
 }
 
 void DictPage::init()
@@ -120,68 +141,4 @@ void DictPage::init()
 
     dialog->addButton("确定", true);
     dialog->setIcon(QIcon(":/image/logo.svg"));
-}
-
-void DictPage::queryWord(const QString &word)
-{
-    QNetworkRequest request;
-    request.setUrl(QUrl("http://fanyi.youdao.com/openapi.do?keyfrom=YouDaoCV&key=659600698&type=data&doctype=json&version=1.1&q=" + word));
-    http->get(request);
-}
-
-void DictPage::replyfinished(QNetworkReply *reply)
-{
-    QJsonDocument json;
-    QJsonObject object, data;
-
-    QByteArray wordInformation = reply->readAll();
-
-    json = QJsonDocument::fromJson(wordInformation);
-
-    if (!json.isNull())
-    {
-        object = json.object();
-        data = object.value("basic").toObject();
-
-        QString uk_phonetic = data.value("uk-phonetic").toString();
-        QString us_phonetic = data.value("us-phonetic").toString();
-        QString text = NULL;
-
-        QJsonArray explain = data.value("explains").toArray();
-
-        nameLabel->setText(object.value("query").toString());
-
-        if (uk_phonetic.isEmpty() && us_phonetic.isEmpty()) {
-            pronLabel1->setVisible(false);
-            pronLabel2->setVisible(false);
-            pronButton1->setVisible(false);
-            pronButton2->setVisible(false);
-
-            if (!data.value("phonetic").toString().isEmpty()) {
-                nameLabel->setText(nameLabel->text() + " [" + data.value("phonetic").toString() + "]");
-            }
-        }else {
-            pronLabel1->setVisible(true);
-            pronLabel2->setVisible(true);
-            pronButton1->setVisible(true);
-            pronButton2->setVisible(true);
-
-            pronLabel1->setText(QString("英[%1]").arg(uk_phonetic));
-            pronLabel2->setText(QString("美[%1]").arg(us_phonetic));
-        }
-
-        if (explain.isEmpty()) {
-            for (int i=0; i<object.value("translation").toArray().size(); ++i) {
-                text.append(object.value("translation").toArray().at(i).toString());
-                text.append("\n");
-            }
-        }else {
-            for (int i=0; i<explain.size(); ++i) {
-                text.append(explain.at(i).toString());
-                text.append("\n");
-            }
-        }
-
-        infoLabel->setText(text);
-    }
 }

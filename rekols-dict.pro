@@ -20,13 +20,15 @@ SOURCES += main.cpp\
     home_page.cpp \
     dict_page.cpp \
     tabbar.cpp \
-    translator_page.cpp
+    translator_page.cpp \
+    youdao_api.cpp
 
 HEADERS  += main_window.h \
     home_page.h \
     dict_page.h \
     tabbar.h \
-    translator_page.h
+    translator_page.h \
+    youdao_api.h
 
 RESOURCES = rekols-dict.qrc
 

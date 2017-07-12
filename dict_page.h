@@ -2,16 +2,6 @@
 #define DICTPAGE_H
 
 #include <QWidget>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QNetworkRequest>
-#include <QNetworkCookie>
-#include <QNetworkCookieJar>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QJsonValue>
-
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -21,6 +11,8 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <ddialog.h>
+
+#include "youdao_api.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -32,8 +24,6 @@ public:
     DictPage(QWidget *parent = 0);
 
     void queryWord(const QString &word);
-
-    QNetworkAccessManager *http;
 
     DDialog *dialog;
 
@@ -57,12 +47,13 @@ public:
     QMediaPlayer *audio;
 
 private:
+    YoudaoAPI *api;
+
     void init();
 
-
 private slots:
-    void replyfinished(QNetworkReply *reply);
     void start();
+    void processingData(QString, QString, QString, QString);
 };
 
 #endif // DICTPAGE_H
