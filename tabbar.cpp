@@ -27,11 +27,11 @@ void TabBar::mousePressEvent(QMouseEvent *e)
 {
     int prevActiveIndex = currentTabIndex;
 
-    if (e->x() > 30 && e->x() < 80) {
+    if (e->x() > 30 && e->x() < 100) {
         currentTabIndex = 0;
-    }else if (e->x() > 30 && e->x() < 130) {
+    }else if (e->x() > 30 && e->x() < 150) {
         currentTabIndex = 1;
-    }else if (e->x() > 30 && e->x() < 185) {
+    }else if (e->x() > 30 && e->x() < 205) {
         currentTabIndex = 2;
     }
 
@@ -47,8 +47,8 @@ void TabBar::paintEvent(QPaintEvent *e)
     painter.setRenderHint(QPainter::Antialiasing, true);
 
     int tabX = 30;
-    int tabNameLeftPadding = 10;
-    int tabNameRightPadding = 10;
+    int tabNameLeftPadding = 20;
+    int tabNameRightPadding = 20;
     int tabNameTopPadding = 5;
 
     painter.drawPixmap(QRect(0, 5, 24, 24), QPixmap(":/image/logo.svg"));
