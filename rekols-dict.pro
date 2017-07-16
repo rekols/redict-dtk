@@ -21,16 +21,20 @@ SOURCES += main.cpp\
     dict_page.cpp \
     tabbar.cpp \
     translator_page.cpp \
-    youdao_api.cpp
+    youdao_api.cpp \
+    load_page.cpp \
+    data_page.cpp
 
 HEADERS  += main_window.h \
     home_page.h \
     dict_page.h \
     tabbar.h \
     translator_page.h \
-    youdao_api.h
+    youdao_api.h \
+    load_page.h \
+    data_page.h
 
-RESOURCES = rekols-dict.qrc
+RESOURCES = images.qrc
 
 isEmpty(BINDIR):BINDIR=/usr/bin
 isEmpty(APPDIR):APPDIR=/usr/share/applications

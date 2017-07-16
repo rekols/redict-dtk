@@ -2,19 +2,9 @@
 #define HOMEPAGE_H
 
 #include <QWidget>
-#include <QVBoxLayout>
-
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QNetworkRequest>
-#include <QNetworkCookie>
-#include <QNetworkCookieJar>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QJsonValue>
-
-#include <QLabel>
+#include <QStackedLayout>
+#include "load_page.h"
+#include "data_page.h"
 
 class HomePage : public QWidget
 {
@@ -25,25 +15,10 @@ public:
     ~HomePage();
 
 private:
-    QVBoxLayout *layout;
-    QHBoxLayout *imageLayout;
-    QHBoxLayout *infoLayout;
-    QLabel *imageLabel;
-    QLabel *infoLabel;
+    QStackedLayout *layout;
+    LoadPage *loadPage;
+    DataPage *dataPage;
 
-    QNetworkAccessManager *http;
-    QNetworkAccessManager *http2;
-
-    QString m_content;
-    QString m_note;
-    QString m_dateline;
-    QString m_picture;
-
-    void loadImage();
-
-private slots:
-    void replyfinished(QNetworkReply *reply);
-    void loadImagefinished(QNetworkReply *reply);
 };
 
 #endif // HOMEPAGE_H
