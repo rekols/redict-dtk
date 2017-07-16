@@ -2,6 +2,7 @@
 #define MAIN_WINDOW_H
 
 #include <DMainWindow>
+#include <QStackedLayout>
 #include "tabbar.h"
 #include "home_page.h"
 #include "dict_page.h"
@@ -18,7 +19,8 @@ public:
     ~MainWindow();
 
 private:
-    QTabWidget *mainWidget;
+    QWidget *mainWidget;
+    QStackedLayout *layout;
     TabBar *toolbar;
     HomePage *homePage;
     DictPage *dictPage;

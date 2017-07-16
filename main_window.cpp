@@ -1,21 +1,21 @@
 #include "main_window.h"
 #include <DTitlebar>
-#include <QTabBar>
 
 MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent)
 {
-    mainWidget = new QTabWidget();
+    mainWidget = new QWidget();
+    layout = new QStackedLayout;
     toolbar = new TabBar();
     homePage = new HomePage();
     dictPage = new DictPage();
     trPage = new TranslatorPage();
 
-    mainWidget->addTab(homePage, "Home");
-    mainWidget->addTab(dictPage, "Dictionary");
-    mainWidget->addTab(trPage, "Translator");
-    mainWidget->tabBar()->hide();
-    mainWidget->setCurrentIndex(0);
+    layout->addWidget(homePage);
+    layout->addWidget(dictPage);
+    layout->addWidget(trPage);
+
+    mainWidget->setLayout(layout);
 
     this->titleBar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
     this->titleBar()->setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
@@ -34,7 +34,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::switchTab(int index)
 {
-    mainWidget->setCurrentIndex(index);
+    layout->setCurrentIndex(index);
 
     if (index == 1) {
         dictPage->searchEdit->setFocus();
