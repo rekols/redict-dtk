@@ -1,5 +1,7 @@
 #include "main_window.h"
 #include <DTitlebar>
+#include <QApplication>
+#include <QClipboard>
 
 MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent)
@@ -25,6 +27,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     setBorderColor("#5D5D5D");
 
+
+    connect(qApp->clipboard(), &QClipboard::selectionChanged, [=]{
+
+    });
 }
 
 MainWindow::~MainWindow()

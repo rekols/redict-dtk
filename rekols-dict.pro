@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT  += core gui network multimedia
+QT  += core gui network multimedia x11extras
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,7 +13,7 @@ TEMPLATE = app
 
 CONFIG += link_pkgconfig
 CONFIG += c++11
-PKGCONFIG += dtkwidget dtkbase dtkutil
+PKGCONFIG += dtkwidget dtkbase dtkutil xcb xcb-util
 
 SOURCES += main.cpp\
     main_window.cpp \
@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     translator_page.cpp \
     youdao_api.cpp \
     load_page.cpp \
-    data_page.cpp
+    data_page.cpp \
+    event_monitor.cpp
 
 HEADERS  += main_window.h \
     home_page.h \
@@ -32,9 +33,14 @@ HEADERS  += main_window.h \
     translator_page.h \
     youdao_api.h \
     load_page.h \
-    data_page.h
+    data_page.h \
+    event_monitor.h
 
 RESOURCES = images.qrc
+
+LIBS += -lX11 -lXext -lXtst
+
+QMAKE_CXXFLAGS += -g
 
 isEmpty(BINDIR):BINDIR=/usr/bin
 isEmpty(APPDIR):APPDIR=/usr/share/applications
