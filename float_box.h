@@ -23,6 +23,7 @@ private:
     YoudaoAPI *api;
 
     QLabel *word;
+    QLabel *pron;
     QLabel *content;
 };
 

@@ -2,7 +2,7 @@
 #include <DTitlebar>
 #include <QApplication>
 #include <QClipboard>
-#include <QDebug>
+#include <QDesktopWidget>
 
 MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent)
@@ -41,7 +41,12 @@ MainWindow::MainWindow(QWidget *parent)
     connect(clickBox, &ClickBox::clicked, this, [=]{
         QString word = qApp->clipboard()->text(QClipboard::Selection);
         floatBox->queryWord(word);
-        floatBox->move(QCursor::pos().x(), QCursor::pos().y());
+
+        int x, y;
+        x = QCursor::pos().x();
+        y = QCursor::pos().y();
+
+        floatBox->move(x, y);
         floatBox->show();
     });
 

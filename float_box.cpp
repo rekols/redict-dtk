@@ -6,6 +6,7 @@ FloatBox::FloatBox(QWidget *parent)
     layout = new QVBoxLayout(this);
     api = new YoudaoAPI(this);
     word = new QLabel();
+    pron = new QLabel();
     content = new QLabel();
 
     QFont font;
@@ -17,6 +18,8 @@ FloatBox::FloatBox(QWidget *parent)
 
     layout->addStretch();
     layout->addWidget(word);
+    layout->addWidget(pron);
+    layout->addSpacing(10);
     layout->addWidget(content);
     layout->addStretch();
 
@@ -33,6 +36,13 @@ void FloatBox::queryWord(const QString &text)
 
 void FloatBox::replyFinished(QString name, QString uk_phonetic, QString us_phonetic, QString text)
 {
+    if (!uk_phonetic.isEmpty()) {
+        pron->setVisible(true);
+        pron->setText(QString("英[%1]      美[%2]").arg(uk_phonetic).arg(us_phonetic));
+    }else {
+        pron->setVisible(false);
+    }
+
     word->setText(name);
     content->setText(text);
 }
