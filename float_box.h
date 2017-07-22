@@ -5,8 +5,11 @@
 #include <QVBoxLayout>
 #include "youdao_api.h"
 #include <QLabel>
+#include <dabstractdialog.h>
 
-class FloatBox : public QWidget
+DWIDGET_USE_NAMESPACE
+
+class FloatBox : public DAbstractDialog
 {
     Q_OBJECT
 
@@ -14,6 +17,8 @@ public:
     FloatBox(QWidget *parent = 0);
 
     void queryWord(const QString &text);
+    void paintEvent(QPaintEvent *);
+
 
 private slots:
     void replyFinished(QString, QString, QString, QString);

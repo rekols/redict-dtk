@@ -65,7 +65,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::closeEvent(QCloseEvent *)
 {
-
+    delete clickBox;
+    delete floatBox;
 }
 
 void MainWindow::switchTab(int index)

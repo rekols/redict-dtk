@@ -1,13 +1,18 @@
 #include "float_box.h"
+#include <QPainter>
 
 FloatBox::FloatBox(QWidget *parent)
-    : QWidget(parent)
+    : DAbstractDialog(parent)
 {
     layout = new QVBoxLayout(this);
     api = new YoudaoAPI(this);
     word = new QLabel();
     pron = new QLabel();
     content = new QLabel();
+
+    word->setStyleSheet("QLabel { background-color : transparent; color : #000000; }");
+    pron->setStyleSheet("QLabel { background-color : transparent; color : #000000; }");
+    content->setStyleSheet("QLabel { background-color : transparent; color : #000000; }");
 
     QFont font;
     font.setPointSize(15);
@@ -23,8 +28,10 @@ FloatBox::FloatBox(QWidget *parent)
     layout->addWidget(content);
     layout->addStretch();
 
+    setAttribute(Qt::WA_DeleteOnClose, true);
+
     setFixedSize(300, 200);
-    setWindowFlags(Qt::FramelessWindowHint | Qt::ToolTip);
+    //setWindowFlags(Qt::FramelessWindowHint | Qt::ToolTip);
 
     connect(api, SIGNAL(searchWordFinished(QString,QString,QString,QString)), this, SLOT(replyFinished(QString,QString,QString,QString)));
 }
@@ -32,6 +39,16 @@ FloatBox::FloatBox(QWidget *parent)
 void FloatBox::queryWord(const QString &text)
 {
     api->searchWord(text);
+}
+
+void FloatBox::paintEvent(QPaintEvent *)
+{
+    QPainter painter(this);
+
+    QPainterPath path;
+    path.addRect(QRectF(rect()));
+    painter.setOpacity(1);
+    painter.fillPath(path, QColor("#ffffff"));
 }
 
 void FloatBox::replyFinished(QString name, QString uk_phonetic, QString us_phonetic, QString text)
