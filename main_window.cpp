@@ -16,8 +16,8 @@ MainWindow::MainWindow(QWidget *parent)
     clickBox = new ClickBox(this);
     floatBox = new FloatBox(this);
 
-    clickBox->hide();
-    floatBox->hide();
+    clickBox->setVisible(false);
+    floatBox->setVisible(false);
 
     layout->addWidget(homePage);
     layout->addWidget(dictPage);
@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(qApp->clipboard(), &QClipboard::selectionChanged, [=]{
         clickBox->move(QCursor::pos().x()+15, QCursor::pos().y()+10);
-        clickBox->show();
+        clickBox->setVisible(true);
     });
 
     connect(clickBox, &ClickBox::clicked, this, [=]{
@@ -47,12 +47,12 @@ MainWindow::MainWindow(QWidget *parent)
         y = QCursor::pos().y();
 
         floatBox->move(x, y);
-        floatBox->show();
+        floatBox->setVisible(true);
     });
 
     connect(&eventMonitor, &EventMonitor::buttonPress, this, [=]{
-        clickBox->hide();
-        floatBox->hide();
+        clickBox->setVisible(false);
+        floatBox->setVisible(false);
     }, Qt::QueuedConnection);
 
     eventMonitor.start();

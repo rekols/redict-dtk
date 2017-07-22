@@ -10,9 +10,9 @@ FloatBox::FloatBox(QWidget *parent)
     pron = new QLabel();
     content = new QLabel();
 
-    word->setStyleSheet("QLabel { background-color : transparent; color : #000000; }");
-    pron->setStyleSheet("QLabel { background-color : transparent; color : #000000; }");
-    content->setStyleSheet("QLabel { background-color : transparent; color : #000000; }");
+    word->setStyleSheet("QLabel { background-color : transparent; color : #FFFFFF; }");
+    pron->setStyleSheet("QLabel { background-color : transparent; color : #FFFFFF; }");
+    content->setStyleSheet("QLabel { background-color : transparent; color : #FFFFFF; }");
 
     QFont font;
     font.setPointSize(15);
@@ -48,7 +48,7 @@ void FloatBox::paintEvent(QPaintEvent *)
     QPainterPath path;
     path.addRect(QRectF(rect()));
     painter.setOpacity(1);
-    painter.fillPath(path, QColor("#ffffff"));
+    painter.fillPath(path, QColor("#404244"));
 }
 
 void FloatBox::replyFinished(QString name, QString uk_phonetic, QString us_phonetic, QString text)
