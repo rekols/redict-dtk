@@ -7,6 +7,9 @@
 #include "home_page.h"
 #include "dict_page.h"
 #include "translator_page.h"
+#include "event_monitor.h"
+#include "click_box.h"
+#include "float_box.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -25,6 +28,13 @@ private:
     HomePage *homePage;
     DictPage *dictPage;
     TranslatorPage *trPage;
+    EventMonitor eventMonitor;
+
+    ClickBox *clickBox;
+    FloatBox *floatBox;
+
+protected:
+    void closeEvent(QCloseEvent *);
 
 private slots:
     void switchTab(int index);

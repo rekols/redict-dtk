@@ -2,6 +2,7 @@
 #include <DTitlebar>
 #include <QApplication>
 #include <QClipboard>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent)
@@ -12,6 +13,11 @@ MainWindow::MainWindow(QWidget *parent)
     homePage = new HomePage();
     dictPage = new DictPage();
     trPage = new TranslatorPage();
+    clickBox = new ClickBox(this);
+    floatBox = new FloatBox(this);
+
+    clickBox->hide();
+    floatBox->hide();
 
     layout->addWidget(homePage);
     layout->addWidget(dictPage);
@@ -27,13 +33,32 @@ MainWindow::MainWindow(QWidget *parent)
 
     setBorderColor("#5D5D5D");
 
-
     connect(qApp->clipboard(), &QClipboard::selectionChanged, [=]{
-
+        clickBox->move(QCursor::pos().x()+15, QCursor::pos().y()+10);
+        clickBox->show();
     });
+
+    connect(clickBox, &ClickBox::clicked, this, [=]{
+        QString word = qApp->clipboard()->text(QClipboard::Selection);
+        floatBox->queryWord(word);
+        floatBox->move(QCursor::pos().x(), QCursor::pos().y());
+        floatBox->show();
+    });
+
+    connect(&eventMonitor, &EventMonitor::buttonPress, this, [=]{
+        clickBox->hide();
+        floatBox->hide();
+    }, Qt::QueuedConnection);
+
+    eventMonitor.start();
 }
 
 MainWindow::~MainWindow()
+{
+
+}
+
+void MainWindow::closeEvent(QCloseEvent *)
 {
 
 }

@@ -24,7 +24,9 @@ SOURCES += main.cpp\
     youdao_api.cpp \
     load_page.cpp \
     data_page.cpp \
-    event_monitor.cpp
+    event_monitor.cpp \
+    click_box.cpp \
+    float_box.cpp
 
 HEADERS  += main_window.h \
     home_page.h \
@@ -34,7 +36,9 @@ HEADERS  += main_window.h \
     youdao_api.h \
     load_page.h \
     data_page.h \
-    event_monitor.h
+    event_monitor.h \
+    click_box.h \
+    float_box.h
 
 RESOURCES = images.qrc
 
