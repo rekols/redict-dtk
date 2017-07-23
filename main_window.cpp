@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     layout->addWidget(homePage);
     layout->addWidget(dictPage);
     layout->addWidget(trPage);
+    layout->setCurrentIndex(1);
 
     mainWidget->setLayout(layout);
 

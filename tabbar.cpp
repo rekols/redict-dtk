@@ -5,7 +5,7 @@ TabBar::TabBar(QWidget *parent)
 {
     setFixedHeight(35);
 
-    currentTabIndex = 0;
+    currentTabIndex = 1;
     tabNameSize = 11;
 
     QFont font;
