@@ -1,9 +1,14 @@
 #include "float_box.h"
 #include <QPainter>
+#include <DBlurEffectWidget>
 
 FloatBox::FloatBox(QWidget *parent)
     : DAbstractDialog(parent)
 {
+    DBlurEffectWidget *bgBlurWidget = new DBlurEffectWidget(this);
+    bgBlurWidget->setBlendMode(DBlurEffectWidget::BehindWindowBlend);
+    bgBlurWidget->setMaskColor(QColor("#404244"));
+
     layout = new QVBoxLayout(this);
     api = new YoudaoAPI(this);
     word = new QLabel();
@@ -32,6 +37,10 @@ FloatBox::FloatBox(QWidget *parent)
 
     setFixedSize(300, 200);
     //setWindowFlags(Qt::FramelessWindowHint | Qt::ToolTip);
+    bgBlurWidget->resize(size());
+
+    setAttribute(Qt::WA_TranslucentBackground);
+    setAttribute(Qt::WA_AlwaysStackOnTop);
 
     connect(api, SIGNAL(searchWordFinished(QString,QString,QString,QString)), this, SLOT(replyFinished(QString,QString,QString,QString)));
 }
@@ -39,16 +48,6 @@ FloatBox::FloatBox(QWidget *parent)
 void FloatBox::queryWord(const QString &text)
 {
     api->searchWord(text);
-}
-
-void FloatBox::paintEvent(QPaintEvent *)
-{
-    QPainter painter(this);
-
-    QPainterPath path;
-    path.addRect(QRectF(rect()));
-    painter.setOpacity(1);
-    painter.fillPath(path, QColor("#404244"));
 }
 
 void FloatBox::replyFinished(QString name, QString uk_phonetic, QString us_phonetic, QString text)

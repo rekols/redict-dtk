@@ -17,8 +17,6 @@ public:
     FloatBox(QWidget *parent = 0);
 
     void queryWord(const QString &text);
-    void paintEvent(QPaintEvent *);
-
 
 private slots:
     void replyFinished(QString, QString, QString, QString);
