@@ -5,7 +5,7 @@ DictPage::DictPage(QWidget *parent)
     : QWidget(parent),
       api(new YoudaoAPI(this))
 {
-    dialog = new DDialog("提示", "请输入您要查询的单词", this);
+    dialog = new DDialog("提示", "请输入您要查询的单词");
     audio = new QMediaPlayer;
     layout = new QVBoxLayout(this);
     searchLayout = new QHBoxLayout();
