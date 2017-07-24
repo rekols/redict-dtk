@@ -13,18 +13,16 @@ FloatBox::FloatBox(QWidget *parent)
     api = new YoudaoAPI(this);
     word = new QLabel();
     pron = new QLabel();
-    content = new QLabel();
+    content = new QPlainTextEdit();
 
     word->setStyleSheet("QLabel { background-color : transparent; color : #FFFFFF; }");
     pron->setStyleSheet("QLabel { background-color : transparent; color : #FFFFFF; }");
-    content->setStyleSheet("QLabel { background-color : transparent; color : #FFFFFF; }");
 
     QFont font;
     font.setPointSize(15);
     word->setFont(font);
 
     word->setWordWrap(true);
-    content->setWordWrap(true);
 
     layout->addStretch();
     layout->addWidget(word);
@@ -60,5 +58,5 @@ void FloatBox::replyFinished(QString name, QString uk_phonetic, QString us_phone
     }
 
     word->setText(name);
-    content->setText(text);
+    content->setPlainText(text);
 }

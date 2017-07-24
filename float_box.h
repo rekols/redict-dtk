@@ -6,6 +6,7 @@
 #include "youdao_api.h"
 #include <QLabel>
 #include <dabstractdialog.h>
+#include <QPlainTextEdit>
 
 DWIDGET_USE_NAMESPACE
 
@@ -27,7 +28,7 @@ private:
 
     QLabel *word;
     QLabel *pron;
-    QLabel *content;
+    QPlainTextEdit *content;
 };
 
 #endif // FLOAT_BOX_H
