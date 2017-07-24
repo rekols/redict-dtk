@@ -7,10 +7,9 @@
 #include <QLabel>
 #include <dimagebutton.h>
 #include <QMediaPlayer>
-
 #include <QLineEdit>
 #include <QPushButton>
-
+#include <QPlainTextEdit>
 #include "youdao_api.h"
 
 DWIDGET_USE_NAMESPACE
@@ -36,7 +35,7 @@ public:
     QLabel *nameLabel;
     QLabel *pronLabel1;
     QLabel *pronLabel2;
-    QLabel *infoLabel;
+    QPlainTextEdit *infoLabel;
 
     DImageButton *pronButton1;
     DImageButton *pronButton2;
