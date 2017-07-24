@@ -19,6 +19,9 @@ public:
 
     void queryWord(const QString &text);
 
+protected:
+    void leaveEvent(QEvent *);
+
 private slots:
     void replyFinished(QString, QString, QString, QString);
 

@@ -64,13 +64,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-
-}
-
-void MainWindow::closeEvent(QCloseEvent *)
-{
-    delete clickBox;
-    delete floatBox;
+    clickBox->deleteLater();
+    floatBox->deleteLater();
 }
 
 void MainWindow::switchTab(int index)

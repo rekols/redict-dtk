@@ -33,9 +33,6 @@ private:
     ClickBox *clickBox;
     FloatBox *floatBox;
 
-protected:
-    void closeEvent(QCloseEvent *);
-
 private slots:
     void switchTab(int index);
 };

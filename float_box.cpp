@@ -1,6 +1,7 @@
 #include "float_box.h"
 #include <QPainter>
 #include <DBlurEffectWidget>
+#include <QEvent>
 
 FloatBox::FloatBox(QWidget *parent)
     : DAbstractDialog(parent)
@@ -41,6 +42,11 @@ FloatBox::FloatBox(QWidget *parent)
     setAttribute(Qt::WA_AlwaysStackOnTop);
 
     connect(api, SIGNAL(searchWordFinished(QString,QString,QString,QString)), this, SLOT(replyFinished(QString,QString,QString,QString)));
+}
+
+void FloatBox::leaveEvent(QEvent *e)
+{
+
 }
 
 void FloatBox::queryWord(const QString &text)
