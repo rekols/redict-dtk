@@ -19,12 +19,14 @@ DictPage::DictPage(QWidget *parent)
     pronLabel2 = new QLabel("");
     infoLabel = new QLabel("");
 
+    searchEdit->setFixedHeight(35);
+    searchButton->setFixedHeight(35);
+
     pronButton1 = new DImageButton(":/image/play.svg", NULL, NULL);
     pronButton2 = new DImageButton(":/image/play.svg", NULL, NULL);
 
     pronButton1->setFixedSize(24, 24);
     pronButton2->setFixedSize(24, 24);
-    searchButton->setFixedWidth(100);
 
     nameLabel->setWordWrap(true);
     infoLabel->setWordWrap(true);
