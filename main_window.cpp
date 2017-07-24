@@ -13,8 +13,8 @@ MainWindow::MainWindow(QWidget *parent)
     homePage = new HomePage();
     dictPage = new DictPage();
     trPage = new TranslatorPage();
-    clickBox = new ClickBox(this);
-    floatBox = new FloatBox(this);
+    clickBox = new ClickBox();
+    floatBox = new FloatBox();
 
     clickBox->setVisible(false);
     floatBox->setVisible(false);

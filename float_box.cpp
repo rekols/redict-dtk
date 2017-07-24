@@ -16,6 +16,9 @@ FloatBox::FloatBox(QWidget *parent)
     pron = new QLabel();
     content = new QPlainTextEdit();
 
+    content->setReadOnly(true);
+    content->setFocusPolicy(Qt::NoFocus);
+
     word->setStyleSheet("QLabel { background-color : transparent; color : #FFFFFF; }");
     pron->setStyleSheet("QLabel { background-color : transparent; color : #FFFFFF; }");
 
