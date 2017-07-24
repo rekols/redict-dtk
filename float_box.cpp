@@ -21,13 +21,15 @@ FloatBox::FloatBox(QWidget *parent)
 
     word->setStyleSheet("QLabel { background-color : transparent; color : #FFFFFF; }");
     pron->setStyleSheet("QLabel { background-color : transparent; color : #FFFFFF; }");
+    content->setStyleSheet("QPlainTextEdit { background-color:transparent; margin:0; border: 0; }");
 
     word->setWordWrap(true);
 
+    layout->setMargin(10);
     layout->addStretch();
     layout->addWidget(word);
     layout->addWidget(pron);
-    layout->addSpacing(10);
+    layout->setSpacing(10);
     layout->addWidget(content);
     layout->addStretch();
 
