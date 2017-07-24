@@ -136,7 +136,4 @@ void DictPage::init()
     pronButton2->setVisible(false);
 
     searchEdit->setFocus();
-
-    dialog->addButton("确定", true);
-    dialog->setIcon(QIcon(":/image/logo.svg"));
 }
