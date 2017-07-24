@@ -22,10 +22,6 @@ FloatBox::FloatBox(QWidget *parent)
     word->setStyleSheet("QLabel { background-color : transparent; color : #FFFFFF; }");
     pron->setStyleSheet("QLabel { background-color : transparent; color : #FFFFFF; }");
 
-    QFont font;
-    font.setPointSize(15);
-    word->setFont(font);
-
     word->setWordWrap(true);
 
     layout->addStretch();
@@ -55,6 +51,23 @@ void FloatBox::leaveEvent(QEvent *e)
 void FloatBox::queryWord(const QString &text)
 {
     api->searchWord(text);
+
+    initFontSize(text.length());
+}
+
+void FloatBox::initFontSize(const int &length)
+{
+    QFont font;
+
+    if (length < 20) {
+        font.setPointSize(18);
+        word->setFont(font);
+    }else if (length > 20 && length < 30) {
+        font.setPointSize(15);
+        word->setFont(font);
+    }
+
+    word->setFont(font);
 }
 
 void FloatBox::replyFinished(QString name, QString uk_phonetic, QString us_phonetic, QString text)

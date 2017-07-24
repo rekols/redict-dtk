@@ -18,6 +18,7 @@ public:
     FloatBox(QWidget *parent = 0);
 
     void queryWord(const QString &text);
+    void initFontSize(const int &length);
 
 protected:
     void leaveEvent(QEvent *);
