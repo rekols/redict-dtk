@@ -10,7 +10,6 @@
 
 #include <QLineEdit>
 #include <QPushButton>
-#include <ddialog.h>
 
 #include "youdao_api.h"
 
@@ -24,8 +23,6 @@ public:
     DictPage(QWidget *parent = 0);
 
     void queryWord(const QString &word);
-
-    DDialog *dialog;
 
     QVBoxLayout *layout;
     QHBoxLayout *searchLayout;
