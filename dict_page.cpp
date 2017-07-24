@@ -68,7 +68,7 @@ DictPage::DictPage(QWidget *parent)
     layout->addLayout(infoLayout);
     layout->addStretch();
     layout->addLayout(youdaoLayout);
-    layout->addSpacing(20);
+    layout->addSpacing(10);
 
     connect(pronButton1, &DImageButton::clicked, this, [=]{
         audio->setMedia(QUrl("http://dict.youdao.com/dictvoice?type=1&audio=" + nameLabel->text()));
