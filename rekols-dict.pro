@@ -51,6 +51,6 @@ isEmpty(APPDIR):APPDIR=/usr/share/applications
 
 target.path = $$INSTROOT$$BINDIR
 desktop.path = $$INSTROOT$$APPDIR
-desktop.files = rekols-dict.desktop
+desktop.files = keyboard-sound.desktop
 
 INSTALLS += target desktop

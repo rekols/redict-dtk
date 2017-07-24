@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(qApp->clipboard(), &QClipboard::selectionChanged, [=]{
         if (!qApp->clipboard()->text(QClipboard::Selection).isEmpty()) {
-            clickBox->move(QCursor::pos().x()+15, QCursor::pos().y()+10);
+            clickBox->move(QCursor::pos().x() + 15, QCursor::pos().y() + 10);
             clickBox->setVisible(true);
         }
     });
@@ -45,11 +45,7 @@ MainWindow::MainWindow(QWidget *parent)
         QString word = qApp->clipboard()->text(QClipboard::Selection);
         floatBox->queryWord(word);
 
-        int x, y;
-        x = QCursor::pos().x();
-        y = QCursor::pos().y();
-
-        floatBox->move(x, y);
+        floatBox->move(QCursor::pos());
         floatBox->setVisible(true);
     });
 
