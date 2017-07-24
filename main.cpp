@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
         a.setProductIcon(QPixmap::fromImage(QImage(":/image/logo.svg")));
         a.setApplicationDescription(DApplication::translate("MainWindow", descriptionText) + "\n");
         a.setApplicationAcknowledgementPage(acknowledgementLink);
+        a.loadTranslator();
 
         a.setTheme("dark");
         a.setWindowIcon(QIcon(":/image/logo.svg"));
