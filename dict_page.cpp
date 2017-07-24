@@ -38,6 +38,7 @@ DictPage::DictPage(QWidget *parent)
 
     searchLayout->addSpacing(15);
     searchLayout->addWidget(searchEdit);
+    searchLayout->addSpacing(5);
     searchLayout->addWidget(searchButton);
     searchLayout->addSpacing(15);
 
