@@ -5,7 +5,7 @@
 ClickBox::ClickBox(QWidget *parent)
     : QWidget(parent)
 {
-    setFixedSize(30, 30);
+    setFixedSize(35, 35);
     setAttribute(Qt::WA_TranslucentBackground);
     setWindowFlags(Qt::FramelessWindowHint | Qt::ToolTip);
 }

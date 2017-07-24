@@ -35,8 +35,10 @@ MainWindow::MainWindow(QWidget *parent)
     setBorderColor("#5D5D5D");
 
     connect(qApp->clipboard(), &QClipboard::selectionChanged, [=]{
-        clickBox->move(QCursor::pos().x()+15, QCursor::pos().y()+10);
-        clickBox->setVisible(true);
+        if (!qApp->clipboard()->text(QClipboard::Selection).isEmpty()) {
+            clickBox->move(QCursor::pos().x()+15, QCursor::pos().y()+10);
+            clickBox->setVisible(true);
+        }
     });
 
     connect(clickBox, &ClickBox::clicked, this, [=]{
@@ -52,6 +54,11 @@ MainWindow::MainWindow(QWidget *parent)
     });
 
     connect(&eventMonitor, &EventMonitor::buttonPress, this, [=]{
+        clickBox->setVisible(false);
+        floatBox->setVisible(false);
+    }, Qt::QueuedConnection);
+
+    connect(&eventMonitor, &EventMonitor::keyPress, this, [=]{
         clickBox->setVisible(false);
         floatBox->setVisible(false);
     }, Qt::QueuedConnection);
