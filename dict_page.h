@@ -22,6 +22,7 @@ public:
     DictPage(QWidget *parent = 0);
 
     void queryWord(const QString &word);
+    void changeTheme(const QString &theme);
 
     QVBoxLayout *layout;
     QHBoxLayout *searchLayout;

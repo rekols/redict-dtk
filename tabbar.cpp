@@ -26,7 +26,7 @@ TabBar::TabBar(QWidget *parent)
 void TabBar::changeTheme(const QString &theme)
 {
     if (theme == "light") {
-        tabNameColor = "#000000";
+        tabNameColor = "#3E3E3E";
     }else {
         tabNameColor = "#FFFFFF";
     }

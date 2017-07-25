@@ -14,6 +14,11 @@ TranslatorPage::TranslatorPage(QWidget *parent)
     QLabel *tips1 = new QLabel("原文");
     QLabel *tips2 = new QLabel("译文");
 
+    tips1->setObjectName("TrLabel");
+    tips2->setObjectName("TrLabel");
+    original->setObjectName("TrContent");
+    translator->setObjectName("TrContent");
+
     QPushButton *trBtn = new QPushButton("翻译");
     hLayout->addWidget(trBtn);
 
@@ -28,10 +33,6 @@ TranslatorPage::TranslatorPage(QWidget *parent)
     layout->addWidget(translator);
 
     setLayout(layout);
-
-    tips1->setStyleSheet("color: #BCBCBC");
-    tips2->setStyleSheet("color: #BCBCBC");
-    //this->setStyleSheet("QPlainTextEdit { border: 1px solid #505050; border-radius: 5px; font-size: 15px; padding: 5px;}");
 
     connect(trBtn, SIGNAL(clicked()), this, SLOT(on_translator_clicked()));
     connect(api, SIGNAL(translatorFinished(QString)), this, SLOT(processingData(QString)));

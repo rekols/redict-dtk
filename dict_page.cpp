@@ -25,8 +25,8 @@ DictPage::DictPage(QWidget *parent)
     searchEdit->setFixedHeight(35);
     searchButton->setFixedHeight(35);
 
-    pronButton1 = new DImageButton(":/image/play.svg", NULL, NULL);
-    pronButton2 = new DImageButton(":/image/play.svg", NULL, NULL);
+    pronButton1 = new DImageButton(NULL, NULL, NULL);
+    pronButton2 = new DImageButton(NULL, NULL, NULL);
 
     pronButton1->setFixedSize(24, 24);
     pronButton2->setFixedSize(24, 24);
@@ -48,11 +48,11 @@ DictPage::DictPage(QWidget *parent)
     wordLayout->addWidget(nameLabel);
     wordLayout->addSpacing(25);
 
-    infoLayout->addSpacing(20);
+    infoLayout->addSpacing(24);
     infoLayout->addWidget(infoLabel);
-    infoLayout->addSpacing(20);
+    infoLayout->addSpacing(24);
 
-    pronLayout->addSpacing(25);
+    pronLayout->addSpacing(24);
     pronLayout->addWidget(pronButton1);
     pronLayout->addWidget(pronLabel1);
     pronLayout->addSpacing(5);
@@ -86,6 +86,25 @@ DictPage::DictPage(QWidget *parent)
     connect(api, SIGNAL(searchWordFinished(QString, QString, QString, QString)), this, SLOT(processingData(QString, QString, QString, QString)));
 
     init();
+}
+
+void DictPage::changeTheme(const QString &theme)
+{
+    if (theme == "light") {
+        pronButton1->setNormalPic(":/image/light/audio-volume-high-normal.png");
+        pronButton1->setHoverPic(":/image/light/audio-volume-high-hover.png");
+        pronButton1->setPressPic(":/image/light/audio-volume-high-press.png");
+        pronButton2->setNormalPic(":/image/light/audio-volume-high-normal.png");
+        pronButton2->setHoverPic(":/image/light/audio-volume-high-hover.png");
+        pronButton2->setPressPic(":/image/light/audio-volume-high-press.png");
+    }else {
+        pronButton1->setNormalPic(":/image/dark/audio-volume-high-normal.png");
+        pronButton1->setHoverPic(":/image/dark/audio-volume-high-hover.png");
+        pronButton1->setPressPic(":/image/dark/audio-volume-high-press.png");
+        pronButton2->setNormalPic(":/image/dark/audio-volume-high-normal.png");
+        pronButton2->setHoverPic(":/image/dark/audio-volume-high-hover.png");
+        pronButton2->setPressPic(":/image/dark/audio-volume-high-press.png");
+    }
 }
 
 void DictPage::start()

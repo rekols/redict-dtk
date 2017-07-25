@@ -7,3 +7,15 @@ QPlainTextEdit {
 #FloatText {
     color: #FFFFFF;
 }
+
+#TrLabel {
+    color: #868686;
+}
+
+#TrContent {
+    border: 1px solid #BBBBBB;
+    border-radius: 5px;
+    color: #000000;
+    font-size: 15px;
+    padding: 5px;
+}

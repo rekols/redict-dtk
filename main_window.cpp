@@ -92,6 +92,7 @@ void MainWindow::initUI()
 
         config->settings->setValue("theme", "light");
         toolbar->changeTheme("light");
+        dictPage->changeTheme("light");
     }else {
         setBorderColor("#5D5D5D");
 
@@ -100,6 +101,7 @@ void MainWindow::initUI()
 
         config->settings->setValue("theme", "dark");
         toolbar->changeTheme("dark");
+        dictPage->changeTheme("dark");
     }
 }
 
