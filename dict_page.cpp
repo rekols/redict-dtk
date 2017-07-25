@@ -20,7 +20,6 @@ DictPage::DictPage(QWidget *parent)
     infoLabel = new QPlainTextEdit();
 
     infoLabel->setReadOnly(true);
-    infoLabel->setFocusPolicy(Qt::NoFocus);
 
     searchEdit->setFixedHeight(35);
     searchButton->setFixedHeight(35);
