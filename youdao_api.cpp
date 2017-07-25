@@ -26,7 +26,7 @@ void YoudaoAPI::translator(const QString &text)
 {
     QNetworkRequest request;
 
-    request.setUrl(QUrl("http://fanyi.youdao.com/openapi.do?keyfrom=YouDaoCV&key=659600698&type=data&doctype=json&version=1.1&q=" + text));
+    request.setUrl(QUrl("http://fanyi.youdao.com/openapi.do?keyfrom=YouDaoCV&key=659600698&type=data&doctype=json&version=1.1&only=translate&q=" + text));
     http->get(request);
     connect(http, SIGNAL(finished(QNetworkReply*)), this, SLOT(translatorFinished(QNetworkReply*)));
 }

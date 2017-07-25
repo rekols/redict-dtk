@@ -21,6 +21,6 @@ void ClickBox::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
         emit clicked();
-        this->hide();
+        this->setVisible(false);
     }
 }

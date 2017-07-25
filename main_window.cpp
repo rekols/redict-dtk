@@ -16,9 +16,6 @@ MainWindow::MainWindow(QWidget *parent)
     clickBox = new ClickBox();
     floatBox = new FloatBox();
 
-    clickBox->setVisible(false);
-    floatBox->setVisible(false);
-
     layout->addWidget(homePage);
     layout->addWidget(dictPage);
     layout->addWidget(trPage);
