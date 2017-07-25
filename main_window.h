@@ -3,6 +3,7 @@
 
 #include <DMainWindow>
 #include <QStackedLayout>
+#include <QMenu>
 #include "tabbar.h"
 #include "home_page.h"
 #include "dict_page.h"
@@ -10,6 +11,7 @@
 #include "event_monitor.h"
 #include "click_box.h"
 #include "float_box.h"
+#include "settings.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -22,8 +24,11 @@ public:
     ~MainWindow();
 
 private:
+    Settings *config;
     QWidget *mainWidget;
     QStackedLayout *layout;
+    QMenu *menu;
+    QAction *themeAction;
     TabBar *toolbar;
     HomePage *homePage;
     DictPage *dictPage;
@@ -32,6 +37,8 @@ private:
 
     ClickBox *clickBox;
     FloatBox *floatBox;
+
+    void initUI();
 
 private slots:
     void switchTab(int index);

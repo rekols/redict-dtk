@@ -23,6 +23,17 @@ TabBar::TabBar(QWidget *parent)
     tabNameWidths.insert(2, fontMetrics->width("翻译"));
 }
 
+void TabBar::changeTheme(const QString &theme)
+{
+    if (theme == "light") {
+        tabNameColor = "#000000";
+    }else {
+        tabNameColor = "#FFFFFF";
+    }
+
+    repaint();
+}
+
 void TabBar::mousePressEvent(QMouseEvent *e)
 {
     int prevActiveIndex = currentTabIndex;
@@ -61,7 +72,7 @@ void TabBar::paintEvent(QPaintEvent *e)
         if (i == currentTabIndex) {
             painter.setPen(QPen(QColor("#2CA7F8")));
         }else {
-            painter.setPen(QPen(QColor("#FFFFFF")));
+            painter.setPen(QPen(QColor(tabNameColor)));
         }
 
         painter.drawText(QRect(tabX + tabNameLeftPadding, tabNameTopPadding, width - tabNameLeftPadding, rect().height() - tabNameTopPadding), Qt::AlignLeft | Qt::AlignTop, tabName);

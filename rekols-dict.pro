@@ -26,7 +26,9 @@ SOURCES += main.cpp\
     data_page.cpp \
     event_monitor.cpp \
     click_box.cpp \
-    float_box.cpp
+    float_box.cpp \
+    settings.cpp \
+    utils.cpp
 
 HEADERS  += main_window.h \
     home_page.h \
@@ -38,7 +40,9 @@ HEADERS  += main_window.h \
     data_page.h \
     event_monitor.h \
     click_box.h \
-    float_box.h
+    float_box.h \
+    settings.h \
+    utils.h
 
 RESOURCES = images.qrc
 

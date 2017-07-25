@@ -1,5 +1,13 @@
 <RCC>
     <qresource prefix="/">
+        <file>image/light/audio-volume-high-normal.png</file>
+        <file>image/light/audio-volume-high-hover.png</file>
+        <file>image/light/audio-volume-high-press.png</file>
+        <file>image/dark/audio-volume-high-normal.png</file>
+        <file>image/dark/audio-volume-high-hover.png</file>
+        <file>image/dark/audio-volume-high-press.png</file>
+        <file>image/light.qss</file>
+        <file>image/dark.qss</file>
         <file>image/Spinner/Spinner01.png</file>
         <file>image/Spinner/Spinner02.png</file>
         <file>image/Spinner/Spinner03.png</file>

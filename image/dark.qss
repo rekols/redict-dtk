@@ -1,0 +1,9 @@
+QPlainTextEdit {
+    margin:0;
+    border: 0;
+    color: #FFFFFF;
+}
+
+#FloatText {
+    color: #FFFFFF;
+}

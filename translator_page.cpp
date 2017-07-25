@@ -31,7 +31,7 @@ TranslatorPage::TranslatorPage(QWidget *parent)
 
     tips1->setStyleSheet("color: #BCBCBC");
     tips2->setStyleSheet("color: #BCBCBC");
-    this->setStyleSheet("QPlainTextEdit { border: 1px solid #505050; border-radius: 5px; font-size: 15px; padding: 5px;}");
+    //this->setStyleSheet("QPlainTextEdit { border: 1px solid #505050; border-radius: 5px; font-size: 15px; padding: 5px;}");
 
     connect(trBtn, SIGNAL(clicked()), this, SLOT(on_translator_clicked()));
     connect(api, SIGNAL(translatorFinished(QString)), this, SLOT(processingData(QString)));

@@ -15,6 +15,8 @@ class TabBar : public QWidget
 public:
     TabBar(QWidget *parent = 0);
 
+    void changeTheme(const QString &theme);
+
 protected:
     void paintEvent(QPaintEvent *);
     void mousePressEvent(QMouseEvent *);
@@ -28,6 +30,8 @@ private:
     QFontMetrics *fontMetrics;
     int currentTabIndex;
     int tabNameSize;
+
+    QString tabNameColor;
 
 signals:
     void switchTab(int index);
