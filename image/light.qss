@@ -6,7 +6,7 @@ QPlainTextEdit {
 
 QLineEdit {
     border: 1px solid #BBBBBB;
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
 #FloatText {
@@ -19,8 +19,26 @@ QLineEdit {
 
 #TrContent {
     border: 1px solid #BBBBBB;
-    border-radius: 5px;
+    border-radius: 3px;
     color: #000000;
     font-size: 15px;
     padding: 5px;
+}
+
+QPushButton {
+    background: #FFFFFF;
+    border: 1px solid #BBBBBB;
+    border-radius: 3px;
+    color: #2CA7F8;
+    font-size: 16px;
+    font-weight: 400;
+}
+QPushButton:hover {
+    background: #2CA7F8;
+    border: 1px solid #2CA7F8;
+    color: #FFFFFF;
+}
+QPushButton:pressed {
+    background: #007DCF;
+    border: 1px solid #007DCF;
 }
