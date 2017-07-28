@@ -4,6 +4,11 @@ QPlainTextEdit {
     color: #000000;
 }
 
+QLineEdit {
+    border: 1px solid #BBBBBB;
+    border-radius: 5px;
+}
+
 #FloatText {
     color: #FFFFFF;
 }

@@ -23,6 +23,7 @@ DictPage::DictPage(QWidget *parent)
 
     searchEdit->setFixedHeight(35);
     searchButton->setFixedHeight(35);
+    searchButton->setFixedWidth(100);
 
     pronButton1 = new DImageButton(NULL, NULL, NULL);
     pronButton2 = new DImageButton(NULL, NULL, NULL);

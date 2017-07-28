@@ -5,6 +5,7 @@
 #include <QDesktopWidget>
 #include <dthememanager.h>
 #include "utils.h"
+#include <QPainter>
 
 MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent)
@@ -20,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     trPage = new TranslatorPage();
     clickBox = new ClickBox();
     floatBox = new FloatBox();
+    backgroundColor = "#FFFFFF";
 
     layout->addWidget(homePage);
     layout->addWidget(dictPage);
@@ -82,9 +84,19 @@ MainWindow::~MainWindow()
     floatBox->deleteLater();
 }
 
+void MainWindow::paintEvent(QPaintEvent *)
+{
+    QPainter painter(this);
+
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(QColor(backgroundColor));
+    painter.drawRect(rect());
+}
+
 void MainWindow::initUI()
 {
     if (config->settings->value("theme").toString() == "light") {
+        backgroundColor = "#FFFFFF";
         setBorderColor("#dddddd");
 
         DThemeManager::instance()->setTheme("light");
@@ -94,6 +106,7 @@ void MainWindow::initUI()
         toolbar->changeTheme("light");
         dictPage->changeTheme("light");
     }else {
+        backgroundColor = "#292B2E";
         setBorderColor("#5D5D5D");
 
         DThemeManager::instance()->setTheme("dark");

@@ -1,6 +1,8 @@
 #include "translator_page.h"
 #include <QLabel>
-#include <QPushButton>
+#include <dtextbutton.h>
+
+DWIDGET_USE_NAMESPACE
 
 TranslatorPage::TranslatorPage(QWidget *parent)
     : QWidget(parent),
@@ -21,6 +23,7 @@ TranslatorPage::TranslatorPage(QWidget *parent)
 
     QPushButton *trBtn = new QPushButton("翻译");
     hLayout->addWidget(trBtn);
+    trBtn->setFixedHeight(35);
 
     translator->setReadOnly(true);
 

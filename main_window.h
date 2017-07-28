@@ -23,6 +23,9 @@ public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+protected:
+    void paintEvent(QPaintEvent *);
+
 private:
     Settings *config;
     QWidget *mainWidget;
@@ -37,6 +40,8 @@ private:
 
     ClickBox *clickBox;
     FloatBox *floatBox;
+
+    QString backgroundColor;
 
     void initUI();
 
