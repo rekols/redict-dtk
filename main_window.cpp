@@ -14,7 +14,9 @@ MainWindow::MainWindow(QWidget *parent)
     mainWidget = new QWidget();
     layout = new QStackedLayout;
     menu = new QMenu(this);
-    themeAction = new QAction("Switch Theme", this);
+    themeAction = new QAction("切换主题", this);
+    openUnderline = new QAction("打开划词", this);
+    closeUnderline = new QAction("关闭划词", this);
     toolbar = new TabBar();
     homePage = new HomePage();
     dictPage = new DictPage();
@@ -31,6 +33,17 @@ MainWindow::MainWindow(QWidget *parent)
     mainWidget->setLayout(layout);
 
     menu->addAction(themeAction);
+    menu->addAction(openUnderline);
+    menu->addAction(closeUnderline);
+
+    if (config->settings->value("underline").toString() == "true") {
+        openUnderLine();
+    }else {
+        closeUnderLine();
+    }
+
+    connect(openUnderline, &QAction::triggered, this, &MainWindow::openUnderLine);
+    connect(closeUnderline, &QAction::triggered, this, &MainWindow::closeUnderLine);
 
     this->titleBar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
     this->titleBar()->setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
@@ -47,33 +60,6 @@ MainWindow::MainWindow(QWidget *parent)
         }
     });
     connect(toolbar, SIGNAL(switchTab(int)), this, SLOT(switchTab(int)));
-
-    connect(qApp->clipboard(), &QClipboard::selectionChanged, [=]{
-        if (!qApp->clipboard()->text(QClipboard::Selection).isEmpty()) {
-            clickBox->move(QCursor::pos().x() + 15, QCursor::pos().y() + 10);
-            clickBox->setVisible(true);
-        }
-    });
-
-    connect(clickBox, &ClickBox::clicked, this, [=]{
-        QString word = qApp->clipboard()->text(QClipboard::Selection);
-        floatBox->queryWord(word);
-
-        floatBox->move(QCursor::pos());
-        floatBox->setVisible(true);
-    });
-
-    connect(&eventMonitor, &EventMonitor::buttonPress, this, [=]{
-        clickBox->setVisible(false);
-        floatBox->setVisible(false);
-    }, Qt::QueuedConnection);
-
-    connect(&eventMonitor, &EventMonitor::keyPress, this, [=]{
-        clickBox->setVisible(false);
-        floatBox->setVisible(false);
-    }, Qt::QueuedConnection);
-
-    eventMonitor.start();
 
     initUI();
 }
@@ -127,4 +113,49 @@ void MainWindow::switchTab(int index)
     }else if (index == 2) {
         trPage->original->setFocus();
     }
+}
+
+void MainWindow::openUnderLine()
+{
+    connect(qApp->clipboard(), &QClipboard::selectionChanged, [=]{
+        if (!qApp->clipboard()->text(QClipboard::Selection).isEmpty()) {
+            clickBox->move(QCursor::pos().x() + 15, QCursor::pos().y() + 10);
+            clickBox->setVisible(true);
+        }
+    });
+
+    connect(clickBox, &ClickBox::clicked, this, [=]{
+        QString word = qApp->clipboard()->text(QClipboard::Selection);
+        floatBox->queryWord(word);
+
+        floatBox->move(QCursor::pos());
+        floatBox->setVisible(true);
+    });
+
+    connect(&eventMonitor, &EventMonitor::buttonPress, this, [=]{
+        clickBox->setVisible(false);
+        floatBox->setVisible(false);
+    }, Qt::QueuedConnection);
+
+    connect(&eventMonitor, &EventMonitor::keyPress, this, [=]{
+        clickBox->setVisible(false);
+        floatBox->setVisible(false);
+    }, Qt::QueuedConnection);
+
+    eventMonitor.start();
+
+    config->settings->setValue("underline", "true");
+    openUnderline->setVisible(false);
+    closeUnderline->setVisible(true);
+}
+
+void MainWindow::closeUnderLine()
+{
+    disconnect(qApp->clipboard(), 0, 0, 0);
+    disconnect(clickBox, 0, 0, 0);
+    disconnect(&eventMonitor, 0, 0, 0);
+
+    config->settings->setValue("underline", "false");
+    openUnderline->setVisible(true);
+    closeUnderline->setVisible(false);
 }

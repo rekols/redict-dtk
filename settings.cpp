@@ -11,6 +11,9 @@ Settings::Settings(QObject *parent)
     if (settings->value("theme").toString().isEmpty()) {
         settings->setValue("theme", "light");
     }
+    if (settings->value("underline").toString().isEmpty()) {
+        settings->setValue("underline", "true");
+    }
 }
 
 QString Settings::configPath()

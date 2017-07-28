@@ -32,6 +32,8 @@ private:
     QStackedLayout *layout;
     QMenu *menu;
     QAction *themeAction;
+    QAction *openUnderline;
+    QAction *closeUnderline;
     TabBar *toolbar;
     HomePage *homePage;
     DictPage *dictPage;
@@ -47,6 +49,8 @@ private:
 
 private slots:
     void switchTab(int index);
+    void openUnderLine();
+    void closeUnderLine();
 };
 
 #endif // MAIN_WINDOW_H
