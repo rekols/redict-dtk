@@ -4,7 +4,7 @@ A simple dictionary for deepin.
 
 ### Build dependencies
 
-`sudo apt install g++ qt5-default libdtkbase-dev libdtkwidget-dev libdtkutil-dev`
+`sudo apt install g++ qt5-default libdtkbase-dev libdtkwidget-dev libdtkutil-dev libxcb-util0-dev libxtst-dev`
 
 ### Runtime dependencies
 
