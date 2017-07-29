@@ -14,7 +14,7 @@ QLineEdit {
 }
 
 #TrLabel {
-    color: #868686;
+    color: #424242;
 }
 
 #TrContent {
@@ -25,7 +25,7 @@ QLineEdit {
     padding: 5px;
 }
 
-QPushButton {
+#Button {
     background: #FFFFFF;
     border: 1px solid #BBBBBB;
     border-radius: 3px;
@@ -33,12 +33,12 @@ QPushButton {
     font-size: 16px;
     font-weight: 400;
 }
-QPushButton:hover {
+#Button:hover {
     background: #2CA7F8;
     border: 1px solid #2CA7F8;
     color: #FFFFFF;
 }
-QPushButton:pressed {
+#Button:pressed {
     background: #007DCF;
     border: 1px solid #007DCF;
 }

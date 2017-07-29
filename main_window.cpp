@@ -23,7 +23,6 @@ MainWindow::MainWindow(QWidget *parent)
     trPage = new TranslatorPage();
     clickBox = new ClickBox();
     floatBox = new FloatBox();
-    backgroundColor = "#FFFFFF";
 
     layout->addWidget(homePage);
     layout->addWidget(dictPage);
@@ -75,14 +74,17 @@ void MainWindow::paintEvent(QPaintEvent *)
     QPainter painter(this);
 
     painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor(backgroundColor));
+    if (config->settings->value("theme").toString() == "light")
+        painter.setBrush(QColor("#FFFFFF"));
+    else
+        painter.setBrush(QColor("#292B2E"));
+
     painter.drawRect(rect());
 }
 
 void MainWindow::initUI()
 {
     if (config->settings->value("theme").toString() == "light") {
-        backgroundColor = "#FFFFFF";
         setBorderColor("#dddddd");
 
         DThemeManager::instance()->setTheme("light");
@@ -92,7 +94,6 @@ void MainWindow::initUI()
         toolbar->changeTheme("light");
         dictPage->changeTheme("light");
     }else {
-        backgroundColor = "#292B2E";
         setBorderColor("#5D5D5D");
 
         DThemeManager::instance()->setTheme("dark");
@@ -102,6 +103,8 @@ void MainWindow::initUI()
         toolbar->changeTheme("dark");
         dictPage->changeTheme("dark");
     }
+
+    repaint();
 }
 
 void MainWindow::switchTab(int index)

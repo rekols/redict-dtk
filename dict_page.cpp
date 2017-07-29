@@ -17,13 +17,14 @@ DictPage::DictPage(QWidget *parent)
     nameLabel = new QLabel("");
     pronLabel1 = new QLabel("");
     pronLabel2 = new QLabel("");
-    infoLabel = new QPlainTextEdit();
+    infoLabel = new QPlainTextEdit();    
 
     infoLabel->setReadOnly(true);
 
     searchEdit->setFixedHeight(35);
     searchButton->setFixedHeight(35);
     searchButton->setFixedWidth(100);
+    searchButton->setObjectName("Button");
 
     pronButton1 = new DImageButton(NULL, NULL, NULL);
     pronButton2 = new DImageButton(NULL, NULL, NULL);

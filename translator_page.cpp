@@ -24,6 +24,7 @@ TranslatorPage::TranslatorPage(QWidget *parent)
     QPushButton *trBtn = new QPushButton("翻译");
     hLayout->addWidget(trBtn);
     trBtn->setFixedHeight(35);
+    trBtn->setObjectName("Button");
 
     translator->setReadOnly(true);
 

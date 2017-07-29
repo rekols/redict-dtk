@@ -43,8 +43,6 @@ private:
     ClickBox *clickBox;
     FloatBox *floatBox;
 
-    QString backgroundColor;
-
     void initUI();
 
 private slots:

@@ -20,7 +20,7 @@ QPlainTextEdit {
     padding: 5px;
 }
 
-QPushButton {
+#Button {
     background: #646668;
     border: 1px solid #646668;
     border-radius: 3px;
@@ -28,12 +28,12 @@ QPushButton {
     font-size: 16px;
     font-weight: 400;
 }
-QPushButton:hover {
+#Button:hover {
     background: #969698;
     border: 1px solid #969698;
     color: #FFFFFF;
 }
-QPushButton:pressed {
+#Button:pressed {
     background: #515355;
     border: 1px solid #515355;
     color: #2CA7F8;
