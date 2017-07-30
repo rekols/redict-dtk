@@ -46,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->titlebar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
     this->titlebar()->setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
-    this->titlebkiar()->setMenu(menu);
+    this->titlebar()->setMenu(menu);
     this->setCentralWidget(mainWidget);
 
     connect(themeAction, &QAction::triggered, this, [=]{
