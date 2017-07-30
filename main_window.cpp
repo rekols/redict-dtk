@@ -44,9 +44,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(openUnderline, &QAction::triggered, this, &MainWindow::openUnderLine);
     connect(closeUnderline, &QAction::triggered, this, &MainWindow::closeUnderLine);
 
-    this->titleBar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
-    this->titleBar()->setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
-    this->titleBar()->setMenu(menu);
+    this->titlebar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
+    this->titlebar()->setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
+    this->titlebkiar()->setMenu(menu);
     this->setCentralWidget(mainWidget);
 
     connect(themeAction, &QAction::triggered, this, [=]{

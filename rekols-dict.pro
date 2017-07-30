@@ -13,7 +13,7 @@ TEMPLATE = app
 
 CONFIG += link_pkgconfig
 CONFIG += c++11
-PKGCONFIG += dtkwidget dtkbase dtkutil xcb xcb-util
+PKGCONFIG += dtkwidget xcb xcb-util
 
 SOURCES += main.cpp\
     main_window.cpp \
