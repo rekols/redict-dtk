@@ -12,7 +12,7 @@ LoadPage::LoadPage(QWidget *parent)
 
     QStringList seq;
     for (int i(1); i != 91; ++i)
-        seq.append(QString(":/image/Spinner/Spinner%1.png").arg(i, 2, 10, QChar('0')));
+        seq.append(QString(":/resources/Spinner/Spinner%1.png").arg(i, 2, 10, QChar('0')));
 
     view = new DPictureSequenceView(this);
     view->setPictureSequence(seq);

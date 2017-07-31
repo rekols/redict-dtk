@@ -18,7 +18,7 @@ QLineEdit {
 }
 
 #TrContent {
-    border: 1px solid #BBBBBB;
+    border: 1px solid #D2D2D2;
     border-radius: 3px;
     color: #000000;
     font-size: 15px;

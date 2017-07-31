@@ -8,9 +8,6 @@
 #include "home_page.h"
 #include "dict_page.h"
 #include "translator_page.h"
-#include "event_monitor.h"
-#include "click_box.h"
-#include "float_box.h"
 #include "settings.h"
 
 DWIDGET_USE_NAMESPACE
@@ -32,23 +29,15 @@ private:
     QStackedLayout *layout;
     QMenu *menu;
     QAction *themeAction;
-    QAction *openUnderline;
-    QAction *closeUnderline;
     TabBar *toolbar;
     HomePage *homePage;
     DictPage *dictPage;
     TranslatorPage *trPage;
-    EventMonitor eventMonitor;
-
-    ClickBox *clickBox;
-    FloatBox *floatBox;
 
     void initUI();
 
 private slots:
     void switchTab(int index);
-    void openUnderLine();
-    void closeUnderLine();
 };
 
 #endif // MAIN_WINDOW_H

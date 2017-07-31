@@ -1,5 +1,4 @@
 #include "dict_page.h"
-#include <QByteArray>
 
 DictPage::DictPage(QWidget *parent)
     : QWidget(parent),
@@ -142,7 +141,7 @@ void DictPage::processingData(QString name, QString uk_phonetic, QString us_phon
 
 void DictPage::init()
 {
-    QPixmap iconPixmap = QPixmap(":/image/youdao-dict.svg");
+    QPixmap iconPixmap = QPixmap(":/resources/youdao-dict.svg");
     QLabel *iconLabel = new QLabel;
     iconLabel->setFixedSize(20, 20);
     iconLabel->setScaledContents(true);
