@@ -44,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(openUnderline, &QAction::triggered, this, &MainWindow::openUnderLine);
     connect(closeUnderline, &QAction::triggered, this, &MainWindow::closeUnderLine);
 
+    this->titlebar()->setSeparatorVisible(true);
     this->titlebar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
     this->titlebar()->setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
     this->titlebar()->setMenu(menu);

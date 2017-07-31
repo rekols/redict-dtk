@@ -79,7 +79,7 @@ void TabBar::paintEvent(QPaintEvent *e)
 
         if (i == currentTabIndex) {
             QPainterPath tabUnderlinePath;
-            tabUnderlinePath.addRect(QRectF(tabX, rect().height() - 2, width, 2));
+            tabUnderlinePath.addRect(QRectF(tabX, rect().height() - 2, width, 1));
             painter.fillPath(tabUnderlinePath, QColor("#2CA7F8"));
         }
 
