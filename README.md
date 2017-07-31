@@ -1,23 +1,26 @@
-## Rekols Dictionary
+# Rekols词典
 
-A simple dictionary for deepin.
+基于dtk开发的一款词典
 
-### Build dependencies
+![](./screenshot/1.png)
+
+![](./screenshot/2.png)
+
+## 编译依赖
 
 `sudo apt install g++ qt5-default libdtkbase-dev libdtkwidget-dev libdtkutil-dev libxcb-util0-dev libxtst-dev`
 
-### Runtime dependencies
+## 编译
 
-* qt5widgets
+* mkdir build
+* cd build
+* qmake ..
+* make
 
-* qt5gui
+## 运行
 
-* qt5core
-
-`sudo apt install libqt5core5a libqt5gui5 libqt5widgets5 libdtkbase libdtkwidget libdtkutil`
+* ./rekols-dict
 
 ## License
 
-Rekols-Dict is licensed under [GPLv3](LICENSE).
-
-
+本词典以GPLv3协议发布，禁止违反GPLv3协议非法闭源.
