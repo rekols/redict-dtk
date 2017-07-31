@@ -44,7 +44,7 @@ HEADERS  += main_window.h \
     settings.h \
     utils.h
 
-RESOURCES = images.qrc
+RESOURCES = resources.qrc
 
 LIBS += -lX11 -lXext -lXtst
 

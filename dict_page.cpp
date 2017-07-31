@@ -92,19 +92,19 @@ DictPage::DictPage(QWidget *parent)
 void DictPage::changeTheme(const QString &theme)
 {
     if (theme == "light") {
-        pronButton1->setNormalPic(":/image/light/audio-volume-high-normal.png");
-        pronButton1->setHoverPic(":/image/light/audio-volume-high-hover.png");
-        pronButton1->setPressPic(":/image/light/audio-volume-high-press.png");
-        pronButton2->setNormalPic(":/image/light/audio-volume-high-normal.png");
-        pronButton2->setHoverPic(":/image/light/audio-volume-high-hover.png");
-        pronButton2->setPressPic(":/image/light/audio-volume-high-press.png");
+        pronButton1->setNormalPic(":/resources/light/audio-volume-high-normal.png");
+        pronButton1->setHoverPic(":/resources/light/audio-volume-high-hover.png");
+        pronButton1->setPressPic(":/resources/light/audio-volume-high-press.png");
+        pronButton2->setNormalPic(":/resources/light/audio-volume-high-normal.png");
+        pronButton2->setHoverPic(":/resources/light/audio-volume-high-hover.png");
+        pronButton2->setPressPic(":/resources/light/audio-volume-high-press.png");
     }else {
-        pronButton1->setNormalPic(":/image/dark/audio-volume-high-normal.png");
-        pronButton1->setHoverPic(":/image/dark/audio-volume-high-hover.png");
-        pronButton1->setPressPic(":/image/dark/audio-volume-high-press.png");
-        pronButton2->setNormalPic(":/image/dark/audio-volume-high-normal.png");
-        pronButton2->setHoverPic(":/image/dark/audio-volume-high-hover.png");
-        pronButton2->setPressPic(":/image/dark/audio-volume-high-press.png");
+        pronButton1->setNormalPic(":/resources/dark/audio-volume-high-normal.png");
+        pronButton1->setHoverPic(":/resources/dark/audio-volume-high-hover.png");
+        pronButton1->setPressPic(":/resources/dark/audio-volume-high-press.png");
+        pronButton2->setNormalPic(":/resources/dark/audio-volume-high-normal.png");
+        pronButton2->setHoverPic(":/resources/dark/audio-volume-high-hover.png");
+        pronButton2->setPressPic(":/resources/dark/audio-volume-high-press.png");
     }
 }
 

@@ -62,7 +62,7 @@ void TabBar::paintEvent(QPaintEvent *e)
     int tabNameRightPadding = 10;
     int tabNameTopPadding = 5;
 
-    painter.drawPixmap(QRect(0, 5, 24, 24), QPixmap(":/image/logo.svg"));
+    painter.drawPixmap(QRect(0, 5, 24, 24), QPixmap(":/resources/logo.svg"));
 
     for (int i=0; i<3; ++i) {
         QString tabName = tabNames[i];

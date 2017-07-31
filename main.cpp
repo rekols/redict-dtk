@@ -17,13 +17,13 @@ int main(int argc, char *argv[])
     {
         a.setApplicationVersion("0.3");
 
-        a.setProductIcon(QPixmap::fromImage(QImage(":/image/logo.svg")));
+        a.setProductIcon(QPixmap::fromImage(QImage(":/resources/logo.svg")));
         a.setApplicationDescription(DApplication::translate("MainWindow", descriptionText) + "\n");
         a.setApplicationAcknowledgementPage(acknowledgementLink);
         a.loadTranslator();
 
         a.setTheme("dark");
-        a.setWindowIcon(QIcon(":/image/logo.svg"));
+        a.setWindowIcon(QIcon(":/resources/logo.svg"));
 
         MainWindow w;
         w.setFixedSize(550, 420);

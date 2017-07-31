@@ -89,7 +89,7 @@ void MainWindow::initUI()
         setBorderColor("#dddddd");
 
         DThemeManager::instance()->setTheme("light");
-        qApp->setStyleSheet(Utils::getQssFileContent(":/image/light.qss"));
+        qApp->setStyleSheet(Utils::getQssFileContent(":/resources/light.qss"));
 
         config->settings->setValue("theme", "light");
         toolbar->changeTheme("light");
@@ -98,7 +98,7 @@ void MainWindow::initUI()
         setBorderColor("#5D5D5D");
 
         DThemeManager::instance()->setTheme("dark");
-        qApp->setStyleSheet(Utils::getQssFileContent(":/image/dark.qss"));
+        qApp->setStyleSheet(Utils::getQssFileContent(":/resources/dark.qss"));
 
         config->settings->setValue("theme", "dark");
         toolbar->changeTheme("dark");
