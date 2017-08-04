@@ -4,7 +4,7 @@
 
 ## 编译依赖
 
-`sudo apt install g++ qt5-default libdtkwidget-dev`
+`sudo apt install g++ qt5-default libdtkcore-dev libdtkwidget-dev`
 
 ## 编译
 
@@ -15,7 +15,7 @@
 
 ## 运行
 
-* ./rekols-dict
+* ./rekols-dictionary
 
 ## License
 
