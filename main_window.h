@@ -3,12 +3,13 @@
 
 #include <DMainWindow>
 #include <QStackedLayout>
-#include <QMenu>
-#include "tabbar.h"
+#include "toolbar.h"
+#include "load_page.h"
 #include "home_page.h"
 #include "dict_page.h"
-#include "translator_page.h"
 #include "settings.h"
+
+#include <QMenu>
 
 DWIDGET_USE_NAMESPACE
 
@@ -20,24 +21,21 @@ public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-protected:
-    void paintEvent(QPaintEvent *);
-
 private:
-    Settings *config;
-    QWidget *mainWidget;
+    QWidget *widget;
     QStackedLayout *layout;
-    QMenu *menu;
-    QAction *themeAction;
-    TabBar *toolbar;
+    ToolBar *toolbar;
+    LoadPage *loadPage;
     HomePage *homePage;
     DictPage *dictPage;
-    TranslatorPage *trPage;
+
+    Settings *config;
+    QMenu *menu;
 
     void initUI();
 
-private slots:
-    void switchTab(int index);
+protected:
+    void paintEvent(QPaintEvent *);
 };
 
 #endif // MAIN_WINDOW_H

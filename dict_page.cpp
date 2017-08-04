@@ -6,24 +6,16 @@ DictPage::DictPage(QWidget *parent)
 {
     audio = new QMediaPlayer;
     layout = new QVBoxLayout(this);
-    searchLayout = new QHBoxLayout();
     wordLayout = new QHBoxLayout();
     pronLayout = new QHBoxLayout();
     infoLayout = new QHBoxLayout();
     youdaoLayout = new QHBoxLayout();
-    searchEdit = new QLineEdit();
-    searchButton = new QPushButton("查询");
     nameLabel = new QLabel("");
     pronLabel1 = new QLabel("");
     pronLabel2 = new QLabel("");
     infoLabel = new QPlainTextEdit();    
 
     infoLabel->setReadOnly(true);
-
-    searchEdit->setFixedHeight(35);
-    searchButton->setFixedHeight(35);
-    searchButton->setFixedWidth(100);
-    searchButton->setObjectName("Button");
 
     pronButton1 = new DImageButton(NULL, NULL, NULL);
     pronButton2 = new DImageButton(NULL, NULL, NULL);
@@ -37,12 +29,6 @@ DictPage::DictPage(QWidget *parent)
     pronLabel1->setStyleSheet("font-size: 13px");
     pronLabel2->setStyleSheet("font-size: 13px");
     infoLabel->setStyleSheet("font-size: 17px");
-
-    searchLayout->addSpacing(15);
-    searchLayout->addWidget(searchEdit);
-    searchLayout->addSpacing(5);
-    searchLayout->addWidget(searchButton);
-    searchLayout->addSpacing(15);
 
     wordLayout->addSpacing(25);
     wordLayout->addWidget(nameLabel);
@@ -60,8 +46,6 @@ DictPage::DictPage(QWidget *parent)
     pronLayout->addWidget(pronLabel2);
 
     layout->addSpacing(10);
-    layout->addLayout(searchLayout);
-    layout->addSpacing(20);
     layout->addLayout(wordLayout);
     layout->addLayout(pronLayout);
     layout->addSpacing(10);
@@ -80,8 +64,10 @@ DictPage::DictPage(QWidget *parent)
         audio->play();
     });
 
+    /*
     connect(searchEdit, SIGNAL(returnPressed()), this, SLOT(start()));
     connect(searchButton, SIGNAL(clicked()), this, SLOT(start()));
+    */
 
     connect(api, SIGNAL(searchWordFinished(QString, QString, QString, QString)), this, SLOT(processingData(QString, QString, QString, QString)));
 
@@ -109,13 +95,7 @@ void DictPage::changeTheme(const QString &theme)
 
 void DictPage::start()
 {
-    if (!searchEdit->text().isEmpty()) {
-        searchEdit->setFocus();
-        api->searchWord(searchEdit->text());
-    }
-    else {
-        searchEdit->setFocus();
-    }
+
 }
 
 void DictPage::processingData(QString name, QString uk_phonetic, QString us_phonetic, QString text)
@@ -158,6 +138,4 @@ void DictPage::init()
     pronLabel2->setVisible(false);
     pronButton1->setVisible(false);
     pronButton2->setVisible(false);
-
-    searchEdit->setFocus();
 }

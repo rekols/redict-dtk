@@ -25,14 +25,11 @@ public:
     void changeTheme(const QString &theme);
 
     QVBoxLayout *layout;
-    QHBoxLayout *searchLayout;
     QHBoxLayout *wordLayout;
     QHBoxLayout *pronLayout;
     QHBoxLayout *infoLayout;
     QHBoxLayout *youdaoLayout;
 
-    QLineEdit *searchEdit;
-    QPushButton *searchButton;
     QLabel *nameLabel;
     QLabel *pronLabel1;
     QLabel *pronLabel2;
@@ -43,7 +40,6 @@ public:
 
     QMediaPlayer *audio;
 
-private:
     YoudaoAPI *api;
 
     void init();

@@ -1,44 +1,37 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2017-06-08T14:27:31
+# Project created by QtCreator 2017-08-04T19:13:28
 #
 #-------------------------------------------------
 
-QT  += core gui network multimedia
+QT       += core gui network multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = rekols-dict
+TARGET = rekols-dictionary
 TEMPLATE = app
-
-CONFIG += link_pkgconfig
-CONFIG += c++11
+CONFIG += c++11 link_pkgconfig
 PKGCONFIG += dtkwidget
 
+
 SOURCES += main.cpp\
-    main_window.cpp \
+        main_window.cpp \
+    toolbar.cpp \
     home_page.cpp \
-    dict_page.cpp \
-    tabbar.cpp \
-    translator_page.cpp \
-    youdao_api.cpp \
     load_page.cpp \
-    data_page.cpp \
-    settings.cpp \
-    utils.cpp
+    dict_page.cpp \
+    youdao_api.cpp \
+    settings.cpp
 
 HEADERS  += main_window.h \
+    toolbar.h \
     home_page.h \
-    dict_page.h \
-    tabbar.h \
-    translator_page.h \
-    youdao_api.h \
     load_page.h \
-    data_page.h \
-    settings.h \
-    utils.h
+    dict_page.h \
+    youdao_api.h \
+    settings.h
 
-RESOURCES = resources.qrc
+RESOURCES += resources.qrc
 
 QMAKE_CXXFLAGS += -g
 
@@ -47,6 +40,6 @@ isEmpty(APPDIR):APPDIR=/usr/share/applications
 
 target.path = $$INSTROOT$$BINDIR
 desktop.path = $$INSTROOT$$APPDIR
-desktop.files = keyboard-sound.desktop
+desktop.files = rekols-dict.desktop
 
 INSTALLS += target desktop

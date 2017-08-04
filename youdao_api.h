@@ -14,20 +14,16 @@ class YoudaoAPI : public QObject
 public:
     YoudaoAPI(QObject *parent = 0);
 
-    void searchWord(const QString &word);
-    void translator(const QString &text);
+    void queryWord(const QString &word);
 
 private:
     QNetworkAccessManager *http;
 
 private slots:
-    void searchWordFinished(QNetworkReply *reply);
-    void translatorFinished(QNetworkReply *reply);
+    void queryWordFinished(QNetworkReply *reply);
 
 signals:
     void searchWordFinished(QString, QString, QString, QString);
-    void translatorFinished(QString);
-
 };
 
 #endif // YOUDAOAPI_H

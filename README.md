@@ -2,13 +2,9 @@
 
 基于dtk开发的一款词典
 
-![](./screenshot/1.png)
-
-![](./screenshot/2.png)
-
 ## 编译依赖
 
-`sudo apt install g++ qt5-default libdtkbase-dev libdtkwidget-dev libdtkutil-dev libxcb-util0-dev libxtst-dev`
+`sudo apt install g++ qt5-default libdtkwidget-dev`
 
 ## 编译
 

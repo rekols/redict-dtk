@@ -1,41 +1,32 @@
 #include "main_window.h"
-#include <DTitlebar>
-#include <QApplication>
-#include <QClipboard>
-#include <QDesktopWidget>
+#include <dtitlebar.h>
 #include <dthememanager.h>
-#include "utils.h"
 #include <QPainter>
 
 MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent)
 {
-    config = new Settings();
-    mainWidget = new QWidget();
-    layout = new QStackedLayout;
-    menu = new QMenu(this);
-    themeAction = new QAction("切换主题", this);
-    toolbar = new TabBar();
+    widget = new QWidget();
+    layout = new QStackedLayout();
+    toolbar = new ToolBar();
+    loadPage = new LoadPage();
     homePage = new HomePage();
     dictPage = new DictPage();
-    trPage = new TranslatorPage();
+    config = new Settings();
+    menu = new QMenu();
 
+    layout->addWidget(loadPage);
     layout->addWidget(homePage);
     layout->addWidget(dictPage);
-    layout->addWidget(trPage);
-    layout->setCurrentIndex(1);
 
-    mainWidget->setLayout(layout);
+    widget->setLayout(layout);
 
+    titlebar()->setWindowFlags(titlebar()->windowFlags() & ~Qt::WindowMaximizeButtonHint);
+    titlebar()->setCustomWidget(toolbar, Qt::AlignHCenter, false);
+    titlebar()->setMenu(menu);
+
+    QAction *themeAction = new QAction("切换主题", this);
     menu->addAction(themeAction);
-
-    this->titlebar()->setSeparatorVisible(true);
-    this->titlebar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
-    this->titlebar()->setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
-    this->titlebar()->setMenu(menu);
-    this->setCentralWidget(mainWidget);
-
-    connect(toolbar, SIGNAL(switchTab(int)), this, SLOT(switchTab(int)));
 
     connect(themeAction, &QAction::triggered, this, [=]{
         if (config->settings->value("theme").toString() == "light") {
@@ -47,12 +38,61 @@ MainWindow::MainWindow(QWidget *parent)
         }
     });
 
+    connect(homePage, &HomePage::loadImageFinished, this, [=]{
+        if (layout->currentIndex() == 2) {
+            return;
+        }
+
+        layout->setCurrentIndex(1);
+    });
+
+    connect(toolbar->edit, &QLineEdit::textChanged, this, [=]{
+        if (toolbar->edit->text().isEmpty()) {
+            layout->setCurrentIndex(1);
+            return;
+        }
+
+        dictPage->api->queryWord(toolbar->edit->text());
+        layout->setCurrentIndex(2);
+    });
+
+    connect(toolbar->edit, &QLineEdit::returnPressed, this, [=]{
+        if (toolbar->edit->text().isEmpty()) {
+            layout->setCurrentIndex(1);
+            return;
+        }
+
+        dictPage->api->queryWord(toolbar->edit->text());
+        layout->setCurrentIndex(2);
+    });
+
+    setCentralWidget(widget);
+
     initUI();
 }
 
 MainWindow::~MainWindow()
 {
 
+}
+
+void MainWindow::initUI()
+{
+    if (config->settings->value("theme").toString() == "light") {
+        setBorderColor("#dddddd");
+
+        DThemeManager::instance()->setTheme("light");
+
+        config->settings->setValue("theme", "light");
+        dictPage->changeTheme("light");
+    }else {
+        setBorderColor("#5D5D5D");
+
+        DThemeManager::instance()->setTheme("dark");
+
+        config->settings->setValue("theme", "dark");
+        dictPage->changeTheme("dark");
+    }
 }
 
 void MainWindow::paintEvent(QPaintEvent *)
@@ -67,38 +107,4 @@ void MainWindow::paintEvent(QPaintEvent *)
         painter.setBrush(QColor("#292B2E"));
 
     painter.drawRect(rect());
-}
-
-void MainWindow::initUI()
-{
-    if (config->settings->value("theme").toString() == "light") {
-        setBorderColor("#dddddd");
-
-        DThemeManager::instance()->setTheme("light");
-        qApp->setStyleSheet(Utils::getQssFileContent(":/resources/light.qss"));
-
-        config->settings->setValue("theme", "light");
-        toolbar->changeTheme("light");
-        dictPage->changeTheme("light");
-    }else {
-        setBorderColor("#5D5D5D");
-
-        DThemeManager::instance()->setTheme("dark");
-        qApp->setStyleSheet(Utils::getQssFileContent(":/resources/dark.qss"));
-
-        config->settings->setValue("theme", "dark");
-        toolbar->changeTheme("dark");
-        dictPage->changeTheme("dark");
-    }
-}
-
-void MainWindow::switchTab(int index)
-{
-    layout->setCurrentIndex(index);
-
-    if (index == 1) {
-        dictPage->searchEdit->setFocus();
-    }else if (index == 2) {
-        trPage->original->setFocus();
-    }
 }

@@ -13,25 +13,17 @@ YoudaoAPI::YoudaoAPI(QObject *parent)
     http = new QNetworkAccessManager(this);
 }
 
-void YoudaoAPI::searchWord(const QString &word)
+void YoudaoAPI::queryWord(const QString &word)
 {
     QNetworkRequest request;
 
     request.setUrl(QUrl("http://fanyi.youdao.com/openapi.do?keyfrom=YouDaoCV&key=659600698&type=data&doctype=json&version=1.1&q=" + word));
     http->get(request);
-    connect(http, SIGNAL(finished(QNetworkReply*)), this, SLOT(searchWordFinished(QNetworkReply*)));
+
+    connect(http, SIGNAL(finished(QNetworkReply*)), this, SLOT(queryWordFinished(QNetworkReply*)));
 }
 
-void YoudaoAPI::translator(const QString &text)
-{
-    QNetworkRequest request;
-
-    request.setUrl(QUrl("http://fanyi.youdao.com/openapi.do?keyfrom=YouDaoCV&key=659600698&type=data&doctype=json&version=1.1&only=translate&q=" + text));
-    http->get(request);
-    connect(http, SIGNAL(finished(QNetworkReply*)), this, SLOT(translatorFinished(QNetworkReply*)));
-}
-
-void YoudaoAPI::searchWordFinished(QNetworkReply *reply)
+void YoudaoAPI::queryWordFinished(QNetworkReply *reply)
 {
     QJsonDocument json;
     QJsonObject object, data;
@@ -64,36 +56,5 @@ void YoudaoAPI::searchWordFinished(QNetworkReply *reply)
         }
 
         emit searchWordFinished(object.value("query").toString(), uk_phonetic, us_phonetic, text);
-
-        /*
-        if (!data.value("phonetic").toString().isEmpty()) {
-            nameLabel->setText(nameLabel->text() + " [" + data.value("phonetic").toString() + "]");
-        }
-        */
-
-    }
-}
-
-void YoudaoAPI::translatorFinished(QNetworkReply *reply)
-{
-    QJsonDocument json;
-    QJsonObject object;
-
-    QByteArray wordInformation = reply->readAll();
-
-    json = QJsonDocument::fromJson(wordInformation);
-
-    if (!json.isNull())
-    {
-        object = json.object();
-
-        QString text = NULL;
-
-        for (int i=0; i<object.value("translation").toArray().size(); ++i) {
-            text.append(object.value("translation").toArray().at(i).toString());
-            text.append("\n");
-        }
-
-        emit translatorFinished(text);
     }
 }

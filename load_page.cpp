@@ -20,8 +20,9 @@ LoadPage::LoadPage(QWidget *parent)
     view->setSpeed(30);
 
     layout->addStretch();
-    layout->addWidget(view, 5, Qt::AlignCenter);
-    layout->addWidget(label, 5, Qt::AlignCenter);
+    layout->addWidget(view, 0, Qt::AlignCenter);
+    layout->addSpacing(10);
+    layout->addWidget(label, 0, Qt::AlignCenter);
     layout->addStretch();
 
     view->play();
