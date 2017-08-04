@@ -1,10 +1,4 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2017-08-04T19:13:28
-#
-#-------------------------------------------------
-
-QT       += core gui network multimedia
+QT  += core gui network multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -12,7 +6,6 @@ TARGET = rekols-dictionary
 TEMPLATE = app
 CONFIG += c++11 link_pkgconfig
 PKGCONFIG += dtkwidget
-
 
 SOURCES += main.cpp\
         main_window.cpp \

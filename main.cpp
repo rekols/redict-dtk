@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
 
     MainWindow w;
     w.setFixedSize(520, 420);
+    a.setWindowIcon(QIcon(":/resources/logo.svg"));
     w.show();
 
     Dtk::Widget::moveToCenter(&w);
