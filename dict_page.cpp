@@ -13,9 +13,7 @@ DictPage::DictPage(QWidget *parent)
     nameLabel = new QLabel("");
     pronLabel1 = new QLabel("");
     pronLabel2 = new QLabel("");
-    infoLabel = new QPlainTextEdit();    
-
-    infoLabel->setReadOnly(true);
+    infoLabel = new QLabel();    
 
     pronButton1 = new DImageButton(NULL, NULL, NULL);
     pronButton2 = new DImageButton(NULL, NULL, NULL);
@@ -23,6 +21,7 @@ DictPage::DictPage(QWidget *parent)
     pronButton1->setFixedSize(24, 24);
     pronButton2->setFixedSize(24, 24);
 
+    infoLabel->setWordWrap(true);
     nameLabel->setWordWrap(true);
 
     nameLabel->setStyleSheet("font-size: 22px; color:#2CA7F8;");
@@ -34,9 +33,9 @@ DictPage::DictPage(QWidget *parent)
     wordLayout->addWidget(nameLabel);
     wordLayout->addSpacing(25);
 
-    infoLayout->addSpacing(24);
+    infoLayout->addSpacing(25);
     infoLayout->addWidget(infoLabel);
-    infoLayout->addSpacing(24);
+    infoLayout->addSpacing(25);
 
     pronLayout->addSpacing(24);
     pronLayout->addWidget(pronButton1);
@@ -116,7 +115,7 @@ void DictPage::processingData(QString name, QString uk_phonetic, QString us_phon
     }
 
     nameLabel->setText(name);
-    infoLabel->setPlainText(text);
+    infoLabel->setText(text);
 }
 
 void DictPage::init()
