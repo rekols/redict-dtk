@@ -19,4 +19,9 @@
 
 ## License
 
-本词典以GPLv3协议发布，禁止违反GPLv3协议非法闭源.
+![](http://www.gnu.org/graphics/gplv3-127x51.png)
+
+Copyright © 2017 Rekols (Felix Bill)
+
+This project is licensed under version 3 of the GNU General Public License.
+
