@@ -2,6 +2,8 @@
 
 基于dtk开发的一款词典
 
+划词功能在old分支：https://github.com/rekols/dictionary/tree/old
+
 ## 编译依赖
 
 `sudo apt install g++ qt5-default libdtkcore-dev libdtkwidget-dev`
