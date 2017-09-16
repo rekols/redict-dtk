@@ -6,12 +6,15 @@ DWIDGET_USE_NAMESPACE
 
 int main(int argc, char *argv[])
 {
+    qputenv("QT_SCALE_FACTOR", "1.35");
+
     DApplication::loadDXcbPlugin();
     DApplication a(argc, argv);
+    a.loadTranslator();
     a.setTheme("dark");
 
     MainWindow w;
-    w.setFixedSize(520, 420);
+    w.setFixedSize(500, 420);
     a.setWindowIcon(QIcon(":/resources/logo.svg"));
     w.show();
 
