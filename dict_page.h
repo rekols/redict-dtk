@@ -28,13 +28,11 @@ public:
     QHBoxLayout *wordLayout;
     QHBoxLayout *pronLayout;
     QHBoxLayout *infoLayout;
-    QHBoxLayout *youdaoLayout;
 
     QLabel *nameLabel;
     QLabel *pronLabel1;
     QLabel *pronLabel2;
     QLabel *infoLabel;
-    QLabel *youdaoLabel;
 
     DImageButton *pronButton1;
     DImageButton *pronButton2;

@@ -9,12 +9,10 @@ DictPage::DictPage(QWidget *parent)
     wordLayout = new QHBoxLayout();
     pronLayout = new QHBoxLayout();
     infoLayout = new QHBoxLayout();
-    youdaoLayout = new QHBoxLayout();
     nameLabel = new QLabel("");
     pronLabel1 = new QLabel("");
     pronLabel2 = new QLabel("");
     infoLabel = new QLabel("");
-    youdaoLabel = new QLabel("©有道词典");
 
     pronButton1 = new DImageButton(nullptr, nullptr, nullptr);
     pronButton2 = new DImageButton(nullptr, nullptr, nullptr);
@@ -45,17 +43,12 @@ DictPage::DictPage(QWidget *parent)
     pronLayout->addWidget(pronButton2);
     pronLayout->addWidget(pronLabel2);
 
-    youdaoLayout->addSpacing(24);
-    youdaoLayout->addWidget(youdaoLabel);
-
     layout->addSpacing(5);
     layout->addLayout(wordLayout);
     layout->addLayout(pronLayout);
     layout->addSpacing(20);
     layout->addLayout(infoLayout);
     layout->addStretch();
-    layout->addLayout(youdaoLayout);
-    layout->addSpacing(5);
 
     connect(pronButton1, &DImageButton::clicked, this, [=]{
         audio->setMedia(QUrl("http://dict.youdao.com/dictvoice?type=1&audio=" + nameLabel->text()));
