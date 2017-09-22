@@ -16,8 +16,8 @@ DictPage::DictPage(QWidget *parent)
     infoLabel = new QLabel("");
     youdaoLabel = new QLabel("©有道词典");
 
-    pronButton1 = new DImageButton(NULL, NULL, NULL);
-    pronButton2 = new DImageButton(NULL, NULL, NULL);
+    pronButton1 = new DImageButton(nullptr, nullptr, nullptr);
+    pronButton2 = new DImageButton(nullptr, nullptr, nullptr);
 
     pronButton1->setFixedSize(24, 24);
     pronButton2->setFixedSize(24, 24);
