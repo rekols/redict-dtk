@@ -1,10 +1,7 @@
 #include "youdao_api.h"
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
+#include <QUrlQuery>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QByteArray>
 #include <QJsonArray>
 
 YoudaoAPI::YoudaoAPI(QObject *parent)
@@ -13,48 +10,59 @@ YoudaoAPI::YoudaoAPI(QObject *parent)
     http = new QNetworkAccessManager(this);
 }
 
-void YoudaoAPI::queryWord(const QString &word)
+YoudaoAPI::~YoudaoAPI()
 {
-    QNetworkRequest request;
-
-    request.setUrl(QUrl("http://fanyi.youdao.com/openapi.do?keyfrom=YouDaoCV&key=659600698&type=data&doctype=json&version=1.1&q=" + word));
-    http->get(request);
-
-    connect(http, SIGNAL(finished(QNetworkReply*)), this, SLOT(queryWordFinished(QNetworkReply*)));
+    delete http;
 }
 
-void YoudaoAPI::queryWordFinished(QNetworkReply *reply)
+void YoudaoAPI::translation(const QString &text)
 {
-    QJsonDocument json;
-    QJsonObject object, data;
+    QUrl url("http://fanyi.youdao.com/openapi.do");
+    QUrlQuery query;
+    query.addQueryItem("keyfrom", "YouDaoCV");
+    query.addQueryItem("key", "659600698");
+    query.addQueryItem("type", "data");
+    query.addQueryItem("doctype", "json");
+    query.addQueryItem("version", "1.1");
+    query.addQueryItem("q", text);
+    url.setQuery(query.toString(QUrl::FullyEncoded));
 
-    QByteArray wordInformation = reply->readAll();
+    QNetworkRequest request(url);
+    http->get(request);
 
-    json = QJsonDocument::fromJson(wordInformation);
+    connect(http, SIGNAL(finished(QNetworkReply*)), this, SLOT(getNetworkReplyFinished(QNetworkReply*)));
+}
 
-    if (!json.isNull())
+void YoudaoAPI::getNetworkReplyFinished(QNetworkReply *reply)
+{
+    QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+    QJsonObject object = document.object();
+    QJsonObject data = object.value("basic").toObject();
+
+    if (!document.isEmpty())
     {
-        object = json.object();
-        data = object.value("basic").toObject();
-
-        QString uk_phonetic = data.value("uk-phonetic").toString();
-        QString us_phonetic = data.value("us-phonetic").toString();
-        QString text = NULL;
+        QString ukPhonetic = data.value("uk-phonetic").toString();
+        QString usPhonetic = data.value("us-phonetic").toString();
+        QString text = nullptr;
 
         QJsonArray explain = data.value("explains").toArray();
 
         if (explain.isEmpty()) {
-            for (int i=0; i<object.value("translation").toArray().size(); ++i) {
+            for (int i = 0; i < object.value("translation").toArray().size(); ++i) {
                 text.append(object.value("translation").toArray().at(i).toString());
                 text.append("\n");
             }
         }else {
-            for (int i=0; i<explain.size(); ++i) {
+            for (int i = 0; i < explain.size(); ++i) {
                 text.append(explain.at(i).toString());
                 text.append("\n");
             }
         }
 
-        emit searchWordFinished(object.value("query").toString(), uk_phonetic, us_phonetic, text);
+        emit finished(object.value("query").toString(),
+                      ukPhonetic,
+                      usPhonetic,
+                      text);
     }
+
 }

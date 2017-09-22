@@ -53,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
             return;
         }
 
-        dictPage->api->queryWord(toolbar->edit->text());
+        dictPage->api->translation(toolbar->edit->text());
         layout->setCurrentIndex(2);
     });
 
@@ -63,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent)
             return;
         }
 
-        dictPage->api->queryWord(toolbar->edit->text());
+        dictPage->api->translation(toolbar->edit->text());
         layout->setCurrentIndex(2);
     });
 

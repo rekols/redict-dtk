@@ -67,7 +67,7 @@ DictPage::DictPage(QWidget *parent)
         audio->play();
     });
 
-    connect(api, SIGNAL(searchWordFinished(QString, QString, QString, QString)), this, SLOT(processingData(QString, QString, QString, QString)));
+    connect(api, SIGNAL(finished(QString,QString,QString,QString)), this, SLOT(processingData(QString, QString, QString, QString)));
 
     init();
 }
