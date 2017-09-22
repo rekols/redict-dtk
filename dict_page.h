@@ -24,18 +24,17 @@ public:
     void queryWord(const QString &word);
     void changeTheme(const QString &theme);
 
-    QVBoxLayout *mainLayout;
     QVBoxLayout *layout;
     QHBoxLayout *wordLayout;
     QHBoxLayout *pronLayout;
     QHBoxLayout *infoLayout;
     QHBoxLayout *youdaoLayout;
-    QScrollArea *mainArea;
 
     QLabel *nameLabel;
     QLabel *pronLabel1;
     QLabel *pronLabel2;
     QLabel *infoLabel;
+    QLabel *youdaoLabel;
 
     DImageButton *pronButton1;
     DImageButton *pronButton2;

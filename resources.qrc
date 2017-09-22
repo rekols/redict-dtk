@@ -99,6 +99,5 @@
         <file>resources/Spinner/Spinner89.png</file>
         <file>resources/Spinner/Spinner90.png</file>
         <file>resources/logo.svg</file>
-        <file>resources/youdao-dict.svg</file>
     </qresource>
 </RCC>

@@ -5,24 +5,19 @@ DictPage::DictPage(QWidget *parent)
       api(new YoudaoAPI(this))
 {
     audio = new QMediaPlayer;
-    mainLayout = new QVBoxLayout(this);
-    layout = new QVBoxLayout();
+    layout = new QVBoxLayout(this);
     wordLayout = new QHBoxLayout();
     pronLayout = new QHBoxLayout();
     infoLayout = new QHBoxLayout();
     youdaoLayout = new QHBoxLayout();
-    mainArea = new QScrollArea();
     nameLabel = new QLabel("");
     pronLabel1 = new QLabel("");
     pronLabel2 = new QLabel("");
-    infoLabel = new QLabel();    
+    infoLabel = new QLabel("");
+    youdaoLabel = new QLabel("©有道词典");
 
     pronButton1 = new DImageButton(NULL, NULL, NULL);
     pronButton2 = new DImageButton(NULL, NULL, NULL);
-
-    mainArea->setLayout(layout);
-    mainArea->setAlignment(Qt::AlignCenter);
-    mainArea->setWidgetResizable(false);
 
     pronButton1->setFixedSize(24, 24);
     pronButton2->setFixedSize(24, 24);
@@ -50,17 +45,17 @@ DictPage::DictPage(QWidget *parent)
     pronLayout->addWidget(pronButton2);
     pronLayout->addWidget(pronLabel2);
 
+    youdaoLayout->addSpacing(24);
+    youdaoLayout->addWidget(youdaoLabel);
+
     layout->addSpacing(5);
     layout->addLayout(wordLayout);
     layout->addLayout(pronLayout);
     layout->addSpacing(20);
     layout->addLayout(infoLayout);
     layout->addStretch();
-
-    mainLayout->addWidget(mainArea);
-    mainLayout->addLayout(youdaoLayout);
-    mainLayout->addSpacing(10);
-    mainLayout->setContentsMargins(0, 0, 0, 0);
+    layout->addLayout(youdaoLayout);
+    layout->addSpacing(5);
 
     connect(pronButton1, &DImageButton::clicked, this, [=]{
         audio->setMedia(QUrl("http://dict.youdao.com/dictvoice?type=1&audio=" + nameLabel->text()));
@@ -71,11 +66,6 @@ DictPage::DictPage(QWidget *parent)
         audio->setMedia(QUrl("http://dict.youdao.com/dictvoice?type=2&audio=" + nameLabel->text()));
         audio->play();
     });
-
-    /*
-    connect(searchEdit, SIGNAL(returnPressed()), this, SLOT(start()));
-    connect(searchButton, SIGNAL(clicked()), this, SLOT(start()));
-    */
 
     connect(api, SIGNAL(searchWordFinished(QString, QString, QString, QString)), this, SLOT(processingData(QString, QString, QString, QString)));
 
@@ -129,19 +119,6 @@ void DictPage::processingData(QString name, QString uk_phonetic, QString us_phon
 
 void DictPage::init()
 {
-    QPixmap iconPixmap = QPixmap(":/resources/youdao-dict.svg");
-    QLabel *iconLabel = new QLabel;
-    iconLabel->setFixedSize(20, 20);
-    iconLabel->setScaledContents(true);
-    iconLabel->setPixmap(iconPixmap);
-
-    QLabel *tips = new QLabel("数据来自有道词典");
-    tips->setStyleSheet("QLabel {font-size: 12px; }");
-
-    youdaoLayout->addSpacing(15);
-    youdaoLayout->addWidget(iconLabel);
-    youdaoLayout->addWidget(tips);
-
     pronLabel1->setVisible(false);
     pronLabel2->setVisible(false);
     pronButton1->setVisible(false);
