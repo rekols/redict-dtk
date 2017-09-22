@@ -80,32 +80,14 @@ MainWindow::~MainWindow()
 void MainWindow::initUI()
 {
     if (config->settings->value("theme").toString() == "light") {
-        setBorderColor("#dddddd");
-
         DThemeManager::instance()->setTheme("light");
 
         config->settings->setValue("theme", "light");
         dictPage->changeTheme("light");
     }else {
-        setBorderColor("#5D5D5D");
-
         DThemeManager::instance()->setTheme("dark");
 
         config->settings->setValue("theme", "dark");
         dictPage->changeTheme("dark");
     }
-}
-
-void MainWindow::paintEvent(QPaintEvent *)
-{
-    QPainter painter(this);
-
-    painter.setPen(Qt::NoPen);
-
-    if (config->settings->value("theme").toString() == "light")
-        painter.setBrush(QColor("#FFFFFF"));
-    else
-        painter.setBrush(QColor("#292B2E"));
-
-    painter.drawRect(rect());
 }

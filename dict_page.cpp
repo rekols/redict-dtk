@@ -5,11 +5,13 @@ DictPage::DictPage(QWidget *parent)
       api(new YoudaoAPI(this))
 {
     audio = new QMediaPlayer;
-    layout = new QVBoxLayout(this);
+    mainLayout = new QVBoxLayout(this);
+    layout = new QVBoxLayout();
     wordLayout = new QHBoxLayout();
     pronLayout = new QHBoxLayout();
     infoLayout = new QHBoxLayout();
     youdaoLayout = new QHBoxLayout();
+    mainArea = new QScrollArea();
     nameLabel = new QLabel("");
     pronLabel1 = new QLabel("");
     pronLabel2 = new QLabel("");
@@ -17,6 +19,10 @@ DictPage::DictPage(QWidget *parent)
 
     pronButton1 = new DImageButton(NULL, NULL, NULL);
     pronButton2 = new DImageButton(NULL, NULL, NULL);
+
+    mainArea->setLayout(layout);
+    mainArea->setAlignment(Qt::AlignCenter);
+    mainArea->setWidgetResizable(false);
 
     pronButton1->setFixedSize(24, 24);
     pronButton2->setFixedSize(24, 24);
@@ -44,14 +50,17 @@ DictPage::DictPage(QWidget *parent)
     pronLayout->addWidget(pronButton2);
     pronLayout->addWidget(pronLabel2);
 
-    layout->addSpacing(10);
+    layout->addSpacing(5);
     layout->addLayout(wordLayout);
     layout->addLayout(pronLayout);
-    layout->addSpacing(10);
+    layout->addSpacing(20);
     layout->addLayout(infoLayout);
     layout->addStretch();
-    layout->addLayout(youdaoLayout);
-    layout->addSpacing(10);
+
+    mainLayout->addWidget(mainArea);
+    mainLayout->addLayout(youdaoLayout);
+    mainLayout->addSpacing(10);
+    mainLayout->setContentsMargins(0, 0, 0, 0);
 
     connect(pronButton1, &DImageButton::clicked, this, [=]{
         audio->setMedia(QUrl("http://dict.youdao.com/dictvoice?type=1&audio=" + nameLabel->text()));

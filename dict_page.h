@@ -9,6 +9,7 @@
 #include <QMediaPlayer>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QScrollArea>
 #include "youdao_api.h"
 
 DWIDGET_USE_NAMESPACE
@@ -23,11 +24,13 @@ public:
     void queryWord(const QString &word);
     void changeTheme(const QString &theme);
 
+    QVBoxLayout *mainLayout;
     QVBoxLayout *layout;
     QHBoxLayout *wordLayout;
     QHBoxLayout *pronLayout;
     QHBoxLayout *infoLayout;
     QHBoxLayout *youdaoLayout;
+    QScrollArea *mainArea;
 
     QLabel *nameLabel;
     QLabel *pronLabel1;

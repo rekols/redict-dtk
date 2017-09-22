@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     a.setTheme("dark");
 
     MainWindow w;
-    w.setFixedSize(500, 420);
+    w.setFixedSize(520, 400);
     a.setWindowIcon(QIcon(":/resources/logo.svg"));
     w.show();
 

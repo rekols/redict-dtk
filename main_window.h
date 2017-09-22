@@ -33,9 +33,6 @@ private:
     QMenu *menu;
 
     void initUI();
-
-protected:
-    void paintEvent(QPaintEvent *);
 };
 
 #endif // MAIN_WINDOW_H
