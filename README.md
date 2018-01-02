@@ -1,8 +1,6 @@
-# Rekols词典
+# ReDict
 
-基于dtk开发的一款词典
-
-划词功能在old分支：https://github.com/rekols/dictionary/tree/old
+Rekols词典，基于dtk开发的一款词典（有道API）
 
 ## 编译依赖
 
@@ -17,13 +15,13 @@
 
 ## 运行
 
-* ./rekols-dictionary
+* ./redict
 
 ## License
 
 ![](http://www.gnu.org/graphics/gplv3-127x51.png)
 
-Copyright © 2017 Rekols (Felix Bill)
+Copyright © 2017 Rekols
 
 This project is licensed under version 3 of the GNU General Public License.
 
