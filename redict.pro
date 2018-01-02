@@ -1,4 +1,4 @@
-QT  += core gui network multimedia
+QT  += core gui network multimedia svg
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

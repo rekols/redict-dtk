@@ -22,8 +22,8 @@ MainWindow::MainWindow(QWidget *parent)
     widget->setLayout(layout);
 
     titlebar()->setWindowFlags(titlebar()->windowFlags() & ~Qt::WindowMaximizeButtonHint);
-    titlebar()->setCustomWidget(toolbar, Qt::AlignHCenter, false);
-    titlebar()->setSeparatorVisible(true);
+    titlebar()->setCustomWidget(toolbar, Qt::AlignVCenter, false);
+    // titlebar()->setSeparatorVisible(true);
     titlebar()->setMenu(menu);
 
     QAction *themeAction = new QAction("切换主题", this);

@@ -6,19 +6,26 @@ DWIDGET_USE_NAMESPACE
 
 int main(int argc, char *argv[])
 {
-    //qputenv("QT_SCALE_FACTOR", "1.35");
-
     DApplication::loadDXcbPlugin();
     DApplication a(argc, argv);
-    a.loadTranslator();
-    a.setTheme("dark");
 
-    MainWindow w;
-    w.setFixedSize(520, 400);
-    a.setWindowIcon(QIcon(":/resources/logo.svg"));
-    w.show();
+    if (a.setSingleInstance("redict")) {
+        a.setAttribute(Qt::AA_UseHighDpiPixmaps);
+        a.loadTranslator();
+        a.setTheme("dark");
+        a.setApplicationVersion("1.0");
+        a.setProductIcon(QIcon(":/resources/logo.svg"));
+        a.setApplicationDescription("Rekols Dictionary");
 
-    Dtk::Widget::moveToCenter(&w);
+        MainWindow w;
+        w.setFixedSize(520, 400);
+        a.setWindowIcon(QIcon(":/resources/logo.svg"));
+        w.show();
 
-    return a.exec();
+        Dtk::Widget::moveToCenter(&w);    
+
+        return a.exec();
+    }
+
+    return 0;
 }

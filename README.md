@@ -4,7 +4,7 @@ Rekols词典，基于dtk开发的一款词典（有道API）
 
 ## 编译依赖
 
-`sudo apt install g++ qt5-default libdtkcore-dev libdtkwidget-dev`
+`sudo apt install g++ qt5-default libdtkcore-dev libdtkwidget-dev libqt5svg5-dev`
 
 ## 编译
 
