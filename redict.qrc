@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/redict.svg</file>
+        <file>images/query_checked.svg</file>
+        <file>images/query_normal.svg</file>
+        <file>images/translate_checked.svg</file>
+        <file>images/translate_normal.svg</file>
+        <file>images/query_button.svg</file>
+        <file>images/audio-volume-high-hover.svg</file>
+        <file>images/audio-volume-high-normal.svg</file>
+        <file>images/audio-volume-high-press.svg</file>
+    </qresource>
+</RCC>

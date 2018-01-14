@@ -1,6 +1,4 @@
-# ReDict
-
-Rekols词典，基于dtk开发的一款词典（有道API）
+# Rekols Dictionary
 
 ## 编译依赖
 
