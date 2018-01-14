@@ -1,5 +1,7 @@
 # Rekols Dictionary
 
+一款Deepin平台下的词典，基于Qt开发，占用内存更小。
+
 ## 编译依赖
 
 `sudo apt install g++ qt5-default libdtkcore-dev libdtkwidget-dev libqt5svg5-dev`
@@ -19,7 +21,7 @@
 
 ![](http://www.gnu.org/graphics/gplv3-127x51.png)
 
-Copyright © 2017 Rekols
+Copyright © 2018 Anjun Steven(Rekols)
 
 This project is licensed under version 3 of the GNU General Public License.
 

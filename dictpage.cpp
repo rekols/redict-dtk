@@ -13,7 +13,8 @@ DictPage::DictPage(QWidget *parent)
                                       ":/images/audio-volume-high-press.svg")),
       m_usPronButton(new DImageButton(":/images/audio-volume-high-normal.svg",
                                       ":/images/audio-volume-high-hover.svg",
-                                      ":/images/audio-volume-high-press.svg"))
+                                      ":/images/audio-volume-high-press.svg")),
+      m_mediaPlayer(new QMediaPlayer)
 {
     QHBoxLayout *pronLayout = new QHBoxLayout;
     pronLayout->addWidget(m_ukLabel);
@@ -41,6 +42,17 @@ DictPage::DictPage(QWidget *parent)
     m_layout->setContentsMargins(20, 10, 20, 0);
 
     connect(m_api, &YoudaoAPI::finished, this, &DictPage::handleData);
+    connect(m_ukPronButton, &DImageButton::clicked, this, [=] {
+        m_mediaPlayer->stop();
+        m_mediaPlayer->setMedia(QUrl("http://dict.youdao.com/dictvoice?type=1&audio=" + m_wordLabel->text()));
+        m_mediaPlayer->play();
+    });
+
+    connect(m_usPronButton, &DImageButton::clicked, this, [=] {
+        m_mediaPlayer->stop();
+        m_mediaPlayer->setMedia(QUrl("http://dict.youdao.com/dictvoice?type=2&audio=" + m_wordLabel->text()));
+        m_mediaPlayer->play();
+    });
 }
 
 DictPage::~DictPage()

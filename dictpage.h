@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QLabel>
+#include <QMediaPlayer>
 #include "youdaoapi.h"
 #include "dimagebutton.h"
 
@@ -34,6 +35,7 @@ private:
     QLabel *m_usLabel;
     DImageButton *m_ukPronButton;
     DImageButton *m_usPronButton;
+    QMediaPlayer *m_mediaPlayer;
 };
 
 #endif
