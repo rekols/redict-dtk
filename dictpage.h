@@ -23,7 +23,12 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QScrollArea>
+#include <QLabel>
+#include <QMediaPlayer>
 #include "youdaoapi.h"
+#include "dimagebutton.h"
+
+DWIDGET_USE_NAMESPACE
 
 class DictPage : public QWidget
 {
@@ -33,11 +38,27 @@ public:
     DictPage(QWidget *parent = nullptr);
     ~DictPage();
 
+    void initUI();
+    void queryWord(const QString &word);
+
+signals:
+    void queryWordFinished();
+
+private:
+    void handleData(const QString &word, const QString &ukPron, const QString &usPron, QString text);
+
 private:
     QWidget *m_contentFrame;
     QVBoxLayout *m_contentLayout;
     QScrollArea *m_contentArea;
     YoudaoAPI *m_api;
+    QLabel *m_wordLabel;
+    QLabel *m_infoLabel;
+    QLabel *m_ukLabel;
+    QLabel *m_usLabel;
+    DImageButton *m_ukPronButton;
+    DImageButton *m_usPronButton;
+    QMediaPlayer *m_mediaPlayer;
 };
 
 #endif

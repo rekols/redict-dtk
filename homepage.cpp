@@ -27,6 +27,7 @@ void HomePage::textChanged(const QString &text)
     if (text.isEmpty()) {
         m_stackedWidget->setCurrentIndex(0);
     } else {
+        m_dictPage->queryWord(text);
         m_stackedWidget->setCurrentIndex(1);
     }
 }

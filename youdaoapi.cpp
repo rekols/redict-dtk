@@ -24,14 +24,14 @@
 #include <QJsonArray>
 
 YoudaoAPI::YoudaoAPI(QObject *parent)
-    : QObject(parent)
+    : QObject(parent),
+      m_http(new QNetworkAccessManager(this))
 {
-    http = new QNetworkAccessManager(this);
 }
 
 YoudaoAPI::~YoudaoAPI()
 {
-    delete http;
+    delete m_http;
 }
 
 void YoudaoAPI::queryWord(const QString &text)
@@ -47,9 +47,9 @@ void YoudaoAPI::queryWord(const QString &text)
     url.setQuery(query.toString(QUrl::FullyEncoded));
 
     QNetworkRequest request(url);
-    http->get(request);
+    m_http->get(request);
 
-    connect(http, SIGNAL(finished(QNetworkReply*)), this, SLOT(getNetworkReplyFinished(QNetworkReply*)));
+    connect(m_http, SIGNAL(finished(QNetworkReply*)), this, SLOT(getNetworkReplyFinished(QNetworkReply*)));
 }
 
 void YoudaoAPI::getNetworkReplyFinished(QNetworkReply *reply)

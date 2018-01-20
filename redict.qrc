@@ -3,5 +3,8 @@
         <file>qss/light/style.qss</file>
         <file>qss/dark/style.qss</file>
         <file>images/redict.svg</file>
+        <file>images/audio-volume-high-hover.svg</file>
+        <file>images/audio-volume-high-normal.svg</file>
+        <file>images/audio-volume-high-press.svg</file>
     </qresource>
 </RCC>

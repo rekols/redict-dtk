@@ -35,14 +35,15 @@ public:
 
     void queryWord(const QString &text);
 
-private:
-    QNetworkAccessManager *http;
+signals:
+    void finished(QString, QString, QString, QString);
 
 private slots:
     void getNetworkReplyFinished(QNetworkReply *);
 
-signals:
-    void finished(QString, QString, QString, QString);
+private:
+    QNetworkAccessManager *m_http;
+
 };
 
 #endif
