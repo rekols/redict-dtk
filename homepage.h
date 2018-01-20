@@ -2,16 +2,10 @@
 #define HOMEPAGE_H
 
 #include <QWidget>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QNetworkRequest>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QJsonValue>
-
-#include <QLabel>
-#include <QStackedLayout>
+#include <QVBoxLayout>
+#include <QLineEdit>
+#include <QStackedWidget>
+#include "infopage.h"
 #include "dictpage.h"
 
 class HomePage : public QWidget
@@ -19,25 +13,17 @@ class HomePage : public QWidget
     Q_OBJECT
 
 public:
-    explicit HomePage(QWidget *parent = nullptr);
-    ~HomePage();
+    HomePage(QWidget *parent = nullptr);
 
-    void queryWord(const QString &text);
-
+private slots:
+    void textChanged(const QString &text);
+    
 private:
-    void loadBasicData();
-    void loadPicture(const QString &imgUrl);
-    void handleBasicData();
-    void handlePictureData();
-
-private:
-    QNetworkAccessManager *m_http;
-    QStackedLayout *m_mainLayout;
+    QVBoxLayout *m_layout;
+    QLineEdit *m_edit;
+    QStackedWidget *m_stackedWidget;
+    InfoPage *m_infoPage;
     DictPage *m_dictPage;
-    QLabel *m_pictureLabel;
-    QLabel *m_enLabel;
-    QLabel *m_zhLabel;
-    QLabel *m_dateLabel;
 };
 
 #endif // HOMEPAGE_H

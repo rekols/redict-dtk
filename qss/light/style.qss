@@ -1,0 +1,31 @@
+QTabBar, QTabBar::tab
+{
+    font-size: 16px;
+    height: 18px;
+    padding: 10px;
+    border: 0px;
+    background-color: transparent;
+    color: palette(text);
+    width: 60px;
+}
+
+QTabBar::tab:hover
+{
+    background-color: #F3F3F3;
+    text-decoration: underline;
+}
+
+QTabBar::tab:selected
+{
+    color: #2CA7F8;
+    border: 0px;
+    border-bottom: 2px solid #2CA7F8;
+}
+
+#SearchEdit {
+    border: 1px solid #F1F1F1;
+    border-radius: 5px;
+    background: #F7F7F7;
+    padding-left: 5px;
+    padding-right: 5px;
+}

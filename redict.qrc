@@ -1,13 +1,7 @@
 <RCC>
     <qresource prefix="/">
+        <file>qss/light/style.qss</file>
+        <file>qss/dark/style.qss</file>
         <file>images/redict.svg</file>
-        <file>images/query_checked.svg</file>
-        <file>images/query_normal.svg</file>
-        <file>images/translate_checked.svg</file>
-        <file>images/translate_normal.svg</file>
-        <file>images/query_button.svg</file>
-        <file>images/audio-volume-high-hover.svg</file>
-        <file>images/audio-volume-high-normal.svg</file>
-        <file>images/audio-volume-high-press.svg</file>
     </qresource>
 </RCC>

@@ -8,23 +8,12 @@ int main(int argc, char *argv[])
 {
     DApplication::loadDXcbPlugin();
     DApplication a(argc, argv);
+    a.setTheme("light");
 
+    MainWindow w;
+    w.show();
 
-    if (a.setSingleInstance("redict")) {
-        a.setAttribute(Qt::AA_UseHighDpiPixmaps);
-        a.setOrganizationName("deepin");
-        a.setApplicationVersion("0.1");
-        a.setProductIcon(QIcon(":/images/redict.svg"));
-        a.setProductName(DApplication::translate("Main", "Rekols Dictionary"));
-        a.setApplicationDescription(DApplication::translate("Main", "ReDict is a simple dictionary for deepin."));
+    Dtk::Widget::moveToCenter(&w);
 
-        MainWindow w;
-        w.show();
-
-        Dtk::Widget::moveToCenter(&w);
-
-        return a.exec();
-    }
-
-    return 0;
+    return a.exec();
 }

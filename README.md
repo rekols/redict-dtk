@@ -1,6 +1,6 @@
 # Rekols Dictionary
 
-一款Deepin平台下的词典，基于Qt开发，占用内存更小。
+一款Deepin平台下的词典，基于Qt开发，使用有道词典API，占用内存小。
 
 ## 编译依赖
 

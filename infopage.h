@@ -17,25 +17,45 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DICTPAGE_H
-#define DICTPAGE_H
+#ifndef INFOPAGE_H
+#define INFOPAGE_H
 
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QScrollArea>
+#include <QLabel>
 
-class DictPage : public QWidget
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonValue>
+
+class InfoPage : public QWidget
 {
     Q_OBJECT
 
 public:
-    DictPage(QWidget *parent = nullptr);
-    ~DictPage();
+    InfoPage(QWidget *parent = nullptr);
+    ~InfoPage();
+    
+private:
+    void loadData();
+    void loadPicture(const QString &imgUrl);
+    void handleData();
+    void handlePictureData();
 
 private:
+    QNetworkAccessManager *m_http;
     QWidget *m_contentFrame;
     QVBoxLayout *m_contentLayout;
     QScrollArea *m_contentArea;
+    QLabel *m_pictureLabel;
+    QLabel *m_enLabel;
+    QLabel *m_zhLabel;
+    QLabel *m_dateLabel;
 };
 
 #endif
