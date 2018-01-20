@@ -23,7 +23,8 @@ DictPage::DictPage(QWidget *parent)
     : QWidget(parent),
       m_contentFrame(new QWidget),
       m_contentLayout(new QVBoxLayout(m_contentFrame)),
-      m_contentArea(new QScrollArea)
+      m_contentArea(new QScrollArea),
+      m_api(new YoudaoAPI)
 {
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     mainLayout->addWidget(m_contentArea);

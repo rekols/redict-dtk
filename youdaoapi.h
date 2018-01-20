@@ -17,27 +17,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DICTPAGE_H
-#define DICTPAGE_H
+#ifndef YOUDAOAPI_H
+#define YOUDAOAPI_H
 
-#include <QWidget>
-#include <QVBoxLayout>
-#include <QScrollArea>
-#include "youdaoapi.h"
+#include <QObject>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
 
-class DictPage : public QWidget
+class YoudaoAPI : public QObject
 {
     Q_OBJECT
 
 public:
-    DictPage(QWidget *parent = nullptr);
-    ~DictPage();
+    YoudaoAPI(QObject *parent = nullptr);
+    ~YoudaoAPI();
+
+    void queryWord(const QString &text);
 
 private:
-    QWidget *m_contentFrame;
-    QVBoxLayout *m_contentLayout;
-    QScrollArea *m_contentArea;
-    YoudaoAPI *m_api;
+    QNetworkAccessManager *http;
+
+private slots:
+    void getNetworkReplyFinished(QNetworkReply *);
+
+signals:
+    void finished(QString, QString, QString, QString);
 };
 
 #endif

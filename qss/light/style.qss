@@ -6,7 +6,7 @@ QTabBar, QTabBar::tab
     border: 0px;
     background-color: transparent;
     color: palette(text);
-    width: 60px;
+    width: 55px;
 }
 
 QTabBar::tab:hover
