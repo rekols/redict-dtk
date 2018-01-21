@@ -94,6 +94,8 @@ void DictPage::initUI()
 void DictPage::queryWord(const QString &word)
 {
     if (!word.isEmpty()) {
+        m_ukPronButton->hide();
+        m_ukPronButton->hide();
         m_api->queryWord(word);
     }
 }

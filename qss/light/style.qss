@@ -11,7 +11,7 @@ QTabBar, QTabBar::tab
 
 QTabBar::tab:hover
 {
-    background-color: #F3F3F3;
+    /* background-color: #F3F3F3; */
     text-decoration: underline;
 }
 
@@ -28,6 +28,11 @@ QTabBar::tab:selected
     background: #F7F7F7;
     padding-left: 5px;
     padding-right: 5px;
+}
+
+#TransEdit {
+    border: 1px solid #EDEDED;
+    border-radius: 5px;
 }
 
 #WordLabel {

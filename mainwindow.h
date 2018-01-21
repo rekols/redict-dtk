@@ -5,6 +5,7 @@
 #include <QStackedLayout>
 #include "toolbar.h"
 #include "homepage.h"
+#include "transpage.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -21,6 +22,7 @@ private:
     QStackedLayout *m_layout;
     ToolBar *m_toolBar;
     HomePage *m_homePage;
+    TransPage *m_transPage;
 };
 
 #endif // MAINWINDOW_H

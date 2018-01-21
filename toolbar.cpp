@@ -20,4 +20,6 @@ ToolBar::ToolBar(QWidget *parent)
     m_tabbar->setFocusPolicy(Qt::NoFocus);
     m_tabbar->addTab("查词");
     m_tabbar->addTab("翻译");
+    
+    connect(m_tabbar, SIGNAL(currentChanged(int)), this, SIGNAL(tabBarIndexChanged(int)));
 }

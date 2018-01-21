@@ -11,6 +11,9 @@ class ToolBar : public QWidget
 
 public:
     ToolBar(QWidget *parent = nullptr);
+    
+signals:
+    void tabBarIndexChanged(const int &index);
 
 private:
     QHBoxLayout *m_layout;

@@ -17,7 +17,8 @@ SOURCES += \
 	homepage.cpp \
 	infopage.cpp \
 	dictpage.cpp \
-	youdaoapi.cpp
+	youdaoapi.cpp \
+	transpage.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -26,7 +27,8 @@ HEADERS += \
 	homepage.h \
 	infopage.h \
 	dictpage.h \
-	youdaoapi.h
+	youdaoapi.h \
+	transpage.h
 
 RESOURCES += \
     redict.qrc

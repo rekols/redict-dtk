@@ -43,8 +43,11 @@ InfoPage::InfoPage(QWidget *parent)
 
     QVBoxLayout *textLayout = new QVBoxLayout;
     textLayout->addWidget(m_enLabel);
+    textLayout->addSpacing(10);
     textLayout->addWidget(m_zhLabel);
+    textLayout->addStretch();
     textLayout->addWidget(m_dateLabel);
+    textLayout->addStretch();
     textLayout->setSpacing(0);
     textLayout->setContentsMargins(10, 5, 10, 0);
 
