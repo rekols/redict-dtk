@@ -39,7 +39,7 @@ signals:
     void finished(QString, QString, QString, QString);
 
 private slots:
-    void getNetworkReplyFinished(QNetworkReply *);
+    void replyFinished(QNetworkReply *);
 
 private:
     QNetworkAccessManager *m_http;

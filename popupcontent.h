@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 ~ 2017 Deepin Technology Co., Ltd.
+ * Copyright (C) 2017 ~ 2018 Deepin Technology Co., Ltd.
  *
  * Author:     rekols <rekols@foxmail.com>
  *
@@ -17,24 +17,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "transpage.h"
+#ifndef POPUPCONTENT_H
+#define POPUPCONTENT_H
 
-TransPage::TransPage(QWidget *parent)
-    : QWidget(parent),
-      m_layout(new QVBoxLayout(this)),
-      m_originEdit(new QTextEdit),
-      m_transEdit(new QTextEdit),
-      m_transButton(new QPushButton("翻译"))
+#include "dabstractdialog.h"
+#include "dblureffectwidget.h"
+
+DWIDGET_USE_NAMESPACE
+
+class PopupContent : public DAbstractDialog
 {
-    m_originEdit->setObjectName("TransEdit");
-    m_transEdit->setObjectName("TransEdit");
-    m_transEdit->setReadOnly(true);
+    Q_OBJECT
 
-    m_layout->addWidget(m_originEdit);
-    m_layout->addWidget(m_transButton);
-    m_layout->addWidget(m_transEdit);
-}
+public:
+    PopupContent(QWidget *parent = nullptr);
+    ~PopupContent();
 
-TransPage::~TransPage()
-{
-}
+protected:
+    void mouseMoveEvent(QMouseEvent *) { };
+};
+
+#endif

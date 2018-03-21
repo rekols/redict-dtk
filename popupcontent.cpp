@@ -17,29 +17,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "mainwindow.h"
-#include <QApplication>
-#include <QClipboard>
+#include "popupcontent.h"
+#include <QVBoxLayout>
+#include <QLabel>
 
-#include <QTextEdit>
-
-MainWindow::MainWindow(QWidget *parent)
-    : DMainWindow(parent),
-      m_popupWindow(new PopupWindow)
+PopupContent::PopupContent(QWidget *parent)
+    : DAbstractDialog(parent)
 {
-    QTextEdit *edit = new QTextEdit;
-    setCentralWidget(edit);
-    edit->setText("sadsddddddddddd");
+    DBlurEffectWidget *bgWidget = new DBlurEffectWidget(this);
+    bgWidget->setBlendMode(DBlurEffectWidget::BehindWindowBlend);
+    bgWidget->setMaskColor(DBlurEffectWidget::LightColor);
 
-    setFixedSize(600, 400);
+    QVBoxLayout *layout = new QVBoxLayout(this);
+    QLabel *label = new QLabel("asddd");
+    layout->addWidget(label);
 
-    connect(qApp->clipboard(), &QClipboard::selectionChanged,
-            [=] {
-                m_popupWindow->popup(QCursor::pos());
-            });
+    setFixedSize(300, 200);
+    bgWidget->resize(size());
+
+    setAttribute(Qt::WA_TranslucentBackground);
+    setAttribute(Qt::WA_DeleteOnClose, true);
+    setAttribute(Qt::WA_AlwaysStackOnTop);
 }
 
-MainWindow::~MainWindow()
+PopupContent::~PopupContent()
 {
-    delete m_popupWindow;
 }

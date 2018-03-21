@@ -49,17 +49,16 @@ void YoudaoAPI::queryWord(const QString &text)
     QNetworkRequest request(url);
     m_http->get(request);
 
-    connect(m_http, SIGNAL(finished(QNetworkReply*)), this, SLOT(getNetworkReplyFinished(QNetworkReply*)));
+    connect(m_http, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinished(QNetworkReply *)));
 }
 
-void YoudaoAPI::getNetworkReplyFinished(QNetworkReply *reply)
+void YoudaoAPI::replyFinished(QNetworkReply *reply)
 {
     QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
     QJsonObject object = document.object();
     QJsonObject data = object.value("basic").toObject();
 
-    if (!document.isEmpty())
-    {
+    if (!document.isEmpty()) {
         QString ukPhonetic = data.value("uk-phonetic").toString();
         QString usPhonetic = data.value("us-phonetic").toString();
         QString text = nullptr;
