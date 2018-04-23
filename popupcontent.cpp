@@ -22,15 +22,20 @@
 #include <QLabel>
 
 PopupContent::PopupContent(QWidget *parent)
-    : DAbstractDialog(parent)
+    : DAbstractDialog(parent),
+      m_queryLabel(new QLabel),
+      m_transLabel(new QLabel)
 {
     DBlurEffectWidget *bgWidget = new DBlurEffectWidget(this);
     bgWidget->setBlendMode(DBlurEffectWidget::BehindWindowBlend);
     bgWidget->setMaskColor(DBlurEffectWidget::LightColor);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
-    QLabel *label = new QLabel("asddd");
-    layout->addWidget(label);
+    layout->addWidget(m_queryLabel);
+    layout->addWidget(m_transLabel);
+
+    m_queryLabel->setWordWrap(true);
+    m_transLabel->setWordWrap(true);
 
     setFixedSize(300, 200);
     bgWidget->resize(size());
@@ -42,4 +47,11 @@ PopupContent::PopupContent(QWidget *parent)
 
 PopupContent::~PopupContent()
 {
+}
+
+void PopupContent::updateContent(const QString &queryText, const QString &ukPhonetic,
+                                 const QString &usPhonetic, const QString &translationText)
+{
+    m_queryLabel->setText(queryText);
+    m_transLabel->setText(translationText);
 }

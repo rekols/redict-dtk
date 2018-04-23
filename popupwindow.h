@@ -24,6 +24,7 @@
 #include <QStackedLayout>
 #include "dregionmonitor.h"
 #include "popupcontent.h"
+#include "youdaoapi.h"
 
 DWIDGET_USE_NAMESPACE
 
@@ -41,6 +42,7 @@ protected:
 
 public slots:
     void popup(const QPoint &pos);
+    void query(const QString &text);
 
 private:
     void onGlobMousePress(const QPoint &mousePos, const int flag);
@@ -49,6 +51,7 @@ private:
     QStackedLayout *m_layout;
     PopupContent *m_content;
     DRegionMonitor *m_regionInter;
+    YoudaoAPI *m_api;
 };
 
 #endif

@@ -26,7 +26,8 @@ PopupWindow::PopupWindow(QWidget *parent)
     : QWidget(parent),
       m_layout(new QStackedLayout(this)),
       m_content(new PopupContent),
-      m_regionInter(new DRegionMonitor(this))
+      m_regionInter(new DRegionMonitor(this)),
+      m_api(new YoudaoAPI)
 {
     setWindowFlags(Qt::FramelessWindowHint | Qt::ToolTip);
     setAttribute(Qt::WA_TranslucentBackground);
@@ -36,6 +37,7 @@ PopupWindow::PopupWindow(QWidget *parent)
     QWidget::hide();
 
     connect(m_regionInter, &DRegionMonitor::buttonPress, this, &PopupWindow::onGlobMousePress);
+    connect(m_api, &YoudaoAPI::finished, m_content, &PopupContent::updateContent);
 }
 
 PopupWindow::~PopupWindow()
@@ -77,6 +79,11 @@ void PopupWindow::popup(const QPoint &pos)
 
     m_content->hide();
     m_regionInter->registerRegion();
+}
+
+void PopupWindow::query(const QString &text)
+{
+    m_api->queryWord(text);
 }
 
 void PopupWindow::onGlobMousePress(const QPoint &mousePos, const int flag)

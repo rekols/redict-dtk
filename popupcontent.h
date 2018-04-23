@@ -23,6 +23,8 @@
 #include "dabstractdialog.h"
 #include "dblureffectwidget.h"
 
+#include <QLabel>
+
 DWIDGET_USE_NAMESPACE
 
 class PopupContent : public DAbstractDialog
@@ -33,8 +35,13 @@ public:
     PopupContent(QWidget *parent = nullptr);
     ~PopupContent();
 
-protected:
-    void mouseMoveEvent(QMouseEvent *) { };
+public slots:
+    void updateContent(const QString &queryText, const QString &ukPhonetic,
+                       const QString &usPhonetic, const QString &translationText);
+
+private:
+    QLabel *m_queryLabel;
+    QLabel *m_transLabel;
 };
 
 #endif

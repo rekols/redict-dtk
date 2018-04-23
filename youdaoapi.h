@@ -36,7 +36,8 @@ public:
     void queryWord(const QString &text);
 
 signals:
-    void finished(QString, QString, QString, QString);
+    void finished(const QString &queryText, const QString &ukPhonetic,
+                  const QString &usPhonetic, const QString &translationText);
 
 private slots:
     void replyFinished(QNetworkReply *);

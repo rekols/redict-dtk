@@ -22,6 +22,7 @@
 #include <QClipboard>
 
 #include <QTextEdit>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent),
@@ -35,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(qApp->clipboard(), &QClipboard::selectionChanged,
             [=] {
+                m_popupWindow->query(qApp->clipboard()->text(QClipboard::Selection));
                 m_popupWindow->popup(QCursor::pos());
             });
 }
