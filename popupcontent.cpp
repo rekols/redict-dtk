@@ -41,7 +41,7 @@ PopupContent::PopupContent(QWidget *parent)
     bgWidget->resize(size());
 
     setAttribute(Qt::WA_TranslucentBackground);
-    setAttribute(Qt::WA_DeleteOnClose, true);
+    setAttribute(Qt::WA_DeleteOnClose, false);
     setAttribute(Qt::WA_AlwaysStackOnTop);
 }
 

@@ -20,7 +20,9 @@
 #include "popupwindow.h"
 #include "dsvgrenderer.h"
 #include <QMouseEvent>
+#include <QCloseEvent>
 #include <QPainter>
+#include <QDebug>
 
 PopupWindow::PopupWindow(QWidget *parent)
     : QWidget(parent),
@@ -65,8 +67,8 @@ void PopupWindow::mouseReleaseEvent(QMouseEvent *e)
 
     if (e->button() == Qt::LeftButton) {
         QPoint pos = QCursor::pos();
-
         QWidget::hide();
+
         m_content->show();
         m_content->move(pos);
     }
@@ -74,11 +76,16 @@ void PopupWindow::mouseReleaseEvent(QMouseEvent *e)
 
 void PopupWindow::popup(const QPoint &pos)
 {
-    QWidget::show();
     QWidget::move(QPoint(pos.x(), pos.y() - 40));
+    QWidget::show();
+
+    if (m_regionInter->registered()) {
+        m_regionInter->unregisterRegion();
+    } else {
+        m_regionInter->registerRegion();
+    }
 
     m_content->hide();
-    m_regionInter->registerRegion();
 }
 
 void PopupWindow::query(const QString &text)
@@ -100,8 +107,10 @@ void PopupWindow::onGlobMousePress(const QPoint &mousePos, const int flag)
     if (rect.contains(mousePos))
         return;
 
-    m_regionInter->unregisterRegion();
-    m_content->hide();
+    if (m_regionInter->registered()) {
+        m_regionInter->unregisterRegion();
+    }
 
+    m_content->hide();
     QWidget::hide();
 }

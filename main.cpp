@@ -27,8 +27,16 @@ int main(int argc, char *argv[])
 {
     DApplication::loadDXcbPlugin();
     DApplication app(argc, argv);
+	app.setAttribute(Qt::AA_UseHighDpiPixmaps);
+    app.loadTranslator();
+    app.setOrganizationName("deepin");
+    app.setApplicationVersion(DApplication::buildVersion("0.1"));
+    app.setApplicationAcknowledgementPage("https://github.com/rekols");
+    app.setProductIcon(QIcon(":/images/redict.svg"));
+    app.setProductName(DApplication::translate("Main", "Rekols Dictionary"));
+    app.setApplicationDescription(DApplication::translate("Main", "ReDict is a simple dictionary for deepin."));
 
-    if (!app.setSingleInstance("deepin-dictionary")) {
+    if (!app.setSingleInstance("redict")) {
         return -1;
     }
 
