@@ -35,6 +35,9 @@ public:
     PopupContent(QWidget *parent = nullptr);
     ~PopupContent();
 
+protected:
+    void mouseMoveEvent(QMouseEvent *);
+
 public slots:
     void updateContent(const QString &queryText, const QString &ukPhonetic,
                        const QString &usPhonetic, const QString &translationText);

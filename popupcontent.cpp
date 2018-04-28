@@ -19,6 +19,7 @@
 
 #include "popupcontent.h"
 #include <QVBoxLayout>
+#include <QMouseEvent>
 #include <QLabel>
 
 PopupContent::PopupContent(QWidget *parent)
@@ -39,14 +40,16 @@ PopupContent::PopupContent(QWidget *parent)
 
     setFixedSize(300, 200);
     bgWidget->resize(size());
-
-    setAttribute(Qt::WA_TranslucentBackground);
-    setAttribute(Qt::WA_DeleteOnClose, false);
-    setAttribute(Qt::WA_AlwaysStackOnTop);
 }
 
 PopupContent::~PopupContent()
 {
+}
+
+void PopupContent::mouseMoveEvent(QMouseEvent *e)
+{
+    // disable move window.
+    e->ignore();
 }
 
 void PopupContent::updateContent(const QString &queryText, const QString &ukPhonetic,
