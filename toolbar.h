@@ -17,30 +17,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef TOOLBAR_H
+#define TOOLBAR_H
 
-#include <DMainWindow>
-#include <QStackedLayout>
-#include "toolbar.h"
-#include "popupwindow.h"
-#include "homepage.h"
+#include <QWidget>
+#include <QLineEdit>
 
-DWIDGET_USE_NAMESPACE
-
-class MainWindow : public DMainWindow
+class ToolBar : public QWidget
 {
     Q_OBJECT
-    
+
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ToolBar(QWidget *parent = nullptr);
+    ~ToolBar();
+
+signals:
+    void returnPressed(const QString &text);
 
 private:
-    QStackedLayout *m_mainLayout;
-    ToolBar *m_toolBar;
-    PopupWindow *m_popupWindow;
-    HomePage *m_homePage;
-};	
+    QLineEdit *m_edit;
+};
 
 #endif

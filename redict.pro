@@ -11,7 +11,7 @@ CONFIG += c++11 link_pkgconfig
 PKGCONFIG += dtkwidget
 
 # Input
-HEADERS += mainwindow.h popupwindow.h popupcontent.h homepage.h dailypage.h youdaoapi.h utils.h
-SOURCES += main.cpp mainwindow.cpp popupwindow.cpp popupcontent.cpp homepage.cpp dailypage.cpp youdaoapi.cpp utils.cpp
+HEADERS += mainwindow.h popupwindow.h popupcontent.h homepage.h dailypage.h toolbar.h youdaoapi.h utils.h
+SOURCES += main.cpp mainwindow.cpp popupwindow.cpp popupcontent.cpp homepage.cpp dailypage.cpp toolbar.cpp youdaoapi.cpp utils.cpp
 
 RESOURCES += redict.qrc
