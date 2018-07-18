@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_mainLayout->addWidget(m_dictPage);
 
     titlebar()->setCustomWidget(m_toolBar, Qt::AlignVCenter, false);
-    titlebar()->setSeparatorVisible(true);
+    titlebar()->setBackgroundTransparent(true);
     titlebar()->setFixedHeight(45);
 
     centralWidget->setLayout(m_mainLayout);

@@ -1,6 +1,6 @@
 # Rekols Dictionary
 
-一款Deepin平台下的词典，基于Qt开发，使用有道词典API，占用内存小。
+一款 Deepin 平台下的词典，基于 Qt / Dtk 开发，使用有道词典 API，占用内存小。
 
 ## 编译依赖
 
@@ -19,9 +19,7 @@
 
 ## License
 
-![](http://www.gnu.org/graphics/gplv3-127x51.png)
+Copyright © 2018 Unshun White(Rekols)
 
-Copyright © 2018 Anjun Steven(Rekols)
-
-This project is licensed under version 3 of the GNU General Public License.
+This project is licensed under WTFPL(Do What The Fuck You Want To Public License).
 
