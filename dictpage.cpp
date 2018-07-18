@@ -31,18 +31,23 @@ DictPage::DictPage(QWidget *parent)
     contentFrame->setWidgetResizable(true);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(contentFrame);
 
     QWidget *contentWidget = new QWidget;
     QVBoxLayout *contentLayout = new QVBoxLayout(contentWidget);
-    
+
+    contentLayout->setContentsMargins(20, 5, 20, 10);
     contentLayout->addWidget(m_wordLabel);
     contentLayout->addWidget(m_infoLabel);
     contentLayout->addStretch();
 
     contentFrame->setWidget(contentWidget);
 
+    m_wordLabel->setWordWrap(true);
+    m_infoLabel->setWordWrap(true);
     m_wordLabel->setStyleSheet("QLabel { color: #2CA7F8; font-size: 25px; }");
+    m_infoLabel->setStyleSheet("QLabel { font-size: 16px; } ");
 
     connect(m_api, &YoudaoAPI::finished, this, &DictPage::handleQueryFinished);
 }
