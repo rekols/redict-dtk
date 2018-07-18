@@ -18,6 +18,7 @@
  */
 
 #include "popupcontent.h"
+#include <QScrollArea>
 #include <QVBoxLayout>
 #include <QMouseEvent>
 #include <QLabel>
@@ -31,9 +32,21 @@ PopupContent::PopupContent(QWidget *parent)
     bgWidget->setBlendMode(DBlurEffectWidget::BehindWindowBlend);
     bgWidget->setMaskColor(DBlurEffectWidget::LightColor);
 
+    QScrollArea *contentFrame = new QScrollArea;
+    contentFrame->setWidgetResizable(true);
+
     QVBoxLayout *layout = new QVBoxLayout(this);
-    layout->addWidget(m_queryLabel);
-    layout->addWidget(m_transLabel);
+    layout->addWidget(contentFrame);
+    layout->setMargin(0);
+
+    QWidget *mainWidget = new QWidget;
+    QVBoxLayout *mainLayout = new QVBoxLayout(mainWidget);
+    contentFrame->setWidget(mainWidget);
+
+    mainLayout->setContentsMargins(10, 10, 10, 10);
+    mainLayout->addWidget(m_queryLabel);
+    mainLayout->addWidget(m_transLabel);
+    mainLayout->addStretch();
 
     m_queryLabel->setWordWrap(true);
     m_transLabel->setWordWrap(true);

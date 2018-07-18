@@ -17,30 +17,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "mainwindow.h"
-#include <QApplication>
-#include <QClipboard>
+#ifndef UTILS_H
+#define UTILS_H
 
-#include <QTextEdit>
-#include <QDebug>
+#include <QObject>
 
-MainWindow::MainWindow(QWidget *parent)
-    : DMainWindow(parent),
-      m_popupWindow(new PopupWindow)
+class Utils : public QObject
 {
-    QTextEdit *edit = new QTextEdit;
-    setCentralWidget(edit);
-    edit->setText("sadsddddddddddd");
+    Q_OBJECT
 
-    setFixedSize(600, 400);
+public:
+    Utils(QObject *parent = nullptr);
+    ~Utils();
 
-    connect(qApp->clipboard(), &QClipboard::selectionChanged, [=] {
-        m_popupWindow->query(qApp->clipboard()->text(QClipboard::Selection));
-        m_popupWindow->popup(QCursor::pos());
-    });
-}
+    static QString getQssContent(const QString &filePath);
+};
 
-MainWindow::~MainWindow()
-{
-    delete m_popupWindow;
-}
+#endif

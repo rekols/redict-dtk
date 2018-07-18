@@ -1,0 +1,11 @@
+QScrollArea { 
+    background: transparent; 
+}
+
+QScrollArea > QWidget > QWidget { 
+    background: transparent; 
+}
+
+QScrollArea > QWidget > QScrollBar { 
+    background: palette(base); 
+}

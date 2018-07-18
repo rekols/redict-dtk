@@ -17,30 +17,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "mainwindow.h"
-#include <QApplication>
-#include <QClipboard>
+#include "utils.h"
+#include <QFile>
 
-#include <QTextEdit>
-#include <QDebug>
-
-MainWindow::MainWindow(QWidget *parent)
-    : DMainWindow(parent),
-      m_popupWindow(new PopupWindow)
+Utils::Utils(QObject *parent)
+    : QObject(parent)
 {
-    QTextEdit *edit = new QTextEdit;
-    setCentralWidget(edit);
-    edit->setText("sadsddddddddddd");
 
-    setFixedSize(600, 400);
-
-    connect(qApp->clipboard(), &QClipboard::selectionChanged, [=] {
-        m_popupWindow->query(qApp->clipboard()->text(QClipboard::Selection));
-        m_popupWindow->popup(QCursor::pos());
-    });
 }
 
-MainWindow::~MainWindow()
+Utils::~Utils()
 {
-    delete m_popupWindow;
+}
+
+QString Utils::getQssContent(const QString &filePath)
+{
+    QFile file(filePath);
+    file.open(QIODevice::ReadOnly);
+
+    QString content = file.readAll();
+    file.close();
+
+    return content;
 }
