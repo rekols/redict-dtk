@@ -17,27 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "mainwindow.h"
-#include "youdaoapi.h"
-#include <QApplication>
-#include <QClipboard>
+#include "homepage.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : DMainWindow(parent),
-      m_popupWindow(new PopupWindow)
+HomePage::HomePage(QWidget *parent)
+    : QWidget(parent)
 {
-    setFixedSize(600, 400);
 
-    YoudaoAPI *api = new YoudaoAPI;
-    api->queryDaily();
-
-    connect(qApp->clipboard(), &QClipboard::selectionChanged, [=] {
-        m_popupWindow->query(qApp->clipboard()->text(QClipboard::Selection));
-        m_popupWindow->popup(QCursor::pos());
-    });
 }
 
-MainWindow::~MainWindow()
+HomePage::~HomePage()
 {
-    delete m_popupWindow;
 }

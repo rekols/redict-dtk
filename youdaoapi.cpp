@@ -23,6 +23,8 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
+#include <QDebug>
+
 YoudaoAPI::YoudaoAPI(QObject *parent)
     : QObject(parent),
       m_http(new QNetworkAccessManager(this))
@@ -49,10 +51,28 @@ void YoudaoAPI::queryWord(const QString &text)
     QNetworkRequest request(url);
     m_http->get(request);
 
-    connect(m_http, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinished(QNetworkReply *)));
+    connect(m_http, SIGNAL(finished(QNetworkReply *)), this, SLOT(queryWordFinished(QNetworkReply *)));
 }
 
-void YoudaoAPI::replyFinished(QNetworkReply *reply)
+void YoudaoAPI::queryDaily()
+{
+    QUrl url("http://dict.youdao.com/infoline/style/cardList");
+    QUrlQuery query;
+    query.addQueryItem("apiversion", "3.0");
+    query.addQueryItem("client", "deskdict");
+    query.addQueryItem("style", "daily");
+    query.addQueryItem("lastId", "0");
+    query.addQueryItem("keyfrom", "deskdict.8.1.2.0");
+    query.addQueryItem("size", "1");
+    url.setQuery(query.toString(QUrl::FullyEncoded));
+
+    QNetworkRequest request(url);
+    m_http->get(request);
+
+    connect(m_http, SIGNAL(finished(QNetworkReply *)), this, SLOT(queryDailyFinished(QNetworkReply *)));
+}
+
+void YoudaoAPI::queryWordFinished(QNetworkReply *reply)
 {
     QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
     QJsonObject object = document.object();
@@ -70,7 +90,7 @@ void YoudaoAPI::replyFinished(QNetworkReply *reply)
                 text.append(object.value("translation").toArray().at(i).toString());
                 text.append("\n");
             }
-        }else {
+        } else {
             for (int i = 0; i < explain.size(); ++i) {
                 text.append(explain.at(i).toString());
                 text.append("\n");
@@ -83,4 +103,17 @@ void YoudaoAPI::replyFinished(QNetworkReply *reply)
                       text);
     }
 
+}
+
+void YoudaoAPI::queryDailyFinished(QNetworkReply *reply)
+{
+    QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+    QJsonObject object = document.array().at(0).toObject();
+
+    const QString title = object.value("title").toString();
+    const QString summary = object.value("summary").toString();
+    const QString voiceURL = object.value("voice").toString();
+    const QString imageURL = object.value("gif").toString();
+
+    emit dailyFinished(std::make_tuple(title, summary, voiceURL, imageURL));
 }

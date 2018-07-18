@@ -34,13 +34,16 @@ public:
     ~YoudaoAPI();
 
     void queryWord(const QString &text);
+    void queryDaily();
 
 signals:
     void finished(const QString &queryText, const QString &ukPhonetic,
                   const QString &usPhonetic, const QString &translationText);
+    void dailyFinished(std::tuple<QString, QString, QString, QString>);
 
 private slots:
-    void replyFinished(QNetworkReply *);
+    void queryWordFinished(QNetworkReply *);
+    void queryDailyFinished(QNetworkReply *);
 
 private:
     QNetworkAccessManager *m_http;
