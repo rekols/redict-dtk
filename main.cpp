@@ -36,7 +36,6 @@ int main(int argc, char *argv[])
     app.setProductIcon(QIcon(":/images/redict.svg"));
     app.setProductName(DApplication::translate("Main", "Rekols Dictionary"));
     app.setApplicationDescription(DApplication::translate("Main", "ReDict is a simple dictionary for deepin."));
-    app.setStyleSheet(Utils::getQssContent(":/qss/style.qss"));
 
     if (!app.setSingleInstance("redict")) {
         return -1;

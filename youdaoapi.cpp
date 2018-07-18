@@ -113,7 +113,7 @@ void YoudaoAPI::queryDailyFinished(QNetworkReply *reply)
     const QString title = object.value("title").toString();
     const QString summary = object.value("summary").toString();
     const QString voiceURL = object.value("voice").toString();
-    const QString imageURL = object.value("gif").toString();
+    const QString imageURL = object.value("gif").toArray().at(0).toString();
 
     emit dailyFinished(std::make_tuple(title, summary, voiceURL, imageURL));
 }

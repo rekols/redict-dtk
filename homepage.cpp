@@ -20,9 +20,11 @@
 #include "homepage.h"
 
 HomePage::HomePage(QWidget *parent)
-    : QWidget(parent)
+    : QWidget(parent),
+      m_layout(new QStackedLayout(this)),
+      m_dailyPage(new DailyPage)
 {
-
+    m_layout->addWidget(m_dailyPage);
 }
 
 HomePage::~HomePage()

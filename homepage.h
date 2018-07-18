@@ -21,6 +21,8 @@
 #define HOMEPAGE_H
 
 #include <QWidget>
+#include <QStackedLayout>
+#include "dailypage.h"
 
 class HomePage : public QWidget
 {
@@ -29,6 +31,10 @@ class HomePage : public QWidget
 public:
     HomePage(QWidget *parent = nullptr);
     ~HomePage();
+
+private:
+    QStackedLayout *m_layout;
+    DailyPage *m_dailyPage;
 };
 
 #endif

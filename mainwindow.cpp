@@ -24,12 +24,17 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent),
-      m_popupWindow(new PopupWindow)
+      m_mainLayout(new QStackedLayout),
+      m_popupWindow(new PopupWindow),
+      m_homePage(new HomePage)
 {
-    setFixedSize(600, 400);
+    QWidget *centralWidget = new QWidget;
 
-    YoudaoAPI *api = new YoudaoAPI;
-    api->queryDaily();
+    m_mainLayout->addWidget(m_homePage);
+
+    centralWidget->setLayout(m_mainLayout);
+    setCentralWidget(centralWidget);
+    setFixedSize(550, 400);
 
     connect(qApp->clipboard(), &QClipboard::selectionChanged, [=] {
         m_popupWindow->query(qApp->clipboard()->text(QClipboard::Selection));

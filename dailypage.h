@@ -17,28 +17,33 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef DAILYPAGE_H
+#define DAILYPAGE_H
 
-#include <DMainWindow>
-#include <QStackedLayout>
-#include "popupwindow.h"
-#include "homepage.h"
+#include <QWidget>
+#include <QLabel>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include "youdaoapi.h"
 
-DWIDGET_USE_NAMESPACE
-
-class MainWindow : public DMainWindow
+class DailyPage : public QWidget
 {
     Q_OBJECT
-    
+
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    DailyPage(QWidget *parent = nullptr);
+    ~DailyPage();
 
 private:
-    QStackedLayout *m_mainLayout;
-    PopupWindow *m_popupWindow;
-    HomePage *m_homePage;
-};	
+    void handleQueryFinished(std::tuple<QString, QString, QString, QString>);
+
+private:
+    QNetworkAccessManager *m_networkManager;
+    QLabel *m_imageLabel;
+    QLabel *m_titleLabel;
+    QLabel *m_summaryLabel;
+    YoudaoAPI *m_api;
+};
 
 #endif

@@ -34,6 +34,9 @@ PopupContent::PopupContent(QWidget *parent)
 
     QScrollArea *contentFrame = new QScrollArea;
     contentFrame->setWidgetResizable(true);
+    contentFrame->setStyleSheet(contentFrame->styleSheet()
+                                + "QScrollArea { background: transparent; }" 
+                                + "QScrollArea > QWidget > QWidget { background: transparent; }");
 
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->addWidget(contentFrame);
