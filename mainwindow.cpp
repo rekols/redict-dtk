@@ -28,11 +28,13 @@ MainWindow::MainWindow(QWidget *parent)
       m_mainLayout(new QStackedLayout),
       m_toolBar(new ToolBar),
       m_popupWindow(new PopupWindow),
-      m_homePage(new HomePage)
+      m_homePage(new HomePage),
+      m_dictPage(new DictPage)
 {
     QWidget *centralWidget = new QWidget;
 
     m_mainLayout->addWidget(m_homePage);
+    m_mainLayout->addWidget(m_dictPage);
 
     titlebar()->setCustomWidget(m_toolBar, Qt::AlignVCenter, false);
     titlebar()->setSeparatorVisible(true);
@@ -41,15 +43,21 @@ MainWindow::MainWindow(QWidget *parent)
     centralWidget->setLayout(m_mainLayout);
     setCentralWidget(centralWidget);
     setShadowOffset(QPoint(0, 0));
-    setBorderColor(QColor("#2CA7F8"));
     setFixedSize(550, 400);
-    setShadowRadius(20);
-    setWindowRadius(0);
 
     connect(qApp->clipboard(), &QClipboard::selectionChanged, [=] {
         m_popupWindow->query(qApp->clipboard()->text(QClipboard::Selection));
         m_popupWindow->popup(QCursor::pos());
     });
+
+    connect(m_toolBar, &ToolBar::textChanged, this, [=] (const QString &text) {
+                                                        if (text.isEmpty()) {
+                                                            m_mainLayout->setCurrentIndex(0);
+                                                        } else {
+                                                            m_dictPage->queryWord(text);
+                                                            m_mainLayout->setCurrentIndex(1);
+                                                        }
+                                                    });
 }
 
 MainWindow::~MainWindow()

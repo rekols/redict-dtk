@@ -45,7 +45,7 @@ ToolBar::ToolBar(QWidget *parent)
     layout->addStretch();
     layout->setMargin(0);
 
-    connect(m_edit, &QLineEdit::returnPressed, this, [=] { emit returnPressed(m_edit->text()); });
+    connect(m_edit, &QLineEdit::textChanged, this, [=] { emit textChanged(m_edit->text()); });
 }
 
 ToolBar::~ToolBar()

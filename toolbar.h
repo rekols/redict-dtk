@@ -32,7 +32,7 @@ public:
     ~ToolBar();
 
 signals:
-    void returnPressed(const QString &text);
+    void textChanged(const QString &text);
 
 private:
     QLineEdit *m_edit;

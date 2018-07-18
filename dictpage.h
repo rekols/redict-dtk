@@ -17,32 +17,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef DICTPAGE_H
+#define DICTPAGE_H
 
-#include <DMainWindow>
-#include <QStackedLayout>
-#include "toolbar.h"
-#include "popupwindow.h"
-#include "homepage.h"
-#include "dictpage.h"
+#include <QWidget>
+#include <QLabel>
+#include "youdaoapi.h"
 
-DWIDGET_USE_NAMESPACE
-
-class MainWindow : public DMainWindow
+class DictPage : public QWidget
 {
     Q_OBJECT
     
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    DictPage(QWidget *parent = nullptr);
+    ~DictPage();
+
+    void queryWord(const QString &text);
 
 private:
-    QStackedLayout *m_mainLayout;
-    ToolBar *m_toolBar;
-    PopupWindow *m_popupWindow;
-    HomePage *m_homePage;
-    DictPage *m_dictPage;
-};	
+    void handleQueryFinished(const QString &queryText, const QString &ukPhonetic,
+                             const QString &usPhonetic, const QString &translationText);
+
+private:
+    YoudaoAPI *m_api;
+    QLabel *m_wordLabel;
+    QLabel *m_infoLabel;
+};
 
 #endif
