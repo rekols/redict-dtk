@@ -15,3 +15,16 @@ HEADERS += mainwindow.h popupwindow.h popupcontent.h homepage.h dailypage.h dict
 SOURCES += main.cpp mainwindow.cpp popupwindow.cpp popupcontent.cpp homepage.cpp dailypage.cpp dictpage.cpp toolbar.cpp youdaoapi.cpp utils.cpp trayicon.cpp
 
 RESOURCES += redict.qrc
+
+isEmpty(BINDIR):BINDIR=/usr/bin
+isEmpty(APPDIR):APPDIR=/usr/share/applications
+isEmpty(DSRDIR):DSRDIR=/usr/share/redict
+
+target.path = $$INSTROOT$$BINDIR
+icon_files.path = $$PREFIX/share/icons/hicolor/scalable/apps/
+icon_files.files = $$PWD/images/redict.svg
+
+desktop.path = $$INSTROOT$$APPDIR
+desktop.files = redict.desktop
+
+INSTALLS += target desktop icon_files
