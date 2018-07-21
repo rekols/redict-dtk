@@ -46,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(centralWidget);
     setWindowIcon(QIcon(":/images/redict.svg"));
     setShadowOffset(QPoint(0, 0));
-    setFixedSize(550, 400);
+    setFixedSize(550, 410);
 
     connect(qApp->clipboard(), &QClipboard::selectionChanged, [=] {
         m_popupWindow->query(qApp->clipboard()->text(QClipboard::Selection));

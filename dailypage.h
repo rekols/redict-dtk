@@ -36,13 +36,14 @@ public:
     ~DailyPage();
 
 private:
-    void handleQueryFinished(std::tuple<QString, QString, QString, QString>);
+    void handleQueryFinished(std::tuple<QString, QString, QString, QString, QString>);
 
 private:
     QNetworkAccessManager *m_networkManager;
     QLabel *m_imageLabel;
     QLabel *m_titleLabel;
     QLabel *m_summaryLabel;
+    QLabel *m_timeLabel;
     YoudaoAPI *m_api;
 };
 

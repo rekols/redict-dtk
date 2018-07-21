@@ -140,6 +140,6 @@ void YoudaoAPI::queryDailyFinished(QNetworkReply *reply)
 
     dateTime = QDateTime::fromString(QString::number(startTime), "yyyyMMddhhmm");
     time = dateTime.toString("yyyy-MM-dd");
-
+o
     emit dailyFinished(std::make_tuple(title, summary, time, voiceURL, imageURL));
 }

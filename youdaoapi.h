@@ -46,9 +46,10 @@ signals:
 
     // 0. title
     // 1. summary
-    // 2. voice url
-    // 3. image url
-    void dailyFinished(std::tuple<QString, QString, QString, QString>);
+    // 2. time
+    // 3. voice url
+    // 4. image url
+    void dailyFinished(std::tuple<QString, QString, QString, QString, QString>);
 
 private slots:
     void queryWordFinished(QNetworkReply *);
