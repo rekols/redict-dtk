@@ -30,23 +30,29 @@ DailyPage::DailyPage(QWidget *parent)
       m_summaryLabel(new QLabel),
       m_api(new YoudaoAPI)
 {
-    QVBoxLayout *mainLayout = new QVBoxLayout(this);
-    QVBoxLayout *textLayout = new QVBoxLayout;
+    QScrollArea *scrollArea = new QScrollArea;
+    QWidget *contentWidget = new QWidget;
+    scrollArea->setWidgetResizable(true);
+    scrollArea->setWidget(contentWidget);
+    scrollArea->setFocusPolicy(Qt::NoFocus);
 
-    m_imageLabel->setFixedHeight(250);
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    QVBoxLayout *contentLayout = new QVBoxLayout(contentWidget);
+
+    m_imageLabel->setFixedHeight(210);
     m_imageLabel->setScaledContents(true);
 
     m_titleLabel->setWordWrap(true);
     m_summaryLabel->setWordWrap(true);
 
-    textLayout->setContentsMargins(20, 10, 20, 10);
-    textLayout->addWidget(m_titleLabel);
-    textLayout->addWidget(m_summaryLabel);
-
     mainLayout->setContentsMargins(0, 0, 0, 0);
-    mainLayout->addWidget(m_imageLabel);
-    mainLayout->addLayout(textLayout);
-    mainLayout->addStretch();
+    mainLayout->addWidget(scrollArea);
+
+    contentLayout->setContentsMargins(0, 0, 0, 0);
+    contentLayout->addWidget(m_imageLabel);
+    contentLayout->addWidget(m_titleLabel);
+    contentLayout->addWidget(m_summaryLabel);
+    contentLayout->addStretch();
 
     QTimer::singleShot(100, m_api, &YoudaoAPI::queryDaily);
 

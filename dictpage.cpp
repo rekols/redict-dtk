@@ -33,16 +33,18 @@ DictPage::DictPage(QWidget *parent)
     contentFrame->setFocusPolicy(Qt::NoFocus);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
-    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setContentsMargins(0, 0, 0, 10);
     layout->addWidget(contentFrame);
 
     QWidget *contentWidget = new QWidget;
     QVBoxLayout *contentLayout = new QVBoxLayout(contentWidget);
 
     QLabel *webTips = new QLabel("网络释义");
-    webTips->setStyleSheet("QLabel { color: #2CA7F8; }");
+    webTips->setStyleSheet("QLabel {" 
+                           "color: #2CA7F8;"
+                           "}");
 
-    contentLayout->setContentsMargins(20, 5, 20, 10);
+    contentLayout->setContentsMargins(10, 0, 10, 0);
     contentLayout->addWidget(m_wordLabel);
     contentLayout->addWidget(m_infoLabel);
     contentLayout->addWidget(webTips);

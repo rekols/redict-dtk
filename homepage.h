@@ -23,6 +23,7 @@
 #include <QWidget>
 #include <QStackedLayout>
 #include "dailypage.h"
+#include "dictpage.h"
 
 class HomePage : public QWidget
 {
@@ -35,6 +36,7 @@ public:
 private:
     QStackedLayout *m_layout;
     DailyPage *m_dailyPage;
+    DictPage *m_dictPage;
 };
 
 #endif

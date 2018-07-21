@@ -25,8 +25,7 @@
 DWIDGET_USE_NAMESPACE
 
 ToolBar::ToolBar(QWidget *parent)
-    : QWidget(parent),
-      m_edit(new QLineEdit)
+    : QWidget(parent)
 {
     const qreal ratio = devicePixelRatioF();
     QPixmap iconPixmap = DSvgRenderer::render(":/images/redict.svg", QSize(22, 22) * ratio);
@@ -34,18 +33,11 @@ ToolBar::ToolBar(QWidget *parent)
     iconPixmap.setDevicePixelRatio(ratio);
     iconLabel->setPixmap(iconPixmap);
 
-    m_edit->setFixedWidth(350);
-    m_edit->setFixedHeight(30);
-
     QHBoxLayout *layout = new QHBoxLayout(this);
     layout->addSpacing(5);
     layout->addWidget(iconLabel);
-    layout->addSpacing(20);
-    layout->addWidget(m_edit);
     layout->addStretch();
     layout->setMargin(0);
-
-    connect(m_edit, &QLineEdit::textChanged, this, [=] { emit textChanged(m_edit->text()); });
 }
 
 ToolBar::~ToolBar()

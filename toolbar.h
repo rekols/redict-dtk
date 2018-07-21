@@ -21,7 +21,6 @@
 #define TOOLBAR_H
 
 #include <QWidget>
-#include <QLineEdit>
 
 class ToolBar : public QWidget
 {
@@ -30,12 +29,6 @@ class ToolBar : public QWidget
 public:
     ToolBar(QWidget *parent = nullptr);
     ~ToolBar();
-
-signals:
-    void textChanged(const QString &text);
-
-private:
-    QLineEdit *m_edit;
 };
 
 #endif

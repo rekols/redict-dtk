@@ -42,7 +42,6 @@ private:
     ToolBar *m_toolBar;
     PopupWindow *m_popupWindow;
     HomePage *m_homePage;
-    DictPage *m_dictPage;
 };	
 
 #endif
