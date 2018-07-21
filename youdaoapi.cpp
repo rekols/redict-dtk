@@ -108,7 +108,7 @@ void YoudaoAPI::queryWordFinished(QNetworkReply *reply)
                 QJsonObject obj = webRefArray.at(i).toObject();
 
                 // QString("<p><font color=\"#2ca7f8\">%1</font>:  ").arg(obj.value("key").toString());
-                webReferences += QString("%1:  ").arg(obj.value("key").toString());
+                webReferences += QString("• %1 :   ").arg(obj.value("key").toString());
 
                 // QJsonArray valueArray = obj.value("value").toArray();
                 // for (int i = 0; i < valueArray.size(); ++i) {

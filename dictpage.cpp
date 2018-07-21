@@ -42,7 +42,6 @@ DictPage::DictPage(QWidget *parent)
     QVBoxLayout *contentLayout = new QVBoxLayout(contentWidget);
 
     QLabel *webTips = new QLabel("网络释义");
-    webTips->setStyleSheet("QLabel { font-weight: bold; }");
 
     contentLayout->setContentsMargins(10, 0, 10, 0);
     contentLayout->addWidget(m_wordLabel);
@@ -58,6 +57,7 @@ DictPage::DictPage(QWidget *parent)
     m_infoLabel->setWordWrap(true);
     m_webLabel->setWordWrap(true);
 
+    webTips->setStyleSheet("QLabel { font-size: 18px; font-weight: bold; }");
     m_wordLabel->setStyleSheet("QLabel { font-size: 25px; font-weight: bold; }");
     m_infoLabel->setStyleSheet("QLabel { font-size: 16px; } ");
 
