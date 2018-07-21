@@ -80,6 +80,7 @@ void PopupWindow::popup(const QPoint &pos)
     QWidget::show();
 
     m_regionInter->registerRegion();
+
     m_content->hide();
 }
 

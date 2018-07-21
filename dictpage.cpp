@@ -59,7 +59,7 @@ DictPage::DictPage(QWidget *parent)
     phoneticLayout->addWidget(m_usBtn);
     phoneticLayout->addStretch();
 
-    contentLayout->setMargin(0);
+    contentLayout->setContentsMargins(10, 0, 10, 0);
     contentLayout->addWidget(m_wordLabel);
     contentLayout->addLayout(phoneticLayout);
     contentLayout->addSpacing(5);

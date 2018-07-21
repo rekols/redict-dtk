@@ -35,7 +35,6 @@ MainWindow::MainWindow(QWidget *parent)
       m_menu(new QMenu),
       m_wordingAction(new QAction)
 {
-
     titlebar()->setCustomWidget(m_toolBar, Qt::AlignVCenter, false);
     titlebar()->setBackgroundTransparent(true);
     titlebar()->setMenu(m_menu);

@@ -3,10 +3,10 @@ Categories=Utility;
 Comment=redict
 Exec=redict
 Icon=redict
-Name=Rekols's Dictionary
+Name=Redict
 StartupNotify=true
 TryExec=redict
 Type=Application
 
 # Translations
-Name[zh_CN]=R词典
+Name[zh_CN]=Redict
