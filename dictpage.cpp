@@ -42,9 +42,7 @@ DictPage::DictPage(QWidget *parent)
     QVBoxLayout *contentLayout = new QVBoxLayout(contentWidget);
 
     QLabel *webTips = new QLabel("网络释义");
-    webTips->setStyleSheet("QLabel {" 
-                           "color: #2CA7F8;"
-                           "}");
+    webTips->setStyleSheet("QLabel { font-weight: bold; }");
 
     contentLayout->setContentsMargins(10, 0, 10, 0);
     contentLayout->addWidget(m_wordLabel);
@@ -59,7 +57,8 @@ DictPage::DictPage(QWidget *parent)
     m_wordLabel->setWordWrap(true);
     m_infoLabel->setWordWrap(true);
     m_webLabel->setWordWrap(true);
-    m_wordLabel->setStyleSheet("QLabel { color: #2CA7F8; font-size: 25px; }");
+
+    m_wordLabel->setStyleSheet("QLabel { font-size: 25px; font-weight: bold; }");
     m_infoLabel->setStyleSheet("QLabel { font-size: 16px; } ");
 
     connect(m_api, &YoudaoAPI::searchFinished, this, &DictPage::handleQueryFinished);

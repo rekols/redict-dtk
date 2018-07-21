@@ -80,8 +80,6 @@ void DailyPage::handleQueryFinished(std::tuple<QString, QString, QString, QStrin
     QNetworkRequest request(QUrl(std::get<4>(data)));
     m_networkManager->get(request);
 
-    qDebug() << std::get<4>(data);
-
     connect(m_networkManager, &QNetworkAccessManager::finished, this, [=] (QNetworkReply *reply) {
         QByteArray imgData = reply->readAll();
         if (!imgData.isEmpty()) {
