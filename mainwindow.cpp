@@ -93,6 +93,7 @@ void MainWindow::initWordingAction()
 
 void MainWindow::enableWording()
 {
+    // Windows and MacOS not support.
     connect(qApp->clipboard(), &QClipboard::selectionChanged, [=] {
         m_popupWindow->popup(QCursor::pos());
         m_popupWindow->query(qApp->clipboard()->text(QClipboard::Selection));
