@@ -29,6 +29,9 @@ HomePage::HomePage(QWidget *parent)
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     QLineEdit *m_queryEdit = new QLineEdit;
 
+    m_queryEdit->setFixedHeight(35);
+    m_queryEdit->setObjectName("QueryEdit");
+
     mainLayout->setContentsMargins(20, 10, 20, 0);
     mainLayout->addWidget(m_queryEdit);
     mainLayout->addSpacing(5);

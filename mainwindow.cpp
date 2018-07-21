@@ -36,10 +36,11 @@ MainWindow::MainWindow(QWidget *parent)
       m_wordingAction(new QAction)
 {
     titlebar()->setCustomWidget(m_toolBar, Qt::AlignVCenter, false);
-    titlebar()->setBackgroundTransparent(true);
-    titlebar()->setMenu(m_menu);
+    titlebar()->setSeparatorVisible(true);
+    // titlebar()->setBackgroundTransparent(true);
     titlebar()->setFixedHeight(40);
-
+    titlebar()->setMenu(m_menu);
+        
     QWidget *centralWidget = new QWidget;
     m_mainLayout->addWidget(m_homePage);
 

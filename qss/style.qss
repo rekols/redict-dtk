@@ -2,9 +2,11 @@ QTabBar,
 QTabBar::tab {
     font-size: 16px;
     height: 18px;
-    padding: 10px;
+    padding: 9px;
     border: 0px;
-    background-color: transparent;
+    background-color: transparent;      
+    border-bottom: 3px solid transparent;
+    width: 55px;
     color: palette(text);
 }
 
@@ -15,5 +17,12 @@ QTabBar::tab:hover {
 QTabBar::tab:selected {
     color: #2CA7F8;
     border: 0px;
-    border-bottom: 2px solid #2CA7F8;
+    border-bottom: 3px solid #2CA7F8;
+}
+
+#QueryEdit {
+    border: 1px solid #D6D6D6;
+    background: #EFEFEF;
+    padding-left: 10px;
+    padding-right: 10px;
 }

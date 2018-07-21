@@ -40,7 +40,9 @@ ToolBar::ToolBar(QWidget *parent)
     tabbar->setFocusPolicy(Qt::NoFocus);
 
     QHBoxLayout *layout = new QHBoxLayout(this);
+    layout->addSpacing(5);
     layout->addWidget(iconLabel);
+    layout->addSpacing(5);
     layout->addWidget(tabbar);
     layout->addStretch();
     layout->setMargin(0);
