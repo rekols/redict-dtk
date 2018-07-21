@@ -27,6 +27,7 @@ DictPage::DictPage(QWidget *parent)
       m_wordLabel(new QLabel),
       m_infoLabel(new QLabel),
       m_webLabel(new QLabel),
+      m_webTips(new QLabel("网络释义")),
       m_ukLabel(new QLabel),
       m_usLabel(new QLabel),
       m_ukBtn(new DImageButton(":/images/audio-volume-high-normal.svg",
@@ -58,14 +59,12 @@ DictPage::DictPage(QWidget *parent)
     phoneticLayout->addWidget(m_usBtn);
     phoneticLayout->addStretch();
 
-    QLabel *webTips = new QLabel("网络释义");
-
     contentLayout->setMargin(0);
     contentLayout->addWidget(m_wordLabel);
     contentLayout->addLayout(phoneticLayout);
     contentLayout->addSpacing(5);
     contentLayout->addWidget(m_infoLabel);
-    contentLayout->addWidget(webTips);
+    contentLayout->addWidget(m_webTips);
     contentLayout->addSpacing(5);
     contentLayout->addWidget(m_webLabel);
     contentLayout->addStretch();
@@ -76,7 +75,7 @@ DictPage::DictPage(QWidget *parent)
     m_infoLabel->setWordWrap(true);
     m_webLabel->setWordWrap(true);
 
-    webTips->setStyleSheet("QLabel { font-size: 18px; font-weight: bold; }");
+    m_webTips->setStyleSheet("QLabel { font-size: 18px; font-weight: bold; }");
     m_wordLabel->setStyleSheet("QLabel { font-size: 25px; font-weight: bold; }");
     m_infoLabel->setStyleSheet("QLabel { font-size: 16px; } ");
 
@@ -123,6 +122,12 @@ void DictPage::handleQueryFinished(std::tuple<QString, QString, QString, QString
 
         m_ukLabel->setText(QString("英 [%1]").arg(ukPhonetic));
         m_usLabel->setText(QString("美 [%1]").arg(usPhonetic));
+    }
+
+    if (webReferences.isEmpty()) {
+        m_webTips->setVisible(false);
+    } else {
+        m_webTips->setVisible(true);
     }
 
     m_wordLabel->setText(queryWord);
