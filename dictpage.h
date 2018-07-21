@@ -22,7 +22,11 @@
 
 #include <QWidget>
 #include <QLabel>
+#include <QMediaPlayer>
+#include "dimagebutton.h"
 #include "youdaoapi.h"
+
+DWIDGET_USE_NAMESPACE
 
 class DictPage : public QWidget
 {
@@ -42,6 +46,11 @@ private:
     QLabel *m_wordLabel;
     QLabel *m_infoLabel;
     QLabel *m_webLabel;
+    DImageButton *m_ukBtn;
+    DImageButton *m_usBtn;
+    QLabel *m_ukLabel;
+    QLabel *m_usLabel;
+    QMediaPlayer *m_audio;
 };
 
 #endif

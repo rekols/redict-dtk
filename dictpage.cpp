@@ -26,7 +26,16 @@ DictPage::DictPage(QWidget *parent)
       m_api(new YoudaoAPI),
       m_wordLabel(new QLabel),
       m_infoLabel(new QLabel),
-      m_webLabel(new QLabel)
+      m_webLabel(new QLabel),
+      m_ukLabel(new QLabel),
+      m_usLabel(new QLabel),
+      m_ukBtn(new DImageButton(":/images/audio-volume-high-normal.svg",
+                               ":/images/audio-volume-high-hover.svg",
+                               ":/images/audio-volume-high-press.svg")),
+      m_usBtn(new DImageButton(":/images/audio-volume-high-normal.svg",
+                               ":/images/audio-volume-high-hover.svg",
+                               ":/images/audio-volume-high-press.svg")),
+      m_audio(new QMediaPlayer)
 {
     QScrollArea *contentFrame = new QScrollArea;
     contentFrame->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -40,14 +49,24 @@ DictPage::DictPage(QWidget *parent)
 
     QWidget *contentWidget = new QWidget;
     QVBoxLayout *contentLayout = new QVBoxLayout(contentWidget);
+    QHBoxLayout *phoneticLayout = new QHBoxLayout;
+
+    phoneticLayout->addWidget(m_ukLabel);
+    phoneticLayout->addWidget(m_ukBtn);
+    phoneticLayout->addSpacing(70);
+    phoneticLayout->addWidget(m_usLabel);
+    phoneticLayout->addWidget(m_usBtn);
+    phoneticLayout->addStretch();
 
     QLabel *webTips = new QLabel("网络释义");
 
-    contentLayout->setContentsMargins(10, 0, 10, 0);
+    contentLayout->setMargin(0);
     contentLayout->addWidget(m_wordLabel);
+    contentLayout->addLayout(phoneticLayout);
+    contentLayout->addSpacing(5);
     contentLayout->addWidget(m_infoLabel);
     contentLayout->addWidget(webTips);
-    contentLayout->addSpacing(2);
+    contentLayout->addSpacing(5);
     contentLayout->addWidget(m_webLabel);
     contentLayout->addStretch();
 
@@ -62,6 +81,16 @@ DictPage::DictPage(QWidget *parent)
     m_infoLabel->setStyleSheet("QLabel { font-size: 16px; } ");
 
     connect(m_api, &YoudaoAPI::searchFinished, this, &DictPage::handleQueryFinished);
+
+    connect(m_ukBtn, &DImageButton::clicked, this, [=]{
+        m_audio->setMedia(QUrl("http://dict.youdao.com/dictvoice?type=1&audio=" + m_wordLabel->text()));
+        m_audio->play();
+    });
+
+    connect(m_usBtn, &DImageButton::clicked, this, [=]{
+        m_audio->setMedia(QUrl("http://dict.youdao.com/dictvoice?type=2&audio=" + m_wordLabel->text()));
+        m_audio->play();
+    });
 }
 
 DictPage::~DictPage()
@@ -81,20 +110,20 @@ void DictPage::handleQueryFinished(std::tuple<QString, QString, QString, QString
     const QString &basicExplains = std::get<3>(data);
     const QString &webReferences = std::get<4>(data);
 
-    // if (ukPhonetic.isEmpty() && usPhonetic.isEmpty()) {
-//         pronLabel1->setVisible(false);
-//         pronLabel2->setVisible(false);
-//         pronButton1->setVisible(false);
-//         pronButton2->setVisible(false);
-    // } else {
-//         pronLabel1->setVisible(true);
-//         pronLabel2->setVisible(true);
-//         pronButton1->setVisible(true);
-//         pronButton2->setVisible(true);
+    if (ukPhonetic.isEmpty() && usPhonetic.isEmpty()) {
+        m_ukLabel->setVisible(false);
+        m_usLabel->setVisible(false);
+        m_ukBtn->setVisible(false);
+        m_usBtn->setVisible(false);
+    } else {
+        m_ukLabel->setVisible(true);
+        m_usLabel->setVisible(true);
+        m_ukBtn->setVisible(true);
+        m_usBtn->setVisible(true);
 
-//         pronLabel1->setText(QString("英[%1]").arg(uk_phonetic));
-//         pronLabel2->setText(QString("美[%1]").arg(us_phonetic));
-    // }
+        m_ukLabel->setText(QString("英 [%1]").arg(ukPhonetic));
+        m_usLabel->setText(QString("美 [%1]").arg(usPhonetic));
+    }
 
     m_wordLabel->setText(queryWord);
     m_infoLabel->setText(basicExplains);
