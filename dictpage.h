@@ -35,13 +35,13 @@ public:
     void queryWord(const QString &text);
 
 private:
-    void handleQueryFinished(const QString &queryText, const QString &ukPhonetic,
-                             const QString &usPhonetic, const QString &translationText);
+    void handleQueryFinished(std::tuple<QString, QString, QString, QString, QString>);
 
 private:
     YoudaoAPI *m_api;
     QLabel *m_wordLabel;
     QLabel *m_infoLabel;
+    QLabel *m_webLabel;
 };
 
 #endif

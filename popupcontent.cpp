@@ -68,9 +68,8 @@ void PopupContent::mouseMoveEvent(QMouseEvent *e)
     e->ignore();
 }
 
-void PopupContent::updateContent(const QString &queryText, const QString &ukPhonetic,
-                                 const QString &usPhonetic, const QString &translationText)
+void PopupContent::updateContent(std::tuple<QString, QString, QString, QString, QString> data)
 {
-    m_queryLabel->setText(queryText);
-    m_transLabel->setText(translationText);
+    m_queryLabel->setText(std::get<0>(data));
+    m_transLabel->setText(std::get<3>(data));
 }

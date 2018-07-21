@@ -39,7 +39,7 @@ PopupWindow::PopupWindow(QWidget *parent)
     QWidget::hide();
 
     connect(m_regionInter, &DRegionMonitor::buttonPress, this, &PopupWindow::onGlobMousePress);
-    connect(m_api, &YoudaoAPI::finished, m_content, &PopupContent::updateContent);
+    connect(m_api, &YoudaoAPI::searchFinished, m_content, &PopupContent::updateContent);
 }
 
 PopupWindow::~PopupWindow()

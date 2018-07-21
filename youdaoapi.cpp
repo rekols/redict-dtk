@@ -79,28 +79,45 @@ void YoudaoAPI::queryWordFinished(QNetworkReply *reply)
     QJsonObject data = object.value("basic").toObject();
 
     if (!document.isEmpty()) {
+        QString queryWord = object.value("query").toString();
         QString ukPhonetic = data.value("uk-phonetic").toString();
         QString usPhonetic = data.value("us-phonetic").toString();
-        QString text = nullptr;
+        QString basicExplains("");
+        QString webReferences("");
 
         QJsonArray explain = data.value("explains").toArray();
 
+        // get the basic data.
         if (explain.isEmpty()) {
             for (int i = 0; i < object.value("translation").toArray().size(); ++i) {
-                text.append(object.value("translation").toArray().at(i).toString());
-                text.append("\n");
+                basicExplains.append(object.value("translation").toArray().at(i).toString());
+                basicExplains.append("\n");
             }
         } else {
             for (int i = 0; i < explain.size(); ++i) {
-                text.append(explain.at(i).toString());
-                text.append("\n");
+                basicExplains.append(explain.at(i).toString());
+                basicExplains.append("\n");
             }
         }
 
-        emit finished(object.value("query").toString(),
-                      ukPhonetic,
-                      usPhonetic,
-                      text);
+        // Access to the web references.
+        QJsonArray webRefArray = object.value("web").toArray();
+        if (!webRefArray.isEmpty()) {
+            for (int i = 0; i < webRefArray.size(); ++i) {
+                QJsonObject obj = webRefArray.at(i).toObject();
+
+                webReferences += obj.value("key").toString() + " - ";
+
+                QJsonArray valueArray = obj.value("value").toArray();
+                for (int i = 0; i < valueArray.size(); ++i) {
+                    webReferences += valueArray.at(i).toString() + " ";
+                }
+
+                webReferences += "\n";
+            }
+        }
+
+        emit searchFinished(std::make_tuple(queryWord, ukPhonetic, usPhonetic, basicExplains, webReferences));
     }
 
 }

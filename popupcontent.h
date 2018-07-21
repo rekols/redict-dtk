@@ -39,8 +39,7 @@ protected:
     void mouseMoveEvent(QMouseEvent *);
 
 public slots:
-    void updateContent(const QString &queryText, const QString &ukPhonetic,
-                       const QString &usPhonetic, const QString &translationText);
+    void updateContent(std::tuple<QString, QString, QString, QString, QString>);
 
 private:
     QLabel *m_queryLabel;

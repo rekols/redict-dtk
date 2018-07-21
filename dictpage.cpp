@@ -25,10 +25,12 @@ DictPage::DictPage(QWidget *parent)
     : QWidget(parent),
       m_api(new YoudaoAPI),
       m_wordLabel(new QLabel),
-      m_infoLabel(new QLabel)
+      m_infoLabel(new QLabel),
+      m_webLabel(new QLabel)
 {
     QScrollArea *contentFrame = new QScrollArea;
     contentFrame->setWidgetResizable(true);
+    contentFrame->setFocusPolicy(Qt::NoFocus);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
@@ -37,19 +39,26 @@ DictPage::DictPage(QWidget *parent)
     QWidget *contentWidget = new QWidget;
     QVBoxLayout *contentLayout = new QVBoxLayout(contentWidget);
 
+    QLabel *webTips = new QLabel("网络释义");
+    webTips->setStyleSheet("QLabel { color: #2CA7F8; }");
+
     contentLayout->setContentsMargins(20, 5, 20, 10);
     contentLayout->addWidget(m_wordLabel);
     contentLayout->addWidget(m_infoLabel);
+    contentLayout->addWidget(webTips);
+    contentLayout->addSpacing(2);
+    contentLayout->addWidget(m_webLabel);
     contentLayout->addStretch();
 
     contentFrame->setWidget(contentWidget);
 
     m_wordLabel->setWordWrap(true);
     m_infoLabel->setWordWrap(true);
+    m_webLabel->setWordWrap(true);
     m_wordLabel->setStyleSheet("QLabel { color: #2CA7F8; font-size: 25px; }");
     m_infoLabel->setStyleSheet("QLabel { font-size: 16px; } ");
 
-    connect(m_api, &YoudaoAPI::finished, this, &DictPage::handleQueryFinished);
+    connect(m_api, &YoudaoAPI::searchFinished, this, &DictPage::handleQueryFinished);
 }
 
 DictPage::~DictPage()
@@ -61,15 +70,20 @@ void DictPage::queryWord(const QString &text)
     m_api->queryWord(text);
 }
 
-void DictPage::handleQueryFinished(const QString &queryText, const QString &ukPhonetic,
-                                   const QString &usPhonetic, const QString &translationText)
+void DictPage::handleQueryFinished(std::tuple<QString, QString, QString, QString, QString> data)
 {
-    if (ukPhonetic.isEmpty() && usPhonetic.isEmpty()) {
+    const QString &queryWord = std::get<0>(data);
+    const QString &ukPhonetic = std::get<1>(data);
+    const QString &usPhonetic = std::get<2>(data);
+    const QString &basicExplains = std::get<3>(data);
+    const QString &webReferences = std::get<4>(data);
+
+    // if (ukPhonetic.isEmpty() && usPhonetic.isEmpty()) {
 //         pronLabel1->setVisible(false);
 //         pronLabel2->setVisible(false);
 //         pronButton1->setVisible(false);
 //         pronButton2->setVisible(false);
-    } else {
+    // } else {
 //         pronLabel1->setVisible(true);
 //         pronLabel2->setVisible(true);
 //         pronButton1->setVisible(true);
@@ -77,8 +91,9 @@ void DictPage::handleQueryFinished(const QString &queryText, const QString &ukPh
 
 //         pronLabel1->setText(QString("英[%1]").arg(uk_phonetic));
 //         pronLabel2->setText(QString("美[%1]").arg(us_phonetic));
-    }
+    // }
 
-    m_wordLabel->setText(queryText);
-    m_infoLabel->setText(translationText);
+    m_wordLabel->setText(queryWord);
+    m_infoLabel->setText(basicExplains);
+    m_webLabel->setText(webReferences);
 }
