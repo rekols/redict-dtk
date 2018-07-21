@@ -17,39 +17,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef TRAYICON_H
+#define TRAYICON_H
 
-#include <DMainWindow>
-#include <QStackedLayout>
-#include "toolbar.h"
-#include "popupwindow.h"
-#include "homepage.h"
-#include "dictpage.h"
-#include "trayicon.h"
+#include <QSystemTrayIcon>
+#include <QApplication>
+#include <QMenu>
 
-DWIDGET_USE_NAMESPACE
-
-class MainWindow : public DMainWindow
+class TrayIcon : public QSystemTrayIcon
 {
     Q_OBJECT
-    
+
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    TrayIcon(QObject *parent = nullptr);
+    ~TrayIcon();
 
-protected:
-    void closeEvent(QCloseEvent *);
+signals:
+    void exitActionTriggered();
+    void openActionTriggered();
+
+private slots:
+    void iconActive(QSystemTrayIcon::ActivationReason reason);
 
 private:
-    void activeWindow();
-
-private:
-    QStackedLayout *m_mainLayout;
-    ToolBar *m_toolBar;
-    PopupWindow *m_popupWindow;
-    HomePage *m_homePage;
-    TrayIcon *m_trayIcon;
-};	
+    QMenu *m_menu;
+    QAction *m_openAction;
+    QAction *m_exitAction;
+};
 
 #endif

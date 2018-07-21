@@ -22,13 +22,15 @@
 #include "dtitlebar.h"
 #include <QApplication>
 #include <QClipboard>
+#include <QCloseEvent>
 
 MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent),
       m_mainLayout(new QStackedLayout),
       m_toolBar(new ToolBar),
       m_popupWindow(new PopupWindow),
-      m_homePage(new HomePage)
+      m_homePage(new HomePage),
+      m_trayIcon(new TrayIcon(this))
 {
     QWidget *centralWidget = new QWidget;
 
@@ -38,8 +40,11 @@ MainWindow::MainWindow(QWidget *parent)
     titlebar()->setBackgroundTransparent(true);
     titlebar()->setFixedHeight(30);
 
+    m_trayIcon->show();
+
     centralWidget->setLayout(m_mainLayout);
     setCentralWidget(centralWidget);
+    setWindowIcon(QIcon(":/images/redict.svg"));
     setShadowOffset(QPoint(0, 0));
     setFixedSize(550, 400);
 
@@ -47,9 +52,27 @@ MainWindow::MainWindow(QWidget *parent)
         m_popupWindow->query(qApp->clipboard()->text(QClipboard::Selection));
         m_popupWindow->popup(QCursor::pos());
     });
+
+    connect(m_trayIcon, &TrayIcon::openActionTriggered, this, &MainWindow::activeWindow);
+    connect(m_trayIcon, &TrayIcon::exitActionTriggered, qApp, &QApplication::quit);
 }
 
 MainWindow::~MainWindow()
 {
     delete m_popupWindow;
+}
+
+void MainWindow::closeEvent(QCloseEvent *e)
+{
+    setVisible(false);
+    e->ignore();
+}
+
+void MainWindow::activeWindow()
+{
+    setVisible(!isVisible());
+
+    if (isVisible()) {
+        activateWindow();
+    }
 }
