@@ -2,9 +2,9 @@
 
 一款 Deepin 平台下的词典，基于 Qt / DTK 开发，使用有道词典 API，占用内存小。
 
-![](https://github.com/rekols/redict/blob/master/screenshot/20180721204850.png)
+![](https://bbs.deepin.org/data/attachment/forum/201807/22/042344xdmpkuyp7z33mp3x.png)
 
-![](https://github.com/rekols/redict/blob/master/screenshot/20180721204910.png)
+![](https://bbs.deepin.org/data/attachment/forum/201807/22/042352nmvmfvtpv445koj4.png)
 
 ## 编译依赖
 
