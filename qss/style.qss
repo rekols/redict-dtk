@@ -21,8 +21,9 @@ QTabBar::tab:selected {
 }
 
 #QueryEdit {
-    border: 1px solid #D6D6D6;
-    background: #EFEFEF;
-    padding-left: 10px;
-    padding-right: 10px;
+    border: 1px solid #E0E0E0;
+    border-radius: 3px;    
+    background: #EDEDED;
+    padding-left: 8px;
+    padding-right: 8px;
 }

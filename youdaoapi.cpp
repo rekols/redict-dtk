@@ -52,7 +52,7 @@ void YoudaoAPI::queryWord(const QString &text)
     QNetworkRequest request(url);
     m_http->get(request);
 
-    connect(m_http, SIGNAL(finished(QNetworkReply *)), this, SLOT(queryWordFinished(QNetworkReply *)));
+    connect(m_http, &QNetworkAccessManager::finished, this, &YoudaoAPI::queryWordFinished);
 }
 
 void YoudaoAPI::queryDaily()
@@ -70,23 +70,23 @@ void YoudaoAPI::queryDaily()
     QNetworkRequest request(url);
     m_http->get(request);
 
-    connect(m_http, SIGNAL(finished(QNetworkReply *)), this, SLOT(queryDailyFinished(QNetworkReply *)));
+    connect(m_http, &QNetworkAccessManager::finished, this, &YoudaoAPI::queryDailyFinished);
 }
 
 void YoudaoAPI::queryWordFinished(QNetworkReply *reply)
 {
     QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
     QJsonObject object = document.object();
-    QJsonObject data = object.value("basic").toObject();
+    QJsonObject dataObj = object.value("basic").toObject();
 
     if (!document.isEmpty()) {
         QString queryWord = object.value("query").toString();
-        QString ukPhonetic = data.value("uk-phonetic").toString();
-        QString usPhonetic = data.value("us-phonetic").toString();
+        QString ukPhonetic = dataObj.value("uk-phonetic").toString();
+        QString usPhonetic = dataObj.value("us-phonetic").toString();
         QString basicExplains("");
         QString webReferences("");
 
-        QJsonArray explain = data.value("explains").toArray();
+        QJsonArray explain = dataObj.value("explains").toArray();
 
         // get the basic data.
         if (explain.isEmpty()) {
