@@ -32,9 +32,11 @@ DailyPage::DailyPage(QWidget *parent)
 {
     QScrollArea *scrollArea = new QScrollArea;
     QWidget *contentWidget = new QWidget;
+    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    scrollArea->setFocusPolicy(Qt::NoFocus);
     scrollArea->setWidgetResizable(true);
     scrollArea->setWidget(contentWidget);
-    scrollArea->setFocusPolicy(Qt::NoFocus);
 
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     QVBoxLayout *contentLayout = new QVBoxLayout(contentWidget);

@@ -29,8 +29,10 @@ DictPage::DictPage(QWidget *parent)
       m_webLabel(new QLabel)
 {
     QScrollArea *contentFrame = new QScrollArea;
-    contentFrame->setWidgetResizable(true);
+    contentFrame->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    contentFrame->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     contentFrame->setFocusPolicy(Qt::NoFocus);
+    contentFrame->setWidgetResizable(true);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 10);

@@ -34,7 +34,6 @@ ToolBar::ToolBar(QWidget *parent)
     iconLabel->setPixmap(iconPixmap);
 
     QHBoxLayout *layout = new QHBoxLayout(this);
-    layout->addSpacing(5);
     layout->addWidget(iconLabel);
     layout->addStretch();
     layout->setMargin(0);
