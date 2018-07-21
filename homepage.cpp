@@ -30,6 +30,7 @@ HomePage::HomePage(QWidget *parent)
     QLineEdit *m_queryEdit = new QLineEdit;
 
     m_queryEdit->setFixedHeight(35);
+    m_queryEdit->setPlaceholderText("输入您要翻译的单词或文字");
     m_queryEdit->setObjectName("QueryEdit");
 
     mainLayout->setContentsMargins(20, 10, 20, 0);
