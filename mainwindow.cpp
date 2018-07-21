@@ -38,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
     titlebar()->setCustomWidget(m_toolBar, Qt::AlignVCenter, false);
     titlebar()->setBackgroundTransparent(true);
     titlebar()->setMenu(m_menu);
-    titlebar()->setFixedHeight(30);
+    titlebar()->setFixedHeight(40);
 
     QWidget *centralWidget = new QWidget;
     m_mainLayout->addWidget(m_homePage);

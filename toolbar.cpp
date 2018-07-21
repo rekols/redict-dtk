@@ -21,6 +21,7 @@
 #include "dsvgrenderer.h"
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QTabBar>
 
 DWIDGET_USE_NAMESPACE
 
@@ -33,8 +34,14 @@ ToolBar::ToolBar(QWidget *parent)
     iconPixmap.setDevicePixelRatio(ratio);
     iconLabel->setPixmap(iconPixmap);
 
+    QTabBar *tabbar = new QTabBar;
+    tabbar->addTab("词典");
+    tabbar->addTab("翻译");
+    tabbar->setFocusPolicy(Qt::NoFocus);
+
     QHBoxLayout *layout = new QHBoxLayout(this);
     layout->addWidget(iconLabel);
+    layout->addWidget(tabbar);
     layout->addStretch();
     layout->setMargin(0);
 }
