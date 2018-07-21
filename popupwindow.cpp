@@ -107,9 +107,9 @@ void PopupWindow::onGlobMousePress(const QPoint &mousePos, const int flag)
     if (rect.contains(mousePos))
         return;
 
-    if (m_regionInter->registered()) {
-        m_regionInter->unregisterRegion();
-    }
+    // if (m_regionInter->registered()) {
+    //     m_regionInter->unregisterRegion();
+    // }
 
     m_content->hide();
     QWidget::hide();

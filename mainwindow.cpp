@@ -30,31 +30,33 @@ MainWindow::MainWindow(QWidget *parent)
       m_toolBar(new ToolBar),
       m_popupWindow(new PopupWindow),
       m_homePage(new HomePage),
-      m_trayIcon(new TrayIcon(this))
+      m_trayIcon(new TrayIcon(this)),
+      m_settings(new QSettings("deepin", "redict")),
+      m_menu(new QMenu),
+      m_wordingAction(new QAction)
 {
-    QWidget *centralWidget = new QWidget;
-
-    m_mainLayout->addWidget(m_homePage);
 
     titlebar()->setCustomWidget(m_toolBar, Qt::AlignVCenter, false);
     titlebar()->setBackgroundTransparent(true);
+    titlebar()->setMenu(m_menu);
     titlebar()->setFixedHeight(30);
 
-    m_trayIcon->show();
+    QWidget *centralWidget = new QWidget;
+    m_mainLayout->addWidget(m_homePage);
 
     centralWidget->setLayout(m_mainLayout);
-    setCentralWidget(centralWidget);
     setWindowIcon(QIcon(":/images/redict.svg"));
+    setCentralWidget(centralWidget);
     setShadowOffset(QPoint(0, 0));
     setFixedSize(550, 410);
 
-    connect(qApp->clipboard(), &QClipboard::selectionChanged, [=] {
-        m_popupWindow->query(qApp->clipboard()->text(QClipboard::Selection));
-        m_popupWindow->popup(QCursor::pos());
-    });
+    initWordingAction();
+    m_menu->addAction(m_wordingAction);
+    m_trayIcon->show();
 
     connect(m_trayIcon, &TrayIcon::openActionTriggered, this, &MainWindow::activeWindow);
     connect(m_trayIcon, &TrayIcon::exitActionTriggered, qApp, &QApplication::quit);
+    connect(m_wordingAction, &QAction::triggered, this, &MainWindow::handleWordingTriggered);
 }
 
 MainWindow::~MainWindow()
@@ -75,4 +77,46 @@ void MainWindow::activeWindow()
     if (isVisible()) {
         activateWindow();
     }
+}
+
+void MainWindow::initWordingAction()
+{
+    m_enableWording = m_settings->value("wording").toBool();
+
+    if (m_enableWording) {
+        m_wordingAction->setText("关闭划词");
+        enableWording();
+    } else {
+        m_wordingAction->setText("开启划词");
+    }
+}
+
+void MainWindow::enableWording()
+{
+    connect(qApp->clipboard(), &QClipboard::selectionChanged, [=] {
+        m_popupWindow->popup(QCursor::pos());
+        m_popupWindow->query(qApp->clipboard()->text(QClipboard::Selection));
+    });
+
+    m_settings->setValue("wording", true);
+    m_enableWording = true;
+}
+
+void MainWindow::disableWording()
+{
+    qApp->clipboard()->disconnect();
+
+    m_settings->setValue("wording", false);
+    m_enableWording = false;
+}
+
+void MainWindow::handleWordingTriggered()
+{
+    if (m_enableWording) {
+        disableWording();
+    } else {
+        enableWording();
+    }
+
+    initWordingAction();
 }

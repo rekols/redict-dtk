@@ -22,6 +22,9 @@
 
 #include <DMainWindow>
 #include <QStackedLayout>
+#include <QSettings>
+#include <QMenu>
+
 #include "toolbar.h"
 #include "popupwindow.h"
 #include "homepage.h"
@@ -43,6 +46,10 @@ protected:
 
 private:
     void activeWindow();
+    void initWordingAction();
+    void enableWording();
+    void disableWording();
+    void handleWordingTriggered();
 
 private:
     QStackedLayout *m_mainLayout;
@@ -50,6 +57,10 @@ private:
     PopupWindow *m_popupWindow;
     HomePage *m_homePage;
     TrayIcon *m_trayIcon;
+    QSettings *m_settings;
+    QMenu *m_menu;
+    QAction *m_wordingAction;
+    bool m_enableWording;
 };	
 
 #endif
