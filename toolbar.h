@@ -29,6 +29,9 @@ class ToolBar : public QWidget
 public:
     ToolBar(QWidget *parent = nullptr);
     ~ToolBar();
+
+signals:
+    void currentChanged(int index);
 };
 
 #endif

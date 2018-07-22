@@ -19,38 +19,54 @@
 
 #include "homepage.h"
 #include <QLineEdit>
+#include <QPushButton>
 
 HomePage::HomePage(QWidget *parent)
     : QWidget(parent),
       m_layout(new QStackedLayout),
       m_dailyPage(new DailyPage),
-      m_dictPage(new DictPage)
+      m_dictPage(new DictPage),
+      m_queryEdit(new QLineEdit)
 {
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
-    QLineEdit *m_queryEdit = new QLineEdit;
+    QPushButton *queryBtn = new QPushButton("查询");
 
-    m_queryEdit->setFixedHeight(35);
+    QHBoxLayout *queryLayout = new QHBoxLayout;
+    queryLayout->addWidget(m_queryEdit);
+    queryLayout->addWidget(queryBtn);
+    
+    queryBtn->setFocusPolicy(Qt::NoFocus);
+    queryBtn->setObjectName("QueryBtn");
+    queryBtn->setFixedSize(90, 35);
+
     m_queryEdit->setPlaceholderText("输入您要翻译的单词或文字");
+    m_queryEdit->setFocusPolicy(Qt::StrongFocus);
     m_queryEdit->setObjectName("QueryEdit");
+    m_queryEdit->setFixedHeight(35);
 
     mainLayout->setContentsMargins(20, 10, 20, 0);
-    mainLayout->addWidget(m_queryEdit);
+    mainLayout->addLayout(queryLayout);
     mainLayout->addSpacing(5);
     mainLayout->addLayout(m_layout);
 
     m_layout->addWidget(m_dailyPage);
     m_layout->addWidget(m_dictPage);
 
-    connect(m_queryEdit, &QLineEdit::textChanged, this, [=] {
-         if (m_queryEdit->text().isEmpty()) {
-             m_layout->setCurrentIndex(0);
-         } else {
-             m_dictPage->queryWord(m_queryEdit->text());
-             m_layout->setCurrentIndex(1);
-         }
-    });
+    connect(m_queryEdit, &QLineEdit::returnPressed, this, &HomePage::queryWord);
+    connect(m_queryEdit, &QLineEdit::textChanged, this, &HomePage::queryWord);
+    connect(queryBtn, &QPushButton::clicked, this, &HomePage::queryWord);
 }
 
 HomePage::~HomePage()
 {
+}
+
+void HomePage::queryWord()
+{
+    if (m_queryEdit->text().isEmpty()) {
+        m_layout->setCurrentIndex(0);
+    } else {
+        m_dictPage->queryWord(m_queryEdit->text());
+        m_layout->setCurrentIndex(1);
+    }
 }

@@ -15,9 +15,9 @@ QTabBar::tab:hover {
 }
 
 QTabBar::tab:selected {
-    color: #E62C2C;
+    color: #2CA7F8;
     border: 0px;
-    border-bottom: 3px solid #E62C2C;
+    border-bottom: 3px solid #2CA7F8;
 }
 
 #QueryEdit {
@@ -26,4 +26,19 @@ QTabBar::tab:selected {
     background: #EDEDED;
     padding-left: 8px;
     padding-right: 8px;
+}
+
+#QueryBtn {
+    background-color: #2CA7F8;
+    border: 1px solid #2CA7F8;
+    border-radius: 3px;
+    color: white;
+}
+
+#QueryBtn:hover {
+    background-color: #43B4FF;
+}
+
+#QueryBtn:pressed {
+    background-color: #099DFF;
 }

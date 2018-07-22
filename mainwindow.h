@@ -28,7 +28,7 @@
 #include "toolbar.h"
 #include "popupwindow.h"
 #include "homepage.h"
-#include "dictpage.h"
+#include "transpage.h"
 #include "trayicon.h"
 
 DWIDGET_USE_NAMESPACE
@@ -56,6 +56,7 @@ private:
     ToolBar *m_toolBar;
     PopupWindow *m_popupWindow;
     HomePage *m_homePage;
+    TransPage *m_transPage;
     TrayIcon *m_trayIcon;
     QSettings *m_settings;
     QMenu *m_menu;

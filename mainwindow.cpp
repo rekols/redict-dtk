@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
       m_toolBar(new ToolBar),
       m_popupWindow(new PopupWindow),
       m_homePage(new HomePage),
+      m_transPage(new TransPage),
       m_trayIcon(new TrayIcon(this)),
       m_settings(new QSettings("deepin", "redict")),
       m_menu(new QMenu),
@@ -43,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
         
     QWidget *centralWidget = new QWidget;
     m_mainLayout->addWidget(m_homePage);
+    m_mainLayout->addWidget(m_transPage);
 
     centralWidget->setLayout(m_mainLayout);
     setWindowIcon(QIcon(":/images/redict.svg"));
@@ -57,6 +59,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_trayIcon, &TrayIcon::openActionTriggered, this, &MainWindow::activeWindow);
     connect(m_trayIcon, &TrayIcon::exitActionTriggered, qApp, &QApplication::quit);
     connect(m_wordingAction, &QAction::triggered, this, &MainWindow::handleWordingTriggered);
+    connect(m_toolBar, &ToolBar::currentChanged, m_mainLayout, &QStackedLayout::setCurrentIndex);
 }
 
 MainWindow::~MainWindow()

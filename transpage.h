@@ -17,32 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef HOMEPAGE_H
-#define HOMEPAGE_H
+#ifndef TRANSPAGE_H
+#define TRANSPAGE_H
 
 #include <QWidget>
-#include <QLineEdit>
-#include <QStackedLayout>
 
-#include "dailypage.h"
-#include "dictpage.h"
-
-class HomePage : public QWidget
+class TransPage : public QWidget
 {
     Q_OBJECT
-
+    
 public:
-    HomePage(QWidget *parent = nullptr);
-    ~HomePage();
-
-private:
-    void queryWord();
-
-private:
-    QStackedLayout *m_layout;
-    DailyPage *m_dailyPage;
-    DictPage *m_dictPage;
-    QLineEdit *m_queryEdit;
+    TransPage(QWidget *parent = nullptr);
+    ~TransPage(); 
 };
 
 #endif

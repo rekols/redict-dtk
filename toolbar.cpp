@@ -22,6 +22,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QTabBar>
+#include <QDebug>
 
 DWIDGET_USE_NAMESPACE
 
@@ -46,6 +47,8 @@ ToolBar::ToolBar(QWidget *parent)
     layout->addWidget(tabbar);
     layout->addStretch();
     layout->setMargin(0);
+
+    connect(tabbar, &QTabBar::currentChanged, this, [=] (int current) { emit currentChanged(current); });
 }
 
 ToolBar::~ToolBar()
