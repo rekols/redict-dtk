@@ -41,7 +41,6 @@ DictPage::DictPage(QWidget *parent)
     QScrollArea *contentFrame = new QScrollArea;
     contentFrame->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     contentFrame->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-    contentFrame->setFocusPolicy(Qt::NoFocus);
     contentFrame->setWidgetResizable(true);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
