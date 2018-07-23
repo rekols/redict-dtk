@@ -34,14 +34,14 @@ MainWindow::MainWindow(QWidget *parent)
       m_trayIcon(new TrayIcon(this)),
       m_settings(new QSettings("deepin", "redict")),
       m_menu(new QMenu),
-      m_wordingAction(new QAction)
+      m_wordingAction(new QAction("划词翻译"))
 {
     titlebar()->setCustomWidget(m_toolBar, Qt::AlignVCenter, false);
     titlebar()->setSeparatorVisible(true);
     // titlebar()->setBackgroundTransparent(true);
     titlebar()->setFixedHeight(40);
     titlebar()->setMenu(m_menu);
-        
+
     QWidget *centralWidget = new QWidget;
     m_mainLayout->addWidget(m_homePage);
     m_mainLayout->addWidget(m_transPage);
@@ -51,6 +51,8 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(centralWidget);
     setShadowOffset(QPoint(0, 0));
     setFixedSize(550, 410);
+
+    m_wordingAction->setCheckable(true);
 
     initWordingAction();
     m_menu->addAction(m_wordingAction);
@@ -87,10 +89,10 @@ void MainWindow::initWordingAction()
     m_enableWording = m_settings->value("wording").toBool();
 
     if (m_enableWording) {
-        m_wordingAction->setText("关闭划词");
+        m_wordingAction->setChecked(true);
         enableWording();
     } else {
-        m_wordingAction->setText("开启划词");
+        m_wordingAction->setChecked(false);
     }
 }
 
