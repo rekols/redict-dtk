@@ -47,9 +47,11 @@ protected:
 private:
     void activeWindow();
     void initWordingAction();
+    void initTrayIconAction();
     void enableWording();
     void disableWording();
     void handleWordingTriggered();
+    void handleTrayIconTriggered();
 
 private:
     QStackedLayout *m_mainLayout;
@@ -61,7 +63,9 @@ private:
     QSettings *m_settings;
     QMenu *m_menu;
     QAction *m_wordingAction;
+    QAction *m_trayIconAction;
     bool m_enableWording;
+    bool m_enableTrayIcon;
 };	
 
 #endif

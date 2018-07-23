@@ -34,7 +34,8 @@ MainWindow::MainWindow(QWidget *parent)
       m_trayIcon(new TrayIcon(this)),
       m_settings(new QSettings("deepin", "redict")),
       m_menu(new QMenu),
-      m_wordingAction(new QAction("划词翻译"))
+      m_wordingAction(new QAction("划词翻译")),
+      m_trayIconAction(new QAction("托盘显示"))
 {
     titlebar()->setCustomWidget(m_toolBar, Qt::AlignVCenter, false);
     titlebar()->setSeparatorVisible(true);
@@ -53,14 +54,18 @@ MainWindow::MainWindow(QWidget *parent)
     setFixedSize(550, 410);
 
     m_wordingAction->setCheckable(true);
+    m_trayIconAction->setCheckable(true);
 
     initWordingAction();
+    initTrayIconAction();
+
+    m_menu->addAction(m_trayIconAction);
     m_menu->addAction(m_wordingAction);
-    m_trayIcon->show();
 
     connect(m_trayIcon, &TrayIcon::openActionTriggered, this, &MainWindow::activeWindow);
     connect(m_trayIcon, &TrayIcon::exitActionTriggered, qApp, &QApplication::quit);
     connect(m_wordingAction, &QAction::triggered, this, &MainWindow::handleWordingTriggered);
+    connect(m_trayIconAction, &QAction::triggered, this, &MainWindow::handleTrayIconTriggered);
     connect(m_toolBar, &ToolBar::currentChanged, m_mainLayout, &QStackedLayout::setCurrentIndex);
 }
 
@@ -71,8 +76,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::closeEvent(QCloseEvent *e)
 {
-    setVisible(false);
-    e->ignore();
+    if (m_enableTrayIcon) {
+        setVisible(false);
+        e->ignore();
+    } else {
+        e->accept();
+    }
 }
 
 void MainWindow::activeWindow()
@@ -93,6 +102,19 @@ void MainWindow::initWordingAction()
         enableWording();
     } else {
         m_wordingAction->setChecked(false);
+    }
+}
+
+void MainWindow::initTrayIconAction()
+{
+    m_enableTrayIcon = m_settings->value("tray").toBool();
+
+    if (m_enableTrayIcon) {
+        m_trayIconAction->setChecked(true);
+        m_trayIcon->show();
+    } else {
+        m_trayIconAction->setChecked(false);
+        m_trayIcon->hide();
     }
 }
 
@@ -125,4 +147,19 @@ void MainWindow::handleWordingTriggered()
     }
 
     initWordingAction();
+}
+
+void MainWindow::handleTrayIconTriggered()
+{
+    if (m_enableTrayIcon) {
+        m_enableTrayIcon = false;
+        m_settings->setValue("tray", false);
+        m_trayIcon->hide();
+    } else {
+        m_enableTrayIcon = true;
+        m_settings->setValue("tray", true);
+        m_trayIcon->show();
+    }
+
+    initTrayIconAction();
 }
