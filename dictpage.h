@@ -38,6 +38,9 @@ public:
 
     void queryWord(const QString &text);
 
+signals:
+    void queryFinished();
+
 private:
     void handleQueryFinished(std::tuple<QString, QString, QString, QString, QString>);
 

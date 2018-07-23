@@ -17,37 +17,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DAILYPAGE_H
-#define DAILYPAGE_H
+#ifndef LOADPAGE_H
+#define LOADPAGE_H
 
 #include <QWidget>
-#include <QLabel>
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include "youdaoapi.h"
+#include "dspinner.h"
 
-class DailyPage : public QWidget
+DWIDGET_USE_NAMESPACE
+
+class LoadPage : public QWidget
 {
     Q_OBJECT
-
+    
 public:
-    DailyPage(QWidget *parent = nullptr);
-    ~DailyPage();
+    LoadPage(QWidget *parent = nullptr);
+    ~LoadPage();
 
-signals:
-    void loadFinished();
-
-private:
-    void handleQueryFinished(std::tuple<QString, QString, QString, QString, QString>);
+    void start();
+    void stop();
 
 private:
-    QNetworkAccessManager *m_networkManager;
-    QLabel *m_imageLabel;
-    QLabel *m_titleLabel;
-    QLabel *m_summaryLabel;
-    QLabel *m_timeLabel;
-    YoudaoAPI *m_api;
+    DSpinner *m_spinner;
 };
 
 #endif

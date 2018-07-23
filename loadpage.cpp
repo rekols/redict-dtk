@@ -17,37 +17,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DAILYPAGE_H
-#define DAILYPAGE_H
+#include "loadpage.h"
+#include <QVBoxLayout>
 
-#include <QWidget>
-#include <QLabel>
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include "youdaoapi.h"
-
-class DailyPage : public QWidget
+LoadPage::LoadPage(QWidget *parent)
+    : QWidget(parent),
+      m_spinner(new DSpinner)
 {
-    Q_OBJECT
+    QVBoxLayout *layout = new QVBoxLayout(this);
+    layout->addWidget(m_spinner, 0, Qt::AlignHCenter);
 
-public:
-    DailyPage(QWidget *parent = nullptr);
-    ~DailyPage();
+    m_spinner->setFixedSize(50, 50);
+    m_spinner->stop();
+}
 
-signals:
-    void loadFinished();
+LoadPage::~LoadPage()
+{
+}
 
-private:
-    void handleQueryFinished(std::tuple<QString, QString, QString, QString, QString>);
+void LoadPage::start()
+{
+    m_spinner->start();
+}
 
-private:
-    QNetworkAccessManager *m_networkManager;
-    QLabel *m_imageLabel;
-    QLabel *m_titleLabel;
-    QLabel *m_summaryLabel;
-    QLabel *m_timeLabel;
-    YoudaoAPI *m_api;
-};
-
-#endif
+void LoadPage::stop()
+{
+    m_spinner->stop();
+}

@@ -75,6 +75,10 @@ void YoudaoAPI::queryDaily()
 
 void YoudaoAPI::queryWordFinished(QNetworkReply *reply)
 {
+    if (reply->error() != QNetworkReply::NoError) {
+        return;
+    }
+
     QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
     QJsonObject object = document.object();
     QJsonObject dataObj = object.value("basic").toObject();
@@ -125,6 +129,10 @@ void YoudaoAPI::queryWordFinished(QNetworkReply *reply)
 
 void YoudaoAPI::queryDailyFinished(QNetworkReply *reply)
 {
+    if (reply->error() != QNetworkReply::NoError) {
+        return;
+    }
+
     QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
     QJsonObject object = document.array().at(0).toObject();
 

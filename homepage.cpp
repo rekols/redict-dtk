@@ -20,12 +20,14 @@
 #include "homepage.h"
 #include <QLineEdit>
 #include <QPushButton>
+#include <QTimer>
 
 HomePage::HomePage(QWidget *parent)
     : QWidget(parent),
       m_layout(new QStackedLayout),
       m_dailyPage(new DailyPage),
       m_dictPage(new DictPage),
+      m_loadPage(new LoadPage),
       m_queryEdit(new QLineEdit)
 {
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
@@ -34,7 +36,7 @@ HomePage::HomePage(QWidget *parent)
     QHBoxLayout *queryLayout = new QHBoxLayout;
     queryLayout->addWidget(m_queryEdit);
     queryLayout->addWidget(queryBtn);
-    
+
     queryBtn->setFocusPolicy(Qt::NoFocus);
     queryBtn->setObjectName("QueryBtn");
     queryBtn->setFixedSize(90, 35);
@@ -51,10 +53,29 @@ HomePage::HomePage(QWidget *parent)
 
     m_layout->addWidget(m_dailyPage);
     m_layout->addWidget(m_dictPage);
+    m_layout->addWidget(m_loadPage);
+
+    m_layout->setCurrentIndex(2);
+    m_loadPage->start();
 
     connect(m_queryEdit, &QLineEdit::returnPressed, this, &HomePage::queryWord);
     connect(m_queryEdit, &QLineEdit::textChanged, this, &HomePage::queryWord);
     connect(queryBtn, &QPushButton::clicked, this, &HomePage::queryWord);
+
+    connect(m_dailyPage, &DailyPage::loadFinished, this,
+            [=] {
+                if (m_currentIndex != 1) {
+                    m_layout->setCurrentIndex(0);
+                    m_loadPage->stop();
+                }
+            });
+
+    connect(m_dictPage, &DictPage::queryFinished, this,
+            [=] {
+                m_currentIndex = 1;
+                m_layout->setCurrentIndex(1);
+                m_loadPage->stop();
+            });
 }
 
 HomePage::~HomePage()
@@ -63,10 +84,13 @@ HomePage::~HomePage()
 
 void HomePage::queryWord()
 {
-    if (m_queryEdit->text().isEmpty()) {
+    const QString &text = m_queryEdit->text();
+
+    if (text.isEmpty()) {
         m_layout->setCurrentIndex(0);
     } else {
+        m_loadPage->start();
+        m_layout->setCurrentIndex(2);
         m_dictPage->queryWord(m_queryEdit->text());
-        m_layout->setCurrentIndex(1);
     }
 }

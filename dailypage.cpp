@@ -87,5 +87,7 @@ void DailyPage::handleQueryFinished(std::tuple<QString, QString, QString, QStrin
             pixmap.loadFromData(imgData);
             m_imageLabel->setPixmap(pixmap);
         }
+
+        emit loadFinished();
     });
 }

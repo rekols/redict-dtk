@@ -135,4 +135,6 @@ void DictPage::handleQueryFinished(std::tuple<QString, QString, QString, QString
     m_wordLabel->setText(queryWord);
     m_infoLabel->setText(basicExplains);
     m_webLabel->setText(webReferences);
+
+    emit queryFinished();
 }

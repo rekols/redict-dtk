@@ -26,6 +26,7 @@
 
 #include "dailypage.h"
 #include "dictpage.h"
+#include "loadpage.h"
 
 class HomePage : public QWidget
 {
@@ -42,7 +43,10 @@ private:
     QStackedLayout *m_layout;
     DailyPage *m_dailyPage;
     DictPage *m_dictPage;
+    LoadPage *m_loadPage;
     QLineEdit *m_queryEdit;
+
+    int m_currentIndex = 0;
 };
 
 #endif
