@@ -46,8 +46,6 @@ private:
     YoudaoAPI *m_api;
     QLabel *m_wordLabel;
     QLabel *m_infoLabel;
-    QLabel *m_webLabel;
-    QLabel *m_webTips;
     DImageButton *m_ukBtn;
     DImageButton *m_usBtn;
     QLabel *m_ukLabel;

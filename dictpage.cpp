@@ -27,8 +27,6 @@ DictPage::DictPage(QWidget *parent)
       m_api(new YoudaoAPI),
       m_wordLabel(new QLabel),
       m_infoLabel(new QLabel),
-      m_webLabel(new QLabel),
-      m_webTips(new QLabel("网络释义")),
       m_ukLabel(new QLabel),
       m_usLabel(new QLabel),
       m_ukBtn(new DImageButton(":/images/audio-volume-high-normal.svg",
@@ -63,30 +61,23 @@ DictPage::DictPage(QWidget *parent)
 
     contentLayout->setSpacing(0);
     contentLayout->setContentsMargins(20, 0, 20, 0);
-    contentLayout->addSpacing(10);
+    contentLayout->addSpacing(5);
     contentLayout->addWidget(m_wordLabel);
     contentLayout->addSpacing(4);
     contentLayout->addLayout(phoneticLayout);
-    contentLayout->addSpacing(8);
     contentLayout->addWidget(m_infoLabel);
-    contentLayout->addWidget(m_webTips);
     contentLayout->addSpacing(5);
-    contentLayout->addWidget(m_webLabel);
     contentLayout->addStretch();
 
     contentFrame->setWidget(contentWidget);
 
     m_wordLabel->setWordWrap(true);
     m_infoLabel->setWordWrap(true);
-    m_webLabel->setWordWrap(true);
 
     m_infoLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
-    m_webLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
 
-    m_webTips->setStyleSheet("QLabel { font-size: 18px; font-weight: bold; }");
     m_wordLabel->setStyleSheet("QLabel { font-size: 25px; font-weight: bold; }");
     m_infoLabel->setStyleSheet("QLabel { font-size: 16px; } ");
-    m_webLabel->setStyleSheet("QLabel { font-size: 16px; } ");
 
     connect(m_api, &YoudaoAPI::searchFinished, this, &DictPage::handleQueryFinished);
 
@@ -138,13 +129,14 @@ void DictPage::handleQueryFinished(std::tuple<QString, QString, QString, QString
         m_usLabel->setText(QString("美 [%1]").arg(usPhonetic));
     }
 
-    if (webReferences.isEmpty()) {
-        m_webTips->setVisible(false);
-    } else {
-        m_webTips->setVisible(true);
+    m_wordLabel->setText(queryWord);
+
+    QString text = basicExplains;
+
+    if (!webReferences.isEmpty()) {
+        text += "<br><b>网络释义</b></br>";
+        text += webReferences;
     }
 
-    m_wordLabel->setText(queryWord);
-    m_infoLabel->setText(basicExplains);
-    m_webLabel->setText(webReferences);
+    m_infoLabel->setText(text);
 }

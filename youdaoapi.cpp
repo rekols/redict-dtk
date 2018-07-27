@@ -97,9 +97,12 @@ void YoudaoAPI::queryWordFinished(QNetworkReply *reply)
 
         // get the basic data.
         for (const QJsonValue &value : explain) {
+            basicExplains.append("<br>");
             basicExplains.append(value.toString());
-            basicExplains.append("\n");
+            basicExplains.append("</br>");
         }
+
+        basicExplains.append("<br></br>");
 
         // Access to the web references.
         QJsonArray webRefArray = object.value("web").toArray();
@@ -110,8 +113,9 @@ void YoudaoAPI::queryWordFinished(QNetworkReply *reply)
                 QJsonArray arr = obj.value(key).toArray();
 
                 for (const QJsonValue &value : arr) {
+                    webReferences += "<br>";
                     webReferences += QString("• %1 : %2").arg(key).arg(value.toString());
-                    webReferences += "\n";
+                    webReferences += "</br>";
                 }
             }
         }
