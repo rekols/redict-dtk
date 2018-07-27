@@ -24,7 +24,7 @@ QTabBar::tab:selected {
     border: 1px solid #E0E0E0;
     border-radius: none;
     background: #EDEDED;
-    padding-left: 15px;
+    padding-left: 10px;
     padding-right: 8px;
 }
 

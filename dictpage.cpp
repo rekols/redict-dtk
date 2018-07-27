@@ -20,6 +20,7 @@
 #include "dictpage.h"
 #include "scrollarea.h"
 #include <QVBoxLayout>
+#include <QScrollBar>
 
 DictPage::DictPage(QWidget *parent)
     : QWidget(parent),
@@ -39,6 +40,7 @@ DictPage::DictPage(QWidget *parent)
       m_audio(new QMediaPlayer)
 {
     ScrollArea *contentFrame = new ScrollArea;
+    m_scrollArea = contentFrame;
     contentFrame->setWidgetResizable(true);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
@@ -61,8 +63,9 @@ DictPage::DictPage(QWidget *parent)
 
     contentLayout->setSpacing(0);
     contentLayout->setContentsMargins(20, 0, 20, 0);
+    contentLayout->addSpacing(10);
     contentLayout->addWidget(m_wordLabel);
-    contentLayout->addSpacing(2);
+    contentLayout->addSpacing(4);
     contentLayout->addLayout(phoneticLayout);
     contentLayout->addSpacing(8);
     contentLayout->addWidget(m_infoLabel);
@@ -104,6 +107,11 @@ DictPage::~DictPage()
 
 void DictPage::queryWord(const QString &text)
 {
+    if (text == m_wordLabel->text()) {
+        return;
+    }
+
+    m_scrollArea->verticalScrollBar()->setValue(0);
     m_api->queryWord(text);
 }
 
@@ -139,6 +147,4 @@ void DictPage::handleQueryFinished(std::tuple<QString, QString, QString, QString
     m_wordLabel->setText(queryWord);
     m_infoLabel->setText(basicExplains);
     m_webLabel->setText(webReferences);
-
-    emit queryFinished();
 }

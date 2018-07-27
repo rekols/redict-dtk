@@ -22,12 +22,13 @@
 
 LoadPage::LoadPage(QWidget *parent)
     : QWidget(parent),
-      m_spinner(new DSpinner)
+      m_spinner(new DSpinner),
+      m_isFinished(false)
 {
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->addWidget(m_spinner, 0, Qt::AlignHCenter);
 
-    m_spinner->setFixedSize(50, 50);
+    m_spinner->setFixedSize(30, 30);
     m_spinner->stop();
 }
 
@@ -42,5 +43,6 @@ void LoadPage::start()
 
 void LoadPage::stop()
 {
+    m_isFinished = true;
     m_spinner->stop();
 }

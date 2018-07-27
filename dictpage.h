@@ -28,18 +28,16 @@
 
 DWIDGET_USE_NAMESPACE
 
+class ScrollArea;
 class DictPage : public QWidget
 {
     Q_OBJECT
-    
+
 public:
     DictPage(QWidget *parent = nullptr);
     ~DictPage();
 
     void queryWord(const QString &text);
-
-signals:
-    void queryFinished();
 
 private:
     void handleQueryFinished(std::tuple<QString, QString, QString, QString, QString>);
@@ -55,6 +53,7 @@ private:
     QLabel *m_ukLabel;
     QLabel *m_usLabel;
     QMediaPlayer *m_audio;
+    ScrollArea *m_scrollArea;
 };
 
 #endif

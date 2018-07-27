@@ -28,7 +28,7 @@ DWIDGET_USE_NAMESPACE
 class LoadPage : public QWidget
 {
     Q_OBJECT
-    
+
 public:
     LoadPage(QWidget *parent = nullptr);
     ~LoadPage();
@@ -36,8 +36,11 @@ public:
     void start();
     void stop();
 
+    bool isFinished() { return m_isFinished; }
+
 private:
     DSpinner *m_spinner;
+    bool m_isFinished;
 };
 
 #endif
