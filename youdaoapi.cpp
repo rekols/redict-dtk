@@ -97,12 +97,9 @@ void YoudaoAPI::queryWordFinished(QNetworkReply *reply)
 
         // get the basic data.
         for (const QJsonValue &value : explain) {
-            basicExplains.append("<br>");
             basicExplains.append(value.toString());
-            basicExplains.append("</br>");
+            basicExplains.append("<br>");
         }
-
-        basicExplains.append("<br></br>");
 
         // Access to the web references.
         QJsonArray webRefArray = object.value("web").toArray();
