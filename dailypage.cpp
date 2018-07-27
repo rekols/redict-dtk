@@ -21,6 +21,9 @@
 #include <QScrollArea>
 #include <QVBoxLayout>
 #include <QTimer>
+#include <QFile>
+#include <QDir>
+#include <QDebug>
 
 DailyPage::DailyPage(QWidget *parent)
     : QWidget(parent),
@@ -71,23 +74,62 @@ DailyPage::~DailyPage()
 {
 }
 
+void DailyPage::checkDirectory()
+{
+    const QString path = QString("%1/.local/share/redict").arg(QDir::homePath());
+
+    if (!QDir(path).exists()) {
+        QDir dir(path);
+        dir.mkpath(".");
+    }
+}
+
 void DailyPage::handleQueryFinished(std::tuple<QString, QString, QString, QString, QString> data)
 {
     m_titleLabel->setText(std::get<0>(data));
     m_summaryLabel->setText(std::get<1>(data));
     m_timeLabel->setText(std::get<2>(data));
 
-    QNetworkRequest request(QUrl(std::get<4>(data)));
-    m_networkManager->get(request);
+    checkDirectory();
 
-    connect(m_networkManager, &QNetworkAccessManager::finished, this, [=] (QNetworkReply *reply) {
-        QByteArray imgData = reply->readAll();
-        if (!imgData.isEmpty()) {
-            QPixmap pixmap;
-            pixmap.loadFromData(imgData);
-            m_imageLabel->setPixmap(pixmap);
+    const QString picturePath = QString("%1/.local/share/redict/%2.jpeg").arg(QDir::homePath()).arg(std::get<2>(data));
+
+    if (!QFile::exists(picturePath)) {
+        QNetworkRequest request(QUrl(std::get<4>(data)));
+        m_networkManager->get(request);
+
+        connect(m_networkManager, &QNetworkAccessManager::finished, this,
+                [=] (QNetworkReply *reply) {
+                    QByteArray imgData = reply->readAll();
+
+                    loadImage(imgData);
+
+                    // save image file to local.
+                    QFile file(picturePath);
+                    if (file.open(QIODevice::Append)) {
+                        file.write(imgData);
+                    }
+                    file.close();
+
+                    m_networkManager->deleteLater();
+                });
+    } else {
+        // open local file.
+        QFile file(picturePath);
+        if (file.open(QIODevice::ReadOnly)) {
+            QByteArray imgData = file.readAll();
+            loadImage(imgData);
         }
+        file.close();
+    }
 
-        emit loadFinished();
-    });
+}
+
+void DailyPage::loadImage(const QByteArray &data)
+{
+    QPixmap pixmap;
+    pixmap.loadFromData(data);
+    m_imageLabel->setPixmap(pixmap);
+
+    emit loadFinished();
 }

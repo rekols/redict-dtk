@@ -39,7 +39,9 @@ signals:
     void loadFinished();
 
 private:
+    void checkDirectory();
     void handleQueryFinished(std::tuple<QString, QString, QString, QString, QString>);
+    void loadImage(const QByteArray &data);
 
 private:
     QNetworkAccessManager *m_networkManager;

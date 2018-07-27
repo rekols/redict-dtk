@@ -85,7 +85,6 @@ void YoudaoAPI::queryWordFinished(QNetworkReply *reply)
 
     QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
     QJsonObject object = document.object();
-    QJsonObject dataObj = object.value("basic").toObject();
 
     if (!document.isEmpty()) {
         QString queryWord = object.value("rq").toString();
