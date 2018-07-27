@@ -18,12 +18,11 @@
  */
 
 #include "dailypage.h"
-#include <QScrollArea>
+#include "scrollarea.h"
 #include <QVBoxLayout>
 #include <QTimer>
 #include <QFile>
 #include <QDir>
-#include <QDebug>
 
 DailyPage::DailyPage(QWidget *parent)
     : QWidget(parent),
@@ -34,19 +33,15 @@ DailyPage::DailyPage(QWidget *parent)
       m_timeLabel(new QLabel),
       m_api(new YoudaoAPI)
 {
-    QScrollArea *scrollArea = new QScrollArea;
+    ScrollArea *scrollArea = new ScrollArea;
     QWidget *contentWidget = new QWidget;
-    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-    scrollArea->setFocusPolicy(Qt::NoFocus);
-    scrollArea->setWidgetResizable(true);
     scrollArea->setWidget(contentWidget);
 
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     QVBoxLayout *contentLayout = new QVBoxLayout(contentWidget);
 
     m_imageLabel->setFixedHeight(200);
-    m_imageLabel->setFixedWidth(530);
+    m_imageLabel->setFixedWidth(518);
     m_imageLabel->setScaledContents(true);
 
     m_titleLabel->setWordWrap(true);
@@ -56,7 +51,7 @@ DailyPage::DailyPage(QWidget *parent)
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->addWidget(scrollArea);
 
-    contentLayout->setContentsMargins(0, 0, 0, 0);
+    contentLayout->setContentsMargins(15, 0, 15, 0);
     contentLayout->addWidget(m_imageLabel);
     contentLayout->addSpacing(8);
     contentLayout->addWidget(m_titleLabel);

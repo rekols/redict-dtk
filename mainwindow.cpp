@@ -40,8 +40,8 @@ MainWindow::MainWindow(QWidget *parent)
       m_trayIconAction(new QAction("托盘显示"))
 {
     titlebar()->setCustomWidget(m_toolBar, Qt::AlignVCenter, false);
-    titlebar()->setSeparatorVisible(true);
-    // titlebar()->setBackgroundTransparent(true);
+    // titlebar()->setSeparatorVisible(true);
+    titlebar()->setBackgroundTransparent(true);
     titlebar()->setFixedHeight(40);
     titlebar()->setMenu(m_menu);
 
@@ -53,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowIcon(QIcon(":/images/redict.svg"));
     setCentralWidget(centralWidget);
     setShadowOffset(QPoint(0, 0));
-    setFixedSize(550, 430);
+    setFixedSize(550, 428);
 
     m_wordingAction->setCheckable(true);
     m_trayIconAction->setCheckable(true);

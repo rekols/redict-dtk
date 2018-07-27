@@ -13,8 +13,8 @@ PKGCONFIG += dtkwidget x11
 LIBS += -lX11 -lXext -lXtst
 
 # Input
-HEADERS += mainwindow.h popupwindow.h popupcontent.h homepage.h dailypage.h dictpage.h toolbar.h youdaoapi.h utils.h trayicon.h transpage.h loadpage.h eventmonitor.h
-SOURCES += main.cpp mainwindow.cpp popupwindow.cpp popupcontent.cpp homepage.cpp dailypage.cpp dictpage.cpp toolbar.cpp youdaoapi.cpp utils.cpp trayicon.cpp transpage.cpp loadpage.cpp eventmonitor.cpp
+HEADERS += mainwindow.h popupwindow.h popupcontent.h homepage.h dailypage.h dictpage.h toolbar.h youdaoapi.h utils.h trayicon.h transpage.h loadpage.h eventmonitor.h scrollarea.h
+SOURCES += main.cpp mainwindow.cpp popupwindow.cpp popupcontent.cpp homepage.cpp dailypage.cpp dictpage.cpp toolbar.cpp youdaoapi.cpp utils.cpp trayicon.cpp transpage.cpp loadpage.cpp eventmonitor.cpp scrollarea.cpp
 
 RESOURCES += redict.qrc
 

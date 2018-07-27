@@ -18,8 +18,8 @@
  */
 
 #include "dictpage.h"
+#include "scrollarea.h"
 #include <QVBoxLayout>
-#include <QScrollArea>
 
 DictPage::DictPage(QWidget *parent)
     : QWidget(parent),
@@ -38,30 +38,33 @@ DictPage::DictPage(QWidget *parent)
                                ":/images/audio-volume-high-press.svg")),
       m_audio(new QMediaPlayer)
 {
-    QScrollArea *contentFrame = new QScrollArea;
-    contentFrame->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    contentFrame->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    ScrollArea *contentFrame = new ScrollArea;
     contentFrame->setWidgetResizable(true);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
-    layout->setContentsMargins(0, 0, 0, 10);
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(contentFrame);
+    layout->addSpacing(22);
 
     QWidget *contentWidget = new QWidget;
     QVBoxLayout *contentLayout = new QVBoxLayout(contentWidget);
     QHBoxLayout *phoneticLayout = new QHBoxLayout;
 
     phoneticLayout->addWidget(m_ukLabel);
+    phoneticLayout->addSpacing(5);
     phoneticLayout->addWidget(m_ukBtn);
     phoneticLayout->addSpacing(70);
     phoneticLayout->addWidget(m_usLabel);
+    phoneticLayout->addSpacing(5);
     phoneticLayout->addWidget(m_usBtn);
     phoneticLayout->addStretch();
 
-    contentLayout->setContentsMargins(10, 0, 10, 0);
+    contentLayout->setSpacing(0);
+    contentLayout->setContentsMargins(20, 0, 20, 0);
     contentLayout->addWidget(m_wordLabel);
+    contentLayout->addSpacing(2);
     contentLayout->addLayout(phoneticLayout);
-    contentLayout->addSpacing(5);
+    contentLayout->addSpacing(8);
     contentLayout->addWidget(m_infoLabel);
     contentLayout->addWidget(m_webTips);
     contentLayout->addSpacing(5);
@@ -80,6 +83,7 @@ DictPage::DictPage(QWidget *parent)
     m_webTips->setStyleSheet("QLabel { font-size: 18px; font-weight: bold; }");
     m_wordLabel->setStyleSheet("QLabel { font-size: 25px; font-weight: bold; }");
     m_infoLabel->setStyleSheet("QLabel { font-size: 16px; } ");
+    m_webLabel->setStyleSheet("QLabel { font-size: 16px; } ");
 
     connect(m_api, &YoudaoAPI::searchFinished, this, &DictPage::handleQueryFinished);
 
