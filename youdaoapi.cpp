@@ -39,14 +39,18 @@ YoudaoAPI::~YoudaoAPI()
 
 void YoudaoAPI::queryWord(const QString &text)
 {
-    QUrl url("http://fanyi.youdao.com/openapi.do");
+    QUrl url("http://dict.youdao.com/jsonresult");
     QUrlQuery query;
-    query.addQueryItem("keyfrom", "YouDaoCV");
-    query.addQueryItem("key", "659600698");
-    query.addQueryItem("type", "data");
-    query.addQueryItem("doctype", "json");
-    query.addQueryItem("version", "1.1");
+    query.addQueryItem("keyfrom", "UWPdict");
     query.addQueryItem("q", text);
+    query.addQueryItem("pos", "0");
+    query.addQueryItem("type", "1");
+    query.addQueryItem("le", "eng");
+    query.addQueryItem("client", "UWP");
+    query.addQueryItem("userMode", "mouse");
+    query.addQueryItem("id", "3018765056360104019641406886401461021011293208219390238144");
+    query.addQueryItem("appVer", "2.1.60.4556.beta");
+    query.addQueryItem("vendor", "store");
     url.setQuery(query.toString(QUrl::FullyEncoded));
 
     QNetworkRequest request(url);
@@ -84,41 +88,32 @@ void YoudaoAPI::queryWordFinished(QNetworkReply *reply)
     QJsonObject dataObj = object.value("basic").toObject();
 
     if (!document.isEmpty()) {
-        QString queryWord = object.value("query").toString();
-        QString ukPhonetic = dataObj.value("uk-phonetic").toString();
-        QString usPhonetic = dataObj.value("us-phonetic").toString();
+        QString queryWord = object.value("rq").toString();
+        QString ukPhonetic = object.value("uksm").toString();
+        QString usPhonetic = object.value("sm").toString();
         QString basicExplains("");
         QString webReferences("");
 
-        QJsonArray explain = dataObj.value("explains").toArray();
+        QJsonArray explain = object.value("basic").toArray();
 
         // get the basic data.
-        if (explain.isEmpty()) {
-            for (int i = 0; i < object.value("translation").toArray().size(); ++i) {
-                basicExplains.append(object.value("translation").toArray().at(i).toString());
-                basicExplains.append("\n");
-            }
-        } else {
-            for (int i = 0; i < explain.size(); ++i) {
-                basicExplains.append(explain.at(i).toString());
-                basicExplains.append("\n");
-            }
+        for (const QJsonValue &value : explain) {
+            basicExplains.append(value.toString());
+            basicExplains.append("\n");
         }
 
         // Access to the web references.
         QJsonArray webRefArray = object.value("web").toArray();
         if (!webRefArray.isEmpty()) {
-            for (int i = 0; i < webRefArray.size(); ++i) {
-                QJsonObject obj = webRefArray.at(i).toObject();
+            for (const QJsonValue &value : webRefArray) {
+                QJsonObject obj = value.toObject();
+                QString key = obj.keys().first();
+                QJsonArray arr = obj.value(key).toArray();
 
-                // QJsonArray valueArray = obj.value("value").toArray();
-                // for (int i = 0; i < valueArray.size(); ++i) {
-                //     webReferences += valueArray.at(i).toString() + " ";
-                // }
-
-                webReferences += QString("• %1 :   ").arg(obj.value("key").toString());
-                webReferences += obj.value("value").toArray().at(0).toString();
-                webReferences += "\n";
+                for (const QJsonValue &value : arr) {
+                    webReferences += QString("• %1 : %2").arg(key).arg(value.toString());
+                    webReferences += "\n";
+                }
             }
         }
 
