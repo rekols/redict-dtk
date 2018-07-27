@@ -30,13 +30,14 @@
 #include "homepage.h"
 #include "transpage.h"
 #include "trayicon.h"
+#include "eventmonitor.h"
 
 DWIDGET_USE_NAMESPACE
 
 class MainWindow : public DMainWindow
 {
     Q_OBJECT
-    
+
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -56,6 +57,7 @@ private:
 private:
     QStackedLayout *m_mainLayout;
     ToolBar *m_toolBar;
+    EventMonitor *m_eventMonitor;
     PopupWindow *m_popupWindow;
     HomePage *m_homePage;
     TransPage *m_transPage;
@@ -66,6 +68,6 @@ private:
     QAction *m_trayIconAction;
     bool m_enableWording;
     bool m_enableTrayIcon;
-};	
+};
 
 #endif

@@ -23,11 +23,13 @@
 #include <QApplication>
 #include <QClipboard>
 #include <QCloseEvent>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : DMainWindow(parent),
       m_mainLayout(new QStackedLayout),
       m_toolBar(new ToolBar),
+      m_eventMonitor(new EventMonitor),
       m_popupWindow(new PopupWindow),
       m_homePage(new HomePage),
       m_transPage(new TransPage),
@@ -51,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowIcon(QIcon(":/images/redict.svg"));
     setCentralWidget(centralWidget);
     setShadowOffset(QPoint(0, 0));
-    setFixedSize(550, 410);
+    setFixedSize(550, 430);
 
     m_wordingAction->setCheckable(true);
     m_trayIconAction->setCheckable(true);
