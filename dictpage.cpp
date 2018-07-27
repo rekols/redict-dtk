@@ -44,7 +44,7 @@ DictPage::DictPage(QWidget *parent)
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(contentFrame);
-    layout->addSpacing(22);
+    layout->addSpacing(15);
 
     QWidget *contentWidget = new QWidget;
     QVBoxLayout *contentLayout = new QVBoxLayout(contentWidget);
@@ -67,7 +67,6 @@ DictPage::DictPage(QWidget *parent)
     contentLayout->addLayout(phoneticLayout);
     contentLayout->addSpacing(5);
     contentLayout->addWidget(m_infoLabel);
-    contentLayout->addSpacing(5);
     contentLayout->addStretch();
 
     contentFrame->setWidget(contentWidget);
