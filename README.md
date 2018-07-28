@@ -1,6 +1,6 @@
 # Rekols's Dictionary
 
-一款 Deepin 平台下的词典，基于 Qt / DTK 开发，使用有道词典 API，占用内存小。
+一款 Deepin 平台下的词典，基于 Qt / DTK 开发，占用内存小，使用有道词典 API，内容版权归网易有道公司所有。
 
 ![](https://github.com/rekols/redict/blob/master/screenshot/20180721204850.png)
 
