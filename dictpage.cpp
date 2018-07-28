@@ -61,11 +61,11 @@ DictPage::DictPage(QWidget *parent)
 
     contentLayout->setSpacing(0);
     contentLayout->setContentsMargins(20, 0, 20, 0);
-    contentLayout->addSpacing(5);
+    contentLayout->addSpacing(8);
     contentLayout->addWidget(m_wordLabel);
     contentLayout->addSpacing(4);
     contentLayout->addLayout(phoneticLayout);
-    contentLayout->addSpacing(5);
+    contentLayout->addSpacing(6);
     contentLayout->addWidget(m_infoLabel);
     contentLayout->addStretch();
 

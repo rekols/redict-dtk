@@ -43,7 +43,7 @@ HomePage::HomePage(QWidget *parent)
     queryBtn->setObjectName("QueryBtn");
     queryBtn->setFixedSize(90, 35);
 
-    m_queryEdit->setPlaceholderText("输入您要翻译的单词或文字");
+    m_queryEdit->setPlaceholderText("输入要查询的单词或词组");
     m_queryEdit->setFocusPolicy(Qt::StrongFocus);
     m_queryEdit->setObjectName("QueryEdit");
     m_queryEdit->setFixedHeight(35);
