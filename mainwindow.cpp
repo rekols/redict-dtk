@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
       m_trayIconAction(new QAction("托盘显示"))
 {
     titlebar()->setCustomWidget(m_toolBar, Qt::AlignVCenter, false);
-    // titlebar()->setSeparatorVisible(true);
+    titlebar()->setSeparatorVisible(true);
     titlebar()->setBackgroundTransparent(true);
     titlebar()->setFixedHeight(40);
     titlebar()->setMenu(m_menu);

@@ -21,14 +21,34 @@
 #define TRANSPAGE_H
 
 #include <QWidget>
+#include <QPlainTextEdit>
+#include <QPushButton>
+#include <QComboBox>
+#include "youdaoapi.h"
 
 class TransPage : public QWidget
 {
     Q_OBJECT
-    
+
 public:
     TransPage(QWidget *parent = nullptr);
-    ~TransPage(); 
+    ~TransPage();
+
+protected:
+    void keyPressEvent(QKeyEvent *);
+
+private:
+    void translate();
+    void handleTranslateFinished(const QString &src, const QString &tgt);
+
+private:
+    QPlainTextEdit *m_orginEdit;
+    QPlainTextEdit *m_transEdit;
+    QComboBox *m_typeBox;
+    QPushButton *m_transBtn;
+    YoudaoAPI *m_api;
+
+    QMap<QString, QString> m_types;
 };
 
 #endif

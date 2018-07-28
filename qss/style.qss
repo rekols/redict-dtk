@@ -42,3 +42,12 @@ QTabBar::tab:selected {
 #QueryBtn:pressed {
     background-color: #099DFF;
 }
+
+QPlainTextEdit {
+    background-color: #F2F2F2;
+    border-radius: 4px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}

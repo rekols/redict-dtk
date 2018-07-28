@@ -34,6 +34,7 @@ public:
     ~YoudaoAPI();
 
     void queryWord(const QString &text);
+    void translate(const QString &text, const QString &type);
     void queryDaily();
 
 signals:
@@ -51,9 +52,12 @@ signals:
     // 4. image url
     void dailyFinished(std::tuple<QString, QString, QString, QString, QString>);
 
+    void translateFinished(const QString src, const QString target);
+
 private slots:
-    void queryWordFinished(QNetworkReply *);
-    void queryDailyFinished(QNetworkReply *);
+    void handleQueryWordFinished();
+    void handleQueryDailyFinished();
+    void handleTranslateFinished();
 
 private:
     QNetworkAccessManager *m_http;
