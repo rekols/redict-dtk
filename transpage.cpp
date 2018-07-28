@@ -27,7 +27,7 @@ TransPage::TransPage(QWidget *parent)
       m_transEdit(new QPlainTextEdit),
       m_typeBox(new QComboBox),
       m_transBtn(new QPushButton("翻译")),
-      m_api(new YoudaoAPI)
+      m_api(YoudaoAPI::instance())
 {
     QVBoxLayout *layout = new QVBoxLayout(this);
     QHBoxLayout *transLayout = new QHBoxLayout;

@@ -31,7 +31,7 @@ DailyPage::DailyPage(QWidget *parent)
       m_titleLabel(new QLabel),
       m_summaryLabel(new QLabel),
       m_timeLabel(new QLabel),
-      m_api(new YoudaoAPI)
+      m_api(YoudaoAPI::instance())
 {
     ScrollArea *scrollArea = new ScrollArea;
     QWidget *contentWidget = new QWidget;

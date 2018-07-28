@@ -26,6 +26,17 @@
 #include <QDebug>
 #include <QDateTime>
 
+static YoudaoAPI *INSTANCE = nullptr;
+
+YoudaoAPI* YoudaoAPI::instance()
+{
+    if (INSTANCE == nullptr) {
+        INSTANCE = new YoudaoAPI;
+    }
+
+    return INSTANCE;
+}
+
 YoudaoAPI::YoudaoAPI(QObject *parent)
     : QObject(parent),
       m_http(new QNetworkAccessManager(this))

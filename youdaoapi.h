@@ -30,6 +30,8 @@ class YoudaoAPI : public QObject
     Q_OBJECT
 
 public:
+    static YoudaoAPI *instance();
+
     YoudaoAPI(QObject *parent = nullptr);
     ~YoudaoAPI();
 

@@ -24,7 +24,7 @@
 
 DictPage::DictPage(QWidget *parent)
     : QWidget(parent),
-      m_api(new YoudaoAPI),
+      m_api(YoudaoAPI::instance()),
       m_wordLabel(new QLabel),
       m_infoLabel(new QLabel),
       m_ukLabel(new QLabel),
