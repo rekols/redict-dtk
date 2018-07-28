@@ -42,7 +42,7 @@ signals:
     // 1. UK phonetic
     // 2. US phonetic
     // 3. basic explains
-    // 4. web references 
+    // 4. web references
     void searchFinished(std::tuple<QString, QString, QString, QString, QString>);
 
     // 0. title
@@ -52,7 +52,7 @@ signals:
     // 4. image url
     void dailyFinished(std::tuple<QString, QString, QString, QString, QString>);
 
-    void translateFinished(const QString src, const QString target);
+    void translateFinished(const QString result);
 
 private slots:
     void handleQueryWordFinished();

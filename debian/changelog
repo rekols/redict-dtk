@@ -1,3 +1,8 @@
+redict (0.6) unstable; urgency=medium
+
+  * 优化网络问题
+  * 加入翻译界面
+
 redict (0.5) unstable; urgency=medium
 
   * Initial Release.

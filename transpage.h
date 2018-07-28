@@ -39,7 +39,7 @@ protected:
 
 private:
     void translate();
-    void handleTranslateFinished(const QString &src, const QString &tgt);
+    void handleTranslateFinished(const QString &result);
 
 private:
     QPlainTextEdit *m_orginEdit;

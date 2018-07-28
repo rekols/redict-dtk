@@ -76,7 +76,7 @@ void TransPage::keyPressEvent(QKeyEvent *e)
 
 void TransPage::translate()
 {
-    const QString text = m_orginEdit->toPlainText();
+    QString text = m_orginEdit->toPlainText();
 
     if (text.isEmpty())
         return;
@@ -116,7 +116,7 @@ void TransPage::translate()
     m_api->translate(text, type);
 }
 
-void TransPage::handleTranslateFinished(const QString &src, const QString &tgt)
+void TransPage::handleTranslateFinished(const QString &result)
 {
-    m_transEdit->setPlainText(tgt);
+    m_transEdit->setPlainText(result);
 }

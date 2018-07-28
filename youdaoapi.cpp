@@ -185,10 +185,17 @@ void YoudaoAPI::handleTranslateFinished()
     }
 
     QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
-    QJsonArray array = document.object().value("translateResult").toArray().at(0).toArray();
-    QJsonObject object = array.at(0).toObject();
-    const QString src = object.value("src").toString();
-    const QString tgt = object.value("tgt").toString();
+    QJsonArray array = document.object().value("translateResult").toArray();
+    QString text;
 
-    emit translateFinished(src, tgt);
+    for (const QJsonValue &value : array) {
+        QJsonArray arr = value.toArray();
+        for (const QJsonValue &value : arr) {
+            QString ret = value.toObject().value("tgt").toString();
+            text += ret;
+            text += "\n";
+        }
+    }
+
+    emit translateFinished(text);
 }
