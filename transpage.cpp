@@ -58,8 +58,6 @@ TransPage::TransPage(QWidget *parent)
     m_orginEdit->setPlaceholderText("请输入您要翻译的文字");
     m_transEdit->setReadOnly(true);
 
-    m_orginEdit->setStyleSheet(m_orginEdit->styleSheet() + "border: 1px solid #E8E8E8");
-
     connect(m_transBtn, &QPushButton::clicked, this, &TransPage::translate);
     connect(m_api, &YoudaoAPI::translateFinished, this, &TransPage::handleTranslateFinished);
     connect(m_typeBox, &QComboBox::currentTextChanged, [=] { translate(); });
