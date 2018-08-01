@@ -75,6 +75,8 @@ DictPage::DictPage(QWidget *parent)
     m_infoLabel->setWordWrap(true);
 
     m_infoLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+    m_ukLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+    m_usLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
 
     m_wordLabel->setStyleSheet("QLabel { font-size: 25px; font-weight: bold; }");
     m_infoLabel->setStyleSheet("QLabel { font-size: 16px; } ");

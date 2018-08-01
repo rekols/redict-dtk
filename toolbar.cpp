@@ -48,6 +48,8 @@ ToolBar::ToolBar(QWidget *parent)
     layout->addStretch();
     layout->setMargin(0);
 
+    setFocusPolicy(Qt::ClickFocus);
+
     connect(tabbar, &QTabBar::currentChanged, this, [=] (int current) { emit currentChanged(current); });
 }
 
