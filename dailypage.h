@@ -46,9 +46,7 @@ private:
 private:
     QNetworkAccessManager *m_networkManager;
     QLabel *m_imageLabel;
-    QLabel *m_titleLabel;
-    QLabel *m_summaryLabel;
-    QLabel *m_timeLabel;
+    QLabel *m_contentLabel;
     YoudaoAPI *m_api;
 };
 

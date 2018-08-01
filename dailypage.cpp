@@ -28,9 +28,7 @@ DailyPage::DailyPage(QWidget *parent)
     : QWidget(parent),
       m_networkManager(new QNetworkAccessManager(this)),
       m_imageLabel(new QLabel),
-      m_titleLabel(new QLabel),
-      m_summaryLabel(new QLabel),
-      m_timeLabel(new QLabel),
+      m_contentLabel(new QLabel),
       m_api(YoudaoAPI::instance())
 {
     ScrollArea *scrollArea = new ScrollArea;
@@ -45,9 +43,8 @@ DailyPage::DailyPage(QWidget *parent)
     m_imageLabel->setFixedWidth(546);
     m_imageLabel->setScaledContents(true);
 
-    m_titleLabel->setWordWrap(true);
-    m_summaryLabel->setWordWrap(true);
-    m_timeLabel->setWordWrap(true);
+    m_contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+    m_contentLabel->setWordWrap(true);
 
     mainLayout->setMargin(0);
     mainLayout->setSpacing(0);
@@ -55,10 +52,8 @@ DailyPage::DailyPage(QWidget *parent)
 
     textLayout->setContentsMargins(10, 0, 10, 0);
     textLayout->addSpacing(8);
-    textLayout->addWidget(m_titleLabel);
-    textLayout->addWidget(m_summaryLabel);
+    textLayout->addWidget(m_contentLabel);
     textLayout->addSpacing(10);
-    textLayout->addWidget(m_timeLabel);
 
     contentLayout->setContentsMargins(0, 0, 0, 0);
     contentLayout->addWidget(m_imageLabel);
@@ -86,10 +81,12 @@ void DailyPage::checkDirectory()
 
 void DailyPage::handleQueryFinished(std::tuple<QString, QString, QString, QString, QString> data)
 {
-    m_titleLabel->setText(std::get<0>(data));
-    m_summaryLabel->setText(std::get<1>(data));
-    m_timeLabel->setText(std::get<2>(data));
+    QString dailyText;
+    dailyText += std::get<0>(data) + "\n\n";
+    dailyText += std::get<1>(data) + "\n\n";
+    dailyText += std::get<2>(data);
 
+    m_contentLabel->setText(dailyText);
     checkDirectory();
 
     const QString picturePath = QString("%1/.local/share/redict/%2.jpeg").arg(QDir::homePath()).arg(std::get<2>(data));
