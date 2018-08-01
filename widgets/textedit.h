@@ -17,38 +17,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef TRANSPAGE_H
-#define TRANSPAGE_H
+#ifndef TEXTEDIT_H
+#define TEXTEDIT_H
 
-#include <QWidget>
-#include <QPushButton>
-#include <QComboBox>
-#include "widgets/textedit.h"
-#include "youdaoapi.h"
+#include <QPlainTextEdit>
 
-class TransPage : public QWidget
+class TextEdit : public QPlainTextEdit
 {
     Q_OBJECT
 
 public:
-    TransPage(QWidget *parent = nullptr);
-    ~TransPage();
+    TextEdit(QWidget *parent = nullptr);
+    ~TextEdit();
+
+    void clearSelection();
+
+signals:
+    void focusIn();
+    void focusOut();
 
 protected:
-    void keyPressEvent(QKeyEvent *);
-
-private:
-    void translate();
-    void handleTranslateFinished(const QString &result);
-
-private:
-    TextEdit *m_orginEdit;
-    TextEdit *m_transEdit;
-    QComboBox *m_typeBox;
-    QPushButton *m_transBtn;
-    YoudaoAPI *m_api;
-
-    QMap<QString, QString> m_types;
+    void focusInEvent(QFocusEvent *);
+    void focusOutEvent(QFocusEvent *);
 };
 
 #endif

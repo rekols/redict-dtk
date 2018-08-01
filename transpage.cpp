@@ -23,8 +23,8 @@
 
 TransPage::TransPage(QWidget *parent)
     : QWidget(parent),
-      m_orginEdit(new QPlainTextEdit),
-      m_transEdit(new QPlainTextEdit),
+      m_orginEdit(new TextEdit),
+      m_transEdit(new TextEdit),
       m_typeBox(new QComboBox),
       m_transBtn(new QPushButton("翻译")),
       m_api(YoudaoAPI::instance())
@@ -58,9 +58,14 @@ TransPage::TransPage(QWidget *parent)
     m_orginEdit->setPlaceholderText("请输入您要翻译的文字");
     m_transEdit->setReadOnly(true);
 
+    m_orginEdit->setStyleSheet(m_orginEdit->styleSheet() + "border: 1px solid #E8E8E8");
+
     connect(m_transBtn, &QPushButton::clicked, this, &TransPage::translate);
     connect(m_api, &YoudaoAPI::translateFinished, this, &TransPage::handleTranslateFinished);
     connect(m_typeBox, &QComboBox::currentTextChanged, [=] { translate(); });
+
+    connect(m_orginEdit, &TextEdit::focusIn, [=] { m_transEdit->clearSelection(); });
+    connect(m_orginEdit, &TextEdit::focusOut, [=] { m_orginEdit->clearSelection(); });
 }
 
 TransPage::~TransPage()
