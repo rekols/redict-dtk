@@ -40,6 +40,7 @@ signals:
 
 private:
     void checkDirectory();
+    void clearImageCache();
     void handleQueryFinished(std::tuple<QString, QString, QString, QString, QString>);
     void loadImage(const QByteArray &data);
 

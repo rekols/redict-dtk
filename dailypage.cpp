@@ -80,6 +80,18 @@ void DailyPage::checkDirectory()
     }
 }
 
+void DailyPage::clearImageCache()
+{
+    QDir dir(QString("%1/.local/share/redict").arg(QDir::homePath()));
+    QFileInfoList fileList = dir.entryInfoList(QDir::Files);
+
+    for (const QFileInfo &file : fileList) {
+        QFile f(file.filePath());
+        f.remove();
+        f.close();
+    }
+}
+
 void DailyPage::handleQueryFinished(std::tuple<QString, QString, QString, QString, QString> data)
 {
     QString dailyText;
@@ -93,6 +105,9 @@ void DailyPage::handleQueryFinished(std::tuple<QString, QString, QString, QStrin
     const QString picturePath = QString("%1/.local/share/redict/%2.jpeg").arg(QDir::homePath()).arg(std::get<2>(data));
 
     if (!QFile::exists(picturePath)) {
+        // auto clear image cache.
+        clearImageCache();
+
         QNetworkRequest request(QUrl(std::get<4>(data)));
         m_networkManager->get(request);
 
