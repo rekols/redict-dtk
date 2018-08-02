@@ -125,7 +125,7 @@ void YoudaoAPI::handleQueryWordFinished()
     if (!document.isEmpty()) {
         QString queryWord = object.value("rq").toString();
         QString ukPhonetic = object.value("uksm").toString();
-        QString usPhonetic = object.value("sm").toString();
+        QString usPhonetic = object.value("ussm").toString();
         QString basicExplains("");
         QString webReferences("");
 

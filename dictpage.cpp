@@ -116,18 +116,21 @@ void DictPage::handleQueryFinished(std::tuple<QString, QString, QString, QString
     const QString &basicExplains = std::get<3>(data);
     const QString &webReferences = std::get<4>(data);
 
-    if (ukPhonetic.isEmpty() && usPhonetic.isEmpty()) {
+    if (ukPhonetic.isEmpty()) {
         m_ukLabel->setVisible(false);
-        m_usLabel->setVisible(false);
         m_ukBtn->setVisible(false);
-        m_usBtn->setVisible(false);
     } else {
         m_ukLabel->setVisible(true);
-        m_usLabel->setVisible(true);
         m_ukBtn->setVisible(true);
-        m_usBtn->setVisible(true);
-
         m_ukLabel->setText(QString("英 [%1]").arg(ukPhonetic));
+    }
+
+    if (usPhonetic.isEmpty()) {
+        m_usLabel->setVisible(false);
+        m_usBtn->setVisible(false);
+    } else {
+        m_usLabel->setVisible(true);
+        m_usBtn->setVisible(true);
         m_usLabel->setText(QString("美 [%1]").arg(usPhonetic));
     }
 
