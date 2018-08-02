@@ -82,9 +82,9 @@ void DailyPage::checkDirectory()
 void DailyPage::handleQueryFinished(std::tuple<QString, QString, QString, QString, QString> data)
 {
     QString dailyText;
-    dailyText += std::get<0>(data) + "\n\n";
-    dailyText += std::get<1>(data) + "\n\n";
-    dailyText += std::get<2>(data);
+    dailyText += QString("<p>%1</p>").arg(std::get<0>(data));
+    dailyText += QString("<p>%1</p>").arg(std::get<1>(data));
+    dailyText += QString("<p>%1</p>").arg(std::get<2>(data));
 
     m_contentLabel->setText(dailyText);
     checkDirectory();
