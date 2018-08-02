@@ -5,5 +5,9 @@
         <file>images/audio-volume-high-hover.svg</file>
         <file>images/audio-volume-high-press.svg</file>
         <file>qss/style.qss</file>
+        <file>images/search.svg</file>
+        <file>images/close_hover.svg</file>
+        <file>images/close_normal.svg</file>
+        <file>images/close_press.svg</file>
     </qresource>
 </RCC>

@@ -19,8 +19,11 @@
 
 #include "queryedit.h"
 #include "listdelegate.h"
+
+#include <QHBoxLayout>
 #include <QCompleter>
 #include <QKeyEvent>
+#include <QLabel>
 #include <QDebug>
 
 QueryEdit::QueryEdit(QWidget *parent)
@@ -28,26 +31,56 @@ QueryEdit::QueryEdit(QWidget *parent)
       m_listView(new QListView(this)),
       m_listModel(new QStringListModel(this)),
       m_api(YoudaoAPI::instance()),
+      m_closeBtn(new DImageButton(":/images/close_normal.svg",
+                                  ":/images/close_hover.svg",
+                                  ":/images/close_press.svg")),
       m_isEnter(false)
 {
+    QHBoxLayout *layout = new QHBoxLayout;
+    setLayout(layout);
+
+    const qreal ratio = devicePixelRatioF();
+    QPixmap iconPixmap = DSvgRenderer::render(":/images/search.svg", QSize(12, 12) * ratio);
+    iconPixmap.setDevicePixelRatio(ratio);
+
+    QLabel *iconLabel = new QLabel;
+    iconLabel->setFixedSize(12, 12);
+    iconLabel->setPixmap(iconPixmap);
+
+    m_closeBtn->hide();
+
+    layout->addSpacing(3);
+    layout->addWidget(iconLabel, 0, Qt::AlignLeft | Qt::AlignVCenter);
+    layout->addWidget(m_closeBtn, 0, Qt::AlignRight | Qt::AlignVCenter);
+
     m_listView->setItemDelegate(new ListDelegate);
     m_listView->setWindowFlags(Qt::ToolTip);
     m_listView->setFixedHeight(145);
 
     setPlaceholderText("输入要查询的单词或词组");
     setFocusPolicy(Qt::StrongFocus);
-    setTextMargins(10, 0, 10, 0);
+    setTextMargins(30, 0, 10, 0);
     setObjectName("QueryEdit");
     setFixedHeight(35);
 
     connect(this, &QLineEdit::textChanged,
             [=] {
+                const QString text = this->text();
+
+                if (text.isEmpty()) {
+                    m_closeBtn->hide();
+                    m_listView->hide();
+                } else {
+                    m_closeBtn->show();
+                }
+
                 if (!m_isEnter) {
-                    m_api->suggest(text());
+                    m_api->suggest(text);
                 }
             });
 
     connect(m_api, &YoudaoAPI::suggestFinished, this, &QueryEdit::handleSuggest);
+    connect(m_closeBtn, &DImageButton::clicked, this, &QLineEdit::clear);
 
     connect(m_listView, &QListView::clicked, this,
             [=] (const QModelIndex &index) {
@@ -123,16 +156,38 @@ void QueryEdit::focusOutEvent(QFocusEvent *e)
 
 void QueryEdit::handleSuggest(const QStringList &list)
 {
+    const int rowCount = list.count();
+
     m_listModel->setStringList(list);
     m_listView->setModel(m_listModel);
 
-    if (m_listModel->rowCount() == 0) {
+    if (rowCount == 0) {
+        m_listView->hide();
         return;
     }
 
-    m_listView->setFixedWidth(width());
+    // adjust the height of listview.
+    switch (rowCount) {
+    case 1:
+        m_listView->setFixedHeight(35 + 5);
+        break;
+
+    case 2:
+        m_listView->setFixedHeight(35 * 2 + 5);
+        break;
+
+    case 3:
+        m_listView->setFixedHeight(35 * 3 + 5);
+        break;
+
+    case 4:
+        m_listView->setFixedHeight(35 * 4 + 5);
+        break;
+    }
+
+    m_listView->setFixedWidth(width() - 40);
     QPoint p(0, height());
-    int x = mapToGlobal(p).x() + 2;
+    int x = mapToGlobal(p).x() + 20;
     int y = mapToGlobal(p).y() + 1;
     m_listView->move(x, y);
     m_listView->show();

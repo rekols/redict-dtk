@@ -24,6 +24,10 @@
 #include <QListView>
 #include <QStringListModel>
 #include "youdaoapi.h"
+#include "dsvgrenderer.h"
+#include "dimagebutton.h"
+
+DWIDGET_USE_NAMESPACE
 
 class QueryEdit : public QLineEdit
 {
@@ -45,6 +49,7 @@ private:
     QListView *m_listView;
     QStringListModel *m_listModel;
     YoudaoAPI *m_api;
+    DImageButton *m_closeBtn;
     bool m_isEnter;
 };
 
