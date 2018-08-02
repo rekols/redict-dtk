@@ -20,6 +20,9 @@
 #include "mainwindow.h"
 #include "youdaoapi.h"
 #include "dtitlebar.h"
+#include "dthememanager.h"
+#include "utils.h"
+
 #include <QApplication>
 #include <QClipboard>
 #include <QCloseEvent>
@@ -37,7 +40,8 @@ MainWindow::MainWindow(QWidget *parent)
       m_settings(new QSettings("deepin", "redict")),
       m_menu(new QMenu),
       m_wordingAction(new QAction("划词翻译")),
-      m_trayIconAction(new QAction("托盘显示"))
+      m_trayIconAction(new QAction("托盘显示")),
+      m_themeAction(new QAction("暗色主题"))
 {
     titlebar()->setCustomWidget(m_toolBar, Qt::AlignVCenter, false);
     titlebar()->setSeparatorVisible(true);
@@ -57,17 +61,21 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_wordingAction->setCheckable(true);
     m_trayIconAction->setCheckable(true);
+    m_themeAction->setCheckable(true);
 
     initWordingAction();
     initTrayIconAction();
+    initThemeAction();
 
     m_menu->addAction(m_trayIconAction);
     m_menu->addAction(m_wordingAction);
+    m_menu->addAction(m_themeAction);
 
     connect(m_trayIcon, &TrayIcon::openActionTriggered, this, &MainWindow::activeWindow);
     connect(m_trayIcon, &TrayIcon::exitActionTriggered, qApp, &QApplication::quit);
     connect(m_wordingAction, &QAction::triggered, this, &MainWindow::handleWordingTriggered);
     connect(m_trayIconAction, &QAction::triggered, this, &MainWindow::handleTrayIconTriggered);
+    connect(m_themeAction, &QAction::triggered, this, &MainWindow::handleThemeTriggered);
     connect(m_toolBar, &ToolBar::currentChanged, m_mainLayout, &QStackedLayout::setCurrentIndex);
 }
 
@@ -120,6 +128,21 @@ void MainWindow::initTrayIconAction()
     }
 }
 
+void MainWindow::initThemeAction()
+{
+    bool isDark = m_settings->value("dark_theme").toBool();
+
+    if (isDark) {
+        m_themeAction->setChecked(true);
+        DThemeManager::instance()->setTheme("light");
+        setStyleSheet(Utils::getQssContent(":/qss/light.qss"));
+    } else {
+        m_themeAction->setChecked(false);
+        DThemeManager::instance()->setTheme("dark");
+        setStyleSheet(Utils::getQssContent(":/qss/dark.qss"));
+    }
+}
+
 void MainWindow::enableWording()
 {
     // Windows and MacOS not support.
@@ -164,4 +187,17 @@ void MainWindow::handleTrayIconTriggered()
     }
 
     initTrayIconAction();
+}
+
+void MainWindow::handleThemeTriggered()
+{
+    bool isDark = m_settings->value("dark_theme").toBool();
+
+    if (isDark) {
+        m_settings->setValue("dark_theme", false);
+    } else {
+        m_settings->setValue("dark_theme", true);
+    }
+
+    initThemeAction();
 }

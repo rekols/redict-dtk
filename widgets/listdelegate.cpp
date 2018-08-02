@@ -18,7 +18,10 @@
  */
 
 #include "listdelegate.h"
+#include "dthememanager.h"
 #include <QPainter>
+
+DWIDGET_USE_NAMESPACE
 
 ListDelegate::ListDelegate(QObject *parent)
     : QStyledItemDelegate(parent)
@@ -32,6 +35,7 @@ ListDelegate::~ListDelegate()
 
 void ListDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+    const bool isDarkTheme = DThemeManager::instance()->theme() == "dark";
     const QStringList data = index.data().toString().split(" | ");
     const QString entry = data.first();
     const QString explain = data.last();
@@ -39,17 +43,27 @@ void ListDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, 
 
     // draw bottom line.
     if (index.row()) {
-        painter->setPen(QColor(0, 0, 0, 255 * 0.1));
+        if (isDarkTheme) {
+            painter->setPen(QColor(255, 255, 255, 255 * 0.1));
+        } else {
+            painter->setPen(QColor(0, 0, 0, 255 * 0.1));
+        }
+
         painter->drawLine(QPoint(rect.x(), rect.y() - 1),
                           QPoint(rect.width(), rect.y() - 1));
     }
 
     // draw background.
     if (option.state & QStyle::State_Selected) {
-        painter->fillRect(rect, QColor("#D0E8FA"));
-        painter->setPen(QColor("#2CA7F8"));
+        painter->fillRect(rect, (isDarkTheme) ? QColor("#045998") : QColor("#D0E8FA"));
+        painter->setPen((isDarkTheme) ? QColor("#FFFFFF") : QColor("#2CA7F8"));
     } else {
-        painter->setPen(Qt::black);
+
+        if (isDarkTheme) {
+            painter->setPen(Qt::white);
+        } else {
+            painter->setPen(Qt::black);
+        }
     }
 
     // set fixed font size.

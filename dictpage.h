@@ -40,6 +40,7 @@ public:
     void queryWord(const QString &text);
 
 private:
+    void initTheme();
     void handleQueryFinished(std::tuple<QString, QString, QString, QString, QString>);
 
 private:

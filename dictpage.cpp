@@ -19,6 +19,7 @@
 
 #include "dictpage.h"
 #include "scrollarea.h"
+#include "dthememanager.h"
 #include <QVBoxLayout>
 #include <QScrollBar>
 
@@ -29,12 +30,8 @@ DictPage::DictPage(QWidget *parent)
       m_infoLabel(new QLabel),
       m_ukLabel(new QLabel),
       m_usLabel(new QLabel),
-      m_ukBtn(new DImageButton(":/images/audio-volume-high-normal.svg",
-                               ":/images/audio-volume-high-hover.svg",
-                               ":/images/audio-volume-high-press.svg")),
-      m_usBtn(new DImageButton(":/images/audio-volume-high-normal.svg",
-                               ":/images/audio-volume-high-hover.svg",
-                               ":/images/audio-volume-high-press.svg")),
+      m_ukBtn(new DImageButton),
+      m_usBtn(new DImageButton),
       m_audio(new QMediaPlayer)
 {
     ScrollArea *contentFrame = new ScrollArea;
@@ -78,8 +75,12 @@ DictPage::DictPage(QWidget *parent)
     m_ukLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
     m_usLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
 
-    m_wordLabel->setStyleSheet("QLabel { font-size: 25px; font-weight: bold; }");
+    m_wordLabel->setStyleSheet("QLabel { color: #2CA7F8; font-size: 25px; font-weight: bold; }");
     m_infoLabel->setStyleSheet("QLabel { font-size: 16px; } ");
+
+    initTheme();
+
+    connect(DThemeManager::instance(), &DThemeManager::themeChanged, this, &DictPage::initTheme);
 
     connect(m_api, &YoudaoAPI::searchFinished, this, &DictPage::handleQueryFinished);
 
@@ -106,6 +107,27 @@ void DictPage::queryWord(const QString &text)
 
     m_scrollArea->verticalScrollBar()->setValue(0);
     m_api->queryWord(text);
+}
+
+void DictPage::initTheme()
+{
+    const bool isDark = DThemeManager::instance()->theme() == "dark";
+
+    if (isDark) {
+        m_ukBtn->setNormalPic(":/images/audio-dark-normal.svg");
+        m_ukBtn->setHoverPic(":/images/audio-dark-hover.svg");
+        m_ukBtn->setPressPic(":/images/audio-dark-press.svg");
+        m_usBtn->setNormalPic(":/images/audio-dark-normal.svg");
+        m_usBtn->setHoverPic(":/images/audio-dark-hover.svg");
+        m_usBtn->setPressPic(":/images/audio-dark-press.svg");
+    } else {
+        m_ukBtn->setNormalPic(":/images/audio-light-normal.svg");
+        m_ukBtn->setHoverPic(":/images/audio-light-hover.svg");
+        m_ukBtn->setPressPic(":/images/audio-light-press.svg");
+        m_usBtn->setNormalPic(":/images/audio-light-normal.svg");
+        m_usBtn->setHoverPic(":/images/audio-light-hover.svg");
+        m_usBtn->setPressPic(":/images/audio-light-press.svg");
+    }
 }
 
 void DictPage::handleQueryFinished(std::tuple<QString, QString, QString, QString, QString> data)

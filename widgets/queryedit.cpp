@@ -19,11 +19,11 @@
 
 #include "queryedit.h"
 #include "listdelegate.h"
+#include "dthememanager.h"
 
 #include <QHBoxLayout>
 #include <QCompleter>
 #include <QKeyEvent>
-#include <QLabel>
 #include <QDebug>
 
 QueryEdit::QueryEdit(QWidget *parent)
@@ -34,23 +34,17 @@ QueryEdit::QueryEdit(QWidget *parent)
       m_closeBtn(new DImageButton(":/images/close_normal.svg",
                                   ":/images/close_hover.svg",
                                   ":/images/close_press.svg")),
+      m_iconLabel(new QLabel),
       m_isEnter(false)
 {
     QHBoxLayout *layout = new QHBoxLayout;
     setLayout(layout);
 
-    const qreal ratio = devicePixelRatioF();
-    QPixmap iconPixmap = DSvgRenderer::render(":/images/search.svg", QSize(12, 12) * ratio);
-    iconPixmap.setDevicePixelRatio(ratio);
-
-    QLabel *iconLabel = new QLabel;
-    iconLabel->setFixedSize(12, 12);
-    iconLabel->setPixmap(iconPixmap);
-
+    m_iconLabel->setFixedSize(12, 12);
     m_closeBtn->hide();
 
     layout->addSpacing(3);
-    layout->addWidget(iconLabel, 0, Qt::AlignLeft | Qt::AlignVCenter);
+    layout->addWidget(m_iconLabel, 0, Qt::AlignLeft | Qt::AlignVCenter);
     layout->addWidget(m_closeBtn, 0, Qt::AlignRight | Qt::AlignVCenter);
 
     m_listView->setItemDelegate(new ListDelegate);
@@ -62,6 +56,7 @@ QueryEdit::QueryEdit(QWidget *parent)
     setTextMargins(30, 0, 30, 0);
     setObjectName("QueryEdit");
     setFixedHeight(35);
+    initTheme();
 
     connect(this, &QLineEdit::textChanged,
             [=] {
@@ -89,6 +84,8 @@ QueryEdit::QueryEdit(QWidget *parent)
                 setText(data.first());
                 m_listView->hide();
             });
+
+    connect(DThemeManager::instance(), &DThemeManager::themeChanged, this, &QueryEdit::initTheme);
 }
 
 QueryEdit::~QueryEdit()
@@ -152,6 +149,23 @@ void QueryEdit::focusOutEvent(QFocusEvent *e)
 {
     QLineEdit::focusOutEvent(e);
     m_listView->hide();
+}
+
+void QueryEdit::initTheme()
+{
+    const qreal ratio = devicePixelRatioF();
+    const bool isDark = DThemeManager::instance()->theme() == "dark";
+
+    QPixmap iconPixmap;
+
+    if (isDark) {
+        iconPixmap = DSvgRenderer::render(":/images/search_dark.svg", QSize(12, 12) * ratio);
+    } else {
+        iconPixmap = DSvgRenderer::render(":/images/search_light.svg", QSize(12, 12) * ratio);
+    }
+
+    iconPixmap.setDevicePixelRatio(ratio);
+    m_iconLabel->setPixmap(iconPixmap);
 }
 
 void QueryEdit::handleSuggest(const QStringList &list)

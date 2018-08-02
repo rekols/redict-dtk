@@ -22,6 +22,7 @@
 
 #include <QLineEdit>
 #include <QListView>
+#include <QLabel>
 #include <QStringListModel>
 #include "youdaoapi.h"
 #include "dsvgrenderer.h"
@@ -43,6 +44,7 @@ protected:
     void focusOutEvent(QFocusEvent *);
 
 private:
+    void initTheme();
     void handleSuggest(const QStringList &list);
 
 private:
@@ -50,6 +52,7 @@ private:
     QStringListModel *m_listModel;
     YoudaoAPI *m_api;
     DImageButton *m_closeBtn;
+    QLabel *m_iconLabel;
     bool m_isEnter;
 };
 
