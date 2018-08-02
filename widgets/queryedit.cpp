@@ -59,7 +59,7 @@ QueryEdit::QueryEdit(QWidget *parent)
 
     setPlaceholderText("输入要查询的单词或词组");
     setFocusPolicy(Qt::StrongFocus);
-    setTextMargins(30, 0, 10, 0);
+    setTextMargins(30, 0, 30, 0);
     setObjectName("QueryEdit");
     setFixedHeight(35);
 
