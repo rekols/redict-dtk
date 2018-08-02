@@ -1,3 +1,9 @@
+redict (0.7) unstable; urgency=medium
+
+  * 加入暗色主题
+  * 加入单词提示下拉栏
+  * 搜索框细节优化(比如加入清除按钮)
+
 redict (0.6) unstable; urgency=medium
 
   * 优化网络问题
