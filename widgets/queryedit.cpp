@@ -48,6 +48,14 @@ QueryEdit::QueryEdit(QWidget *parent)
             });
 
     connect(m_api, &YoudaoAPI::suggestFinished, this, &QueryEdit::handleSuggest);
+
+    connect(m_listView, &QListView::clicked, this,
+            [=] (const QModelIndex &index) {
+                QStringList data = index.data().toString().split(" | ");
+                m_isEnter = true;
+                setText(data.first());
+                m_listView->hide();
+            });
 }
 
 QueryEdit::~QueryEdit()
