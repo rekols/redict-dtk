@@ -52,16 +52,12 @@ void YoudaoAPI::queryWord(const QString &text)
 {
     QUrl url("http://dict.youdao.com/jsonresult");
     QUrlQuery query;
-    query.addQueryItem("keyfrom", "UWPdict");
     query.addQueryItem("q", text);
-    query.addQueryItem("pos", "0");
     query.addQueryItem("type", "1");
-    query.addQueryItem("le", "eng");
-    query.addQueryItem("client", "UWP");
-    query.addQueryItem("userMode", "mouse");
-    query.addQueryItem("id", "3018765056360104019641406886401461021011293208219390238144");
-    query.addQueryItem("appVer", "2.1.60.4556.beta");
-    query.addQueryItem("vendor", "store");
+    query.addQueryItem("client", "deskdict");
+    query.addQueryItem("keyfrom", "deskdict_deepin");
+    query.addQueryItem("pos", "-1");
+    query.addQueryItem("len", "eng");
     url.setQuery(query.toString(QUrl::FullyEncoded));
 
     QNetworkRequest request(url);
