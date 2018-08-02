@@ -40,7 +40,7 @@ QueryEdit::QueryEdit(QWidget *parent)
     QHBoxLayout *layout = new QHBoxLayout;
     setLayout(layout);
 
-    m_iconLabel->setFixedSize(16, 16);
+    m_iconLabel->setFixedSize(18, 18);
     m_closeBtn->hide();
 
     layout->addSpacing(3);
