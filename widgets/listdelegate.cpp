@@ -37,6 +37,13 @@ void ListDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, 
     const QString explain = data.last();
     const QRect rect = option.rect;
 
+    // draw bottom line.
+    if (index.row()) {
+        painter->setPen(QColor(0, 0, 0, 255 * 0.1));
+        painter->drawLine(QPoint(rect.x(), rect.y() - 1),
+                          QPoint(rect.width(), rect.y() - 1));
+    }
+
     // draw background.
     if (option.state & QStyle::State_Selected) {
         painter->fillRect(rect, QColor("#D0E8FA"));
@@ -53,8 +60,8 @@ void ListDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, 
     QRect entryRect = rect;
     entryRect.setLeft(10);
     entryRect.setWidth(rect.width() / 3);
-    const QString entryText = painter->fontMetrics().elidedText(entry, Qt::ElideRight, rect.width() / 3 - 10);
-    painter->drawText(entryRect, Qt::AlignLeft | Qt::AlignVCenter, entry);
+    const QString entryText = painter->fontMetrics().elidedText(entry, Qt::ElideRight, rect.width() / 3 - 20);
+    painter->drawText(entryRect, Qt::AlignLeft | Qt::AlignVCenter, entryText);
 
     QRect explainRect = rect;
     explainRect.setLeft(rect.width() / 3);
