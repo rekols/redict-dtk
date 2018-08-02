@@ -14,10 +14,14 @@ LIBS += -lX11 -lXext -lXtst
 
 # Input
 HEADERS += mainwindow.h popupwindow.h popupcontent.h homepage.h dailypage.h dictpage.h toolbar.h youdaoapi.h utils.h trayicon.h transpage.h loadpage.h eventmonitor.h scrollarea.h \
-    widgets/textedit.h
+    widgets/textedit.h \
+    widgets/queryedit.h \
+    widgets/listdelegate.h
 
 SOURCES += main.cpp mainwindow.cpp popupwindow.cpp popupcontent.cpp homepage.cpp dailypage.cpp dictpage.cpp toolbar.cpp youdaoapi.cpp utils.cpp trayicon.cpp transpage.cpp loadpage.cpp eventmonitor.cpp scrollarea.cpp \
-    widgets/textedit.cpp
+    widgets/textedit.cpp \
+    widgets/queryedit.cpp \
+    widgets/listdelegate.cpp
 
 RESOURCES += redict.qrc
 

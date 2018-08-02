@@ -24,8 +24,6 @@ QTabBar::tab:selected {
     border: 1px solid #E0E0E0;
     border-radius: none;
     background: #EDEDED;
-    padding-left: 10px;
-    padding-right: 8px;
 }
 
 #QueryBtn {
@@ -57,4 +55,9 @@ QPlainTextEdit {
 
 QComboBox {
     font-size: 15px;
+}
+
+QListView {
+    border: 1px solid #2CA7F8;
+    background: white;
 }

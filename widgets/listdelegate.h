@@ -17,36 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef HOMEPAGE_H
-#define HOMEPAGE_H
+#ifndef LISTDELEGATE_H
+#define LISTDELEGATE_H
 
-#include <QWidget>
-#include <QStackedLayout>
+#include <QStyledItemDelegate>
 
-#include "widgets/queryedit.h"
-#include "dailypage.h"
-#include "dictpage.h"
-#include "loadpage.h"
-
-class HomePage : public QWidget
+class ListDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 
 public:
-    HomePage(QWidget *parent = nullptr);
-    ~HomePage();
+    ListDelegate(QObject *parent = nullptr);
+    ~ListDelegate();
 
-private:
-    void queryWord();
-
-private:
-    QStackedLayout *m_layout;
-    DailyPage *m_dailyPage;
-    DictPage *m_dictPage;
-    LoadPage *m_loadPage;
-    QueryEdit *m_queryEdit;
-
-    int m_currentIndex = 0;
+protected:
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+    QSize sizeHint ( const QStyleOptionViewItem& option, const QModelIndex& index ) const;
 };
 
 #endif

@@ -17,36 +17,35 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef HOMEPAGE_H
-#define HOMEPAGE_H
+#ifndef QUERYEDIT_H
+#define QUERYEDIT_H
 
-#include <QWidget>
-#include <QStackedLayout>
+#include <QLineEdit>
+#include <QListView>
+#include <QStringListModel>
+#include "youdaoapi.h"
 
-#include "widgets/queryedit.h"
-#include "dailypage.h"
-#include "dictpage.h"
-#include "loadpage.h"
-
-class HomePage : public QWidget
+class QueryEdit : public QLineEdit
 {
     Q_OBJECT
 
 public:
-    HomePage(QWidget *parent = nullptr);
-    ~HomePage();
+    QueryEdit(QWidget *parent = nullptr);
+    ~QueryEdit();
+
+protected:
+    void keyPressEvent(QKeyEvent *);
+    void focusInEvent(QFocusEvent *);
+    void focusOutEvent(QFocusEvent *);
 
 private:
-    void queryWord();
+    void handleSuggest(const QStringList &list);
 
 private:
-    QStackedLayout *m_layout;
-    DailyPage *m_dailyPage;
-    DictPage *m_dictPage;
-    LoadPage *m_loadPage;
-    QueryEdit *m_queryEdit;
-
-    int m_currentIndex = 0;
+    QListView *m_listView;
+    QStringListModel *m_listModel;
+    YoudaoAPI *m_api;
+    bool m_isEnter;
 };
 
 #endif

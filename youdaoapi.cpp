@@ -23,6 +23,9 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
+#include <QXmlStreamWriter>
+#include <QXmlStreamReader>
+
 #include <QDebug>
 #include <QDateTime>
 
@@ -64,6 +67,26 @@ void YoudaoAPI::queryWord(const QString &text)
     QNetworkReply *reply = m_http->get(request);
 
     connect(reply, &QNetworkReply::finished, this, &YoudaoAPI::handleQueryWordFinished);
+}
+
+void YoudaoAPI::suggest(const QString &text)
+{
+    QUrl url("http://dict.youdao.com/suggest");
+    QUrlQuery query;
+    query.addQueryItem("type", "DESKDICT");
+    query.addQueryItem("client", "deskdict");
+    query.addQueryItem("keyfrom", "deskdict_deepin");
+    query.addQueryItem("num", "4");
+    query.addQueryItem("q", text);
+    query.addQueryItem("ver", "2.0");
+    query.addQueryItem("le", "eng");
+    query.addQueryItem("doctype", "json");
+    url.setQuery(query.toString(QUrl::FullyEncoded));
+
+    QNetworkRequest request(url);
+    QNetworkReply *reply = m_http->get(request);
+
+    connect(reply, &QNetworkReply::finished, this, &YoudaoAPI::handleSuggestFinished);
 }
 
 void YoudaoAPI::translate(const QString &text, const QString &type)
@@ -205,4 +228,31 @@ void YoudaoAPI::handleTranslateFinished()
     }
 
     emit translateFinished(text);
+}
+
+void YoudaoAPI::handleSuggestFinished()
+{
+    QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
+
+    if (reply->error() != QNetworkReply::NoError) {
+        return;
+    }
+
+    QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+    QJsonObject object = document.object().value("data").toObject();
+    QJsonArray array = object.value("entries").toArray();
+    QStringList list;
+
+    for (const QJsonValue &value : array) {
+        QJsonObject obj = value.toObject();
+        QString entry = obj.value("entry").toString();
+        const QString explain = obj.value("explain").toString();
+
+        entry.push_back(" | ");
+        entry.push_back(explain);
+
+        list << entry;
+    }
+
+    emit suggestFinished(list);
 }
