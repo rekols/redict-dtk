@@ -153,8 +153,6 @@ void YoudaoAPI::handleQueryWordFinished()
             }
         }
 
-        qDebug() << webReferences;
-
         emit searchFinished(std::make_tuple(queryWord, ukPhonetic, usPhonetic, basicExplains, webReferences));
     }
 }

@@ -43,6 +43,7 @@ DailyPage::DailyPage(QWidget *parent)
     m_imageLabel->setFixedWidth(546);
     m_imageLabel->setScaledContents(true);
 
+    m_contentLabel->setStyleSheet("QLabel { font-size: 15px; }");
     m_contentLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
     m_contentLabel->setWordWrap(true);
 

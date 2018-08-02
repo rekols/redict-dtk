@@ -32,6 +32,7 @@ QTabBar::tab:selected {
     background-color: #2CA7F8;
     border: 1px solid #2CA7F8;
     border-radius: none;
+    font-size: 15px;
     color: white;
 }
 
@@ -51,4 +52,9 @@ QPlainTextEdit {
     padding-top: 5px;
     padding-right: 5px;
     padding-bottom: 5px;
+    font-size: 15px;
+}
+
+QComboBox {
+    font-size: 15px;
 }
