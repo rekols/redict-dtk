@@ -31,6 +31,10 @@ PopupWindow::PopupWindow(QWidget *parent)
       m_regionInter(new DRegionMonitor(this)),
       m_api(new YoudaoAPI)
 {
+    const qreal ratio = devicePixelRatioF();
+    m_iconPixmap = DSvgRenderer::render(":/images/redict.svg", QSize(30, 30) * ratio);
+    m_iconPixmap.setDevicePixelRatio(ratio);
+
     setWindowFlags(Qt::FramelessWindowHint | Qt::ToolTip);
     setAttribute(Qt::WA_TranslucentBackground);
     setCursor(Qt::PointingHandCursor);
@@ -54,11 +58,7 @@ void PopupWindow::paintEvent(QPaintEvent *e)
     QPainter painter(this);
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing | QPainter::SmoothPixmapTransform);
 
-    const qreal ratio = devicePixelRatioF();
-    QPixmap pixmap = DSvgRenderer::render(":/images/redict.svg", QSize(30, 30) * ratio);
-    pixmap.setDevicePixelRatio(ratio);
-
-    painter.drawPixmap(rect(), pixmap);
+    painter.drawPixmap(rect(), m_iconPixmap);
 }
 
 void PopupWindow::mouseReleaseEvent(QMouseEvent *e)

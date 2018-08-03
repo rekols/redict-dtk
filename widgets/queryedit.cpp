@@ -131,6 +131,7 @@ void QueryEdit::keyPressEvent(QKeyEvent *e)
                 setText(data.first());
             }
             m_listView->hide();
+            selectAll();
 
         } else {
             m_isEnter = false;

@@ -52,6 +52,7 @@ private:
     PopupContent *m_content;
     DRegionMonitor *m_regionInter;
     YoudaoAPI *m_api;
+    QPixmap m_iconPixmap;
 };
 
 #endif
