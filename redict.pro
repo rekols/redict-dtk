@@ -13,15 +13,42 @@ PKGCONFIG += dtkwidget x11
 LIBS += -lX11 -lXext -lXtst
 
 # Input
-HEADERS += mainwindow.h popupwindow.h popupcontent.h homepage.h dailypage.h dictpage.h toolbar.h youdaoapi.h utils.h trayicon.h transpage.h loadpage.h eventmonitor.h scrollarea.h \
-    widgets/textedit.h \
-    widgets/queryedit.h \
-    widgets/listdelegate.h
+HEADERS += dailypage.h \
+           dictpage.h \
+           eventmonitor.h \
+           homepage.h \
+           loadpage.h \
+           mainwindow.h \
+           transpage.h \
+           trayicon.h \
+           utils.h \
+           youdaoapi.h \
+           popup/popupcontent.h \
+           popup/popupwindow.h \
+           widgets/listdelegate.h \
+           widgets/queryedit.h \
+           widgets/scrollarea.h \
+           widgets/textedit.h \
+           widgets/toolbar.h
 
-SOURCES += main.cpp mainwindow.cpp popupwindow.cpp popupcontent.cpp homepage.cpp dailypage.cpp dictpage.cpp toolbar.cpp youdaoapi.cpp utils.cpp trayicon.cpp transpage.cpp loadpage.cpp eventmonitor.cpp scrollarea.cpp \
-    widgets/textedit.cpp \
-    widgets/queryedit.cpp \
-    widgets/listdelegate.cpp
+SOURCES += dailypage.cpp \
+           dictpage.cpp \
+           eventmonitor.cpp \
+           homepage.cpp \
+           loadpage.cpp \
+           main.cpp \
+           mainwindow.cpp \
+           transpage.cpp \
+           trayicon.cpp \
+           utils.cpp \
+           youdaoapi.cpp \
+           popup/popupcontent.cpp \
+           popup/popupwindow.cpp \
+           widgets/listdelegate.cpp \
+           widgets/queryedit.cpp \
+           widgets/scrollarea.cpp \
+           widgets/textedit.cpp \
+           widgets/toolbar.cpp
 
 RESOURCES += redict.qrc
 

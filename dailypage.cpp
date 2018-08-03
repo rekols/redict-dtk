@@ -18,7 +18,7 @@
  */
 
 #include "dailypage.h"
-#include "scrollarea.h"
+#include "widgets/scrollarea.h"
 #include <QVBoxLayout>
 #include <QTimer>
 #include <QFile>

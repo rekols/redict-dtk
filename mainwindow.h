@@ -25,8 +25,8 @@
 #include <QSettings>
 #include <QMenu>
 
-#include "toolbar.h"
-#include "popupwindow.h"
+#include "widgets/toolbar.h"
+#include "popup/popupwindow.h"
 #include "homepage.h"
 #include "transpage.h"
 #include "trayicon.h"

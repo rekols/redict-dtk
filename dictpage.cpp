@@ -18,7 +18,7 @@
  */
 
 #include "dictpage.h"
-#include "scrollarea.h"
+#include "widgets/scrollarea.h"
 #include "dthememanager.h"
 #include <QVBoxLayout>
 #include <QScrollBar>

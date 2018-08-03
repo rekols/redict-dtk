@@ -23,9 +23,6 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
-#include <QXmlStreamWriter>
-#include <QXmlStreamReader>
-
 #include <QDebug>
 #include <QDateTime>
 
