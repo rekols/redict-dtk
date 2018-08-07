@@ -54,8 +54,6 @@ HomePage::HomePage(QWidget *parent)
     m_layout->addWidget(m_dictPage);
     m_layout->addWidget(m_loadPage);
 
-    setFocusPolicy(Qt::ClickFocus);
-
     m_layout->setCurrentIndex(2);
     m_loadPage->start();
 

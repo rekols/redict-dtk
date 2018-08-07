@@ -131,6 +131,10 @@ void DailyPage::handleQueryFinished(std::tuple<QString, QString, QString, QStrin
         QFile file(picturePath);
         if (file.open(QIODevice::ReadOnly)) {
             QByteArray imgData = file.readAll();
+            if (imgData.isEmpty()) {
+                clearImageCache();
+                m_api->queryDaily();
+            }
             loadImage(imgData);
         }
         file.close();
