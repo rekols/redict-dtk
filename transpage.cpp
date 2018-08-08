@@ -62,6 +62,12 @@ TransPage::TransPage(QWidget *parent)
     connect(m_api, &YoudaoAPI::translateFinished, this, &TransPage::handleTranslateFinished);
     connect(m_typeBox, &QComboBox::currentTextChanged, [=] { translate(); });
 
+    connect(m_orginEdit, &TextEdit::textChanged, [=] {
+                                                     if (m_orginEdit->toPlainText().isEmpty()) {
+                                                         m_transEdit->clear();
+                                                     }
+                                                 });
+
     connect(m_orginEdit, &TextEdit::focusIn, [=] { m_transEdit->clearSelection(); });
     connect(m_orginEdit, &TextEdit::focusOut, [=] { m_orginEdit->clearSelection(); });
 }
