@@ -50,6 +50,12 @@ MainWindow::MainWindow(QWidget *parent)
     titlebar()->setFixedHeight(40);
     titlebar()->setMenu(m_menu);
 
+    // init settings.
+    if (!m_settings->contains("darkTheme")) {
+        m_settings->setValue("darkTheme", false);
+    }
+
+    // init central widget.
     QWidget *centralWidget = new QWidget;
     m_mainLayout->addWidget(m_homePage);
     m_mainLayout->addWidget(m_transPage);
@@ -148,16 +154,16 @@ void MainWindow::initTrayIconAction()
 
 void MainWindow::initThemeAction()
 {
-    bool isDark = m_settings->value("dark_theme").toBool();
+    bool isDark = m_settings->value("darkTheme").toBool();
 
     if (isDark) {
         m_themeAction->setChecked(true);
-        DThemeManager::instance()->setTheme("light");
-        setStyleSheet(Utils::getQssContent(":/qss/light.qss"));
-    } else {
-        m_themeAction->setChecked(false);
         DThemeManager::instance()->setTheme("dark");
         setStyleSheet(Utils::getQssContent(":/qss/dark.qss"));
+    } else {
+        m_themeAction->setChecked(false);
+        DThemeManager::instance()->setTheme("light");
+        setStyleSheet(Utils::getQssContent(":/qss/light.qss"));
     }
 }
 
@@ -209,12 +215,12 @@ void MainWindow::handleTrayIconTriggered()
 
 void MainWindow::handleThemeTriggered()
 {
-    bool isDark = m_settings->value("dark_theme").toBool();
+    bool isDark = m_settings->value("darkTheme").toBool();
 
     if (isDark) {
-        m_settings->setValue("dark_theme", false);
+        m_settings->setValue("darkTheme", false);
     } else {
-        m_settings->setValue("dark_theme", true);
+        m_settings->setValue("darkTheme", true);
     }
 
     initThemeAction();
