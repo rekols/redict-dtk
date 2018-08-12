@@ -42,8 +42,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+signals:
+    void requestKeyPressEvent(QKeyEvent *);
+
 protected:
     void closeEvent(QCloseEvent *);
+    void keyPressEvent(QKeyEvent *);
 
 private:
     void activeWindow();

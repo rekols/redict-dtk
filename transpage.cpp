@@ -18,6 +18,7 @@
  */
 
 #include "transpage.h"
+#include "mainwindow.h"
 #include <QVBoxLayout>
 #include <QKeyEvent>
 
@@ -81,6 +82,9 @@ void TransPage::keyPressEvent(QKeyEvent *e)
     if (e->key() == Qt::Key_Return && (e->modifiers() & Qt::ControlModifier)) {
         translate();
     }
+
+    // request window keypress.
+    (qobject_cast<MainWindow *>(this->window()))->requestKeyPressEvent(e);
 }
 
 void TransPage::translate()

@@ -21,6 +21,7 @@
 #define TOOLBAR_H
 
 #include <QWidget>
+#include <QTabBar>
 
 class ToolBar : public QWidget
 {
@@ -29,6 +30,8 @@ class ToolBar : public QWidget
 public:
     ToolBar(QWidget *parent = nullptr);
     ~ToolBar();
+
+    QTabBar *tabbar;
 
 signals:
     void currentChanged(int index);

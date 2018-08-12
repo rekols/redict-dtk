@@ -26,6 +26,7 @@
 #include <QApplication>
 #include <QClipboard>
 #include <QCloseEvent>
+#include <QKeyEvent>
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -77,6 +78,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_trayIconAction, &QAction::triggered, this, &MainWindow::handleTrayIconTriggered);
     connect(m_themeAction, &QAction::triggered, this, &MainWindow::handleThemeTriggered);
     connect(m_toolBar, &ToolBar::currentChanged, m_mainLayout, &QStackedLayout::setCurrentIndex);
+    connect(this, &MainWindow::requestKeyPressEvent, this, &MainWindow::keyPressEvent);
 }
 
 MainWindow::~MainWindow()
@@ -91,6 +93,22 @@ void MainWindow::closeEvent(QCloseEvent *e)
         e->ignore();
     } else {
         e->accept();
+    }
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *e)
+{
+    if (e->modifiers() == Qt::ControlModifier &&
+        e->key() == Qt::Key_Tab) {
+
+        const int tabCount = m_toolBar->tabbar->count();
+        int tabIndex = m_toolBar->tabbar->currentIndex() + 1;
+
+        if (tabIndex >= tabCount) {
+            tabIndex = 0;
+        }
+
+        m_toolBar->tabbar->setCurrentIndex(tabIndex);
     }
 }
 
