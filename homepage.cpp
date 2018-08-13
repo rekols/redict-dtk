@@ -59,7 +59,14 @@ HomePage::HomePage(QWidget *parent)
 
     connect(m_queryEdit, &QLineEdit::returnPressed, this, &HomePage::queryWord);
     connect(m_queryEdit, &QLineEdit::textChanged, this, &HomePage::queryWord);
-    connect(queryBtn, &QPushButton::clicked, this, &HomePage::queryWord);
+
+    connect(queryBtn, &QPushButton::clicked, this,
+            [=] {
+                // FIXME(rekols): press enter after don't hide the listview.
+                m_queryEdit->setEnter(true);
+                queryWord();
+            });
+
 
     connect(m_dailyPage, &DailyPage::loadFinished, this,
             [=] {

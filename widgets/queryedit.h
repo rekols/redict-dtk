@@ -38,6 +38,8 @@ public:
     QueryEdit(QWidget *parent = nullptr);
     ~QueryEdit();
 
+    void setEnter(bool enter);
+
 protected:
     void keyPressEvent(QKeyEvent *);
     void focusInEvent(QFocusEvent *);

@@ -92,6 +92,13 @@ QueryEdit::~QueryEdit()
 {
 }
 
+void QueryEdit::setEnter(bool enter)
+{
+    if (enter) {
+        m_listView->hide();
+    }
+}
+
 void QueryEdit::keyPressEvent(QKeyEvent *e)
 {
     if (m_listView->isHidden()) {
