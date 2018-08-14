@@ -76,7 +76,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_menu->addAction(m_themeAction);
     m_menu->addSeparator();
-    m_menu->addAction(m_wordingAction);
+    // m_menu->addAction(m_wordingAction);
     m_menu->addAction(m_trayIconAction);
 
     connect(m_trayIcon, &TrayIcon::openActionTriggered, this, &MainWindow::activeWindow);
