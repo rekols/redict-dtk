@@ -21,6 +21,7 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QTimer>
+#include <QDebug>
 
 HomePage::HomePage(QWidget *parent)
     : QWidget(parent),
@@ -60,13 +61,10 @@ HomePage::HomePage(QWidget *parent)
     connect(m_queryEdit, &QLineEdit::returnPressed, this, &HomePage::queryWord);
     connect(m_queryEdit, &QLineEdit::textChanged, this, &HomePage::queryWord);
 
-    connect(queryBtn, &QPushButton::clicked, this,
-            [=] {
-                // FIXME(rekols): press enter after don't hide the listview.
-                m_queryEdit->setEnter(true);
-                queryWord();
-            });
-
+    connect(queryBtn, &QPushButton::pressed, this, [=] {
+        queryWord();
+        m_queryEdit->pressEnter();
+    });
 
     connect(m_dailyPage, &DailyPage::loadFinished, this,
             [=] {

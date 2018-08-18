@@ -38,7 +38,7 @@ public:
     QueryEdit(QWidget *parent = nullptr);
     ~QueryEdit();
 
-    void setEnter(bool enter);
+    void pressEnter();
 
 protected:
     void keyPressEvent(QKeyEvent *);

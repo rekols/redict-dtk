@@ -83,6 +83,7 @@ QueryEdit::QueryEdit(QWidget *parent)
                 m_isEnter = true;
                 setText(data.first());
                 m_listView->hide();
+                selectAll();
             });
 
     connect(DThemeManager::instance(), &DThemeManager::themeChanged, this, &QueryEdit::initTheme);
@@ -92,11 +93,17 @@ QueryEdit::~QueryEdit()
 {
 }
 
-void QueryEdit::setEnter(bool enter)
+void QueryEdit::pressEnter()
 {
-    if (enter) {
-        m_listView->hide();
+    QModelIndex currentIndex = m_listView->currentIndex();
+    
+    m_isEnter = true;
+    if (currentIndex.isValid()) {
+        QStringList data = currentIndex.data().toString().split(" | ");
+        setText(data.first());
     }
+    m_listView->hide();
+    selectAll();
 }
 
 void QueryEdit::keyPressEvent(QKeyEvent *e)
@@ -132,13 +139,7 @@ void QueryEdit::keyPressEvent(QKeyEvent *e)
             m_listView->hide();
         } else if (e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return) {
 
-            m_isEnter = true;
-            if (currentIndex.isValid()) {
-                QStringList data = currentIndex.data().toString().split(" | ");
-                setText(data.first());
-            }
-            m_listView->hide();
-            selectAll();
+            pressEnter();
 
         } else {
             m_isEnter = false;
