@@ -22,6 +22,8 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QDebug>
+#include <QEvent>
+#include <QMouseEvent>
 
 DWIDGET_USE_NAMESPACE
 
@@ -38,6 +40,7 @@ ToolBar::ToolBar(QWidget *parent)
     tabbar->addTab("词典");
     tabbar->addTab("翻译");
     tabbar->setFocusPolicy(Qt::NoFocus);
+    tabbar->installEventFilter(this);
 
     QHBoxLayout *layout = new QHBoxLayout(this);
     layout->addSpacing(5);
