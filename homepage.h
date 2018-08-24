@@ -36,6 +36,8 @@ public:
     HomePage(QWidget *parent = nullptr);
     ~HomePage();
 
+    void updatePos();
+
 private:
     void queryWord();
 

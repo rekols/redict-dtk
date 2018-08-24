@@ -96,7 +96,7 @@ QueryEdit::~QueryEdit()
 void QueryEdit::pressEnter()
 {
     QModelIndex currentIndex = m_listView->currentIndex();
-    
+
     m_isEnter = true;
     if (currentIndex.isValid()) {
         QStringList data = currentIndex.data().toString().split(" | ");
@@ -104,6 +104,17 @@ void QueryEdit::pressEnter()
     }
     m_listView->hide();
     selectAll();
+}
+
+void QueryEdit::updatePos()
+{
+    if (m_listView->isVisible()) {
+        QPoint p(0, height());
+        int x = mapToGlobal(p).x() + 20;
+        int y = mapToGlobal(p).y() + 1;
+        m_listView->move(x, y);
+        m_listView->show();
+    }
 }
 
 void QueryEdit::keyPressEvent(QKeyEvent *e)

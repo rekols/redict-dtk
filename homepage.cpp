@@ -77,6 +77,11 @@ HomePage::~HomePage()
 {
 }
 
+void HomePage::updatePos()
+{
+    m_queryEdit->updatePos();
+}
+
 void HomePage::queryWord()
 {
     const QString &text = m_queryEdit->text();

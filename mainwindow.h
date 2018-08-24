@@ -48,6 +48,7 @@ signals:
 protected:
     void closeEvent(QCloseEvent *);
     void keyPressEvent(QKeyEvent *);
+    bool eventFilter(QObject *object, QEvent *event);
 
 private:
     void activeWindow();

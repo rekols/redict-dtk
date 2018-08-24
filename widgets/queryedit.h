@@ -39,6 +39,7 @@ public:
     ~QueryEdit();
 
     void pressEnter();
+    void updatePos();
 
 protected:
     void keyPressEvent(QKeyEvent *);

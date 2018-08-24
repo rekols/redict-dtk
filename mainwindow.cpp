@@ -55,6 +55,8 @@ MainWindow::MainWindow(QWidget *parent)
         m_settings->setValue("darkTheme", false);
     }
 
+    installEventFilter(this);
+
     // init central widget.
     QWidget *centralWidget = new QWidget;
     m_mainLayout->addWidget(m_homePage);
@@ -117,6 +119,18 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 
         m_toolBar->tabbar->setCurrentIndex(tabIndex);
     }
+}
+
+bool MainWindow::eventFilter(QObject *object, QEvent *event)
+{
+    if (event->type() == QEvent::Move) {
+        QMoveEvent *moveEvent = static_cast<QMoveEvent *>(event);
+        if (m_toolBar->tabbar->currentIndex() == 0) {
+        }
+        m_homePage->updatePos();
+    }
+
+    return DMainWindow::eventFilter(object, event);
 }
 
 void MainWindow::activeWindow()
