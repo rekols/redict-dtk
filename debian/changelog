@@ -1,3 +1,11 @@
+redict (0.8) unstable; urgency=medium
+
+  * 修复图片加载不成功问题
+  * 支持快捷键 Ctrl + Tab 切换页面
+  * 修复菜单主题不正常问题
+  * 更新搜索栏图标
+  * 搜索建议框跟随窗口位置
+
 redict (0.7) unstable; urgency=medium
 
   * 加入暗色主题
