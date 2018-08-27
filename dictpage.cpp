@@ -101,6 +101,14 @@ DictPage::~DictPage()
 
 void DictPage::queryWord(const QString &text)
 {
+    // init status.
+    m_wordLabel->setVisible(false);
+    m_infoLabel->setVisible(false);
+    m_usBtn->setVisible(false);
+    m_ukBtn->setVisible(false);
+    m_usLabel->setVisible(false);
+    m_ukLabel->setVisible(false);
+
     if (text == m_wordLabel->text()) {
         return;
     }
@@ -156,6 +164,7 @@ void DictPage::handleQueryFinished(std::tuple<QString, QString, QString, QString
         m_usLabel->setText(QString("美 [%1]").arg(usPhonetic));
     }
 
+    m_wordLabel->setVisible(true);
     m_wordLabel->setText(queryWord);
 
     QString text = basicExplains;
@@ -165,5 +174,6 @@ void DictPage::handleQueryFinished(std::tuple<QString, QString, QString, QString
         text += webReferences;
     }
 
+    m_infoLabel->setVisible(true);
     m_infoLabel->setText(text);
 }
