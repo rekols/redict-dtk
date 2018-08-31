@@ -18,7 +18,7 @@
  */
 
 #include "popupwindow.h"
-#include "dsvgrenderer.h"
+#include "utils.h"
 #include <QMouseEvent>
 #include <QCloseEvent>
 #include <QPainter>
@@ -31,9 +31,7 @@ PopupWindow::PopupWindow(QWidget *parent)
       m_regionInter(new DRegionMonitor(this)),
       m_api(new YoudaoAPI)
 {
-    const qreal ratio = devicePixelRatioF();
-    m_iconPixmap = DSvgRenderer::render(":/images/redict.svg", QSize(30, 30) * ratio);
-    m_iconPixmap.setDevicePixelRatio(ratio);
+    m_iconPixmap = Utils::renderSVG(":/images/redict.svg", QSize(30, 30));
 
     setWindowFlags(Qt::FramelessWindowHint | Qt::ToolTip);
     setAttribute(Qt::WA_TranslucentBackground);

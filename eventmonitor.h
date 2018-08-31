@@ -20,6 +20,7 @@
 #ifndef EVENTMONITOR_H
 #define EVENTMONITOR_H
 
+#include <QApplication>
 #include <QThread>
 #include <QPoint>
 #include <QDebug>

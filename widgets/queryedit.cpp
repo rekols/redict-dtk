@@ -18,6 +18,7 @@
  */
 
 #include "queryedit.h"
+#include "utils.h"
 #include "listdelegate.h"
 #include "dthememanager.h"
 
@@ -173,18 +174,16 @@ void QueryEdit::focusOutEvent(QFocusEvent *e)
 
 void QueryEdit::initTheme()
 {
-    const qreal ratio = devicePixelRatioF();
     const bool isDark = DThemeManager::instance()->theme() == "dark";
 
     QPixmap iconPixmap;
 
     if (isDark) {
-        iconPixmap = DSvgRenderer::render(":/images/search_dark.svg", QSize(12, 12) * ratio);
+        iconPixmap = Utils::renderSVG(":/images/search_dark.svg", QSize(12, 12));
     } else {
-        iconPixmap = DSvgRenderer::render(":/images/search_light.svg", QSize(12, 12) * ratio);
+        iconPixmap = Utils::renderSVG(":/images/search_light.svg", QSize(12, 12));
     }
 
-    iconPixmap.setDevicePixelRatio(ratio);
     m_iconLabel->setPixmap(iconPixmap);
 }
 

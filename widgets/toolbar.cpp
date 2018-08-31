@@ -18,22 +18,18 @@
  */
 
 #include "toolbar.h"
-#include "dsvgrenderer.h"
+#include "utils.h"
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QDebug>
 #include <QEvent>
 #include <QMouseEvent>
 
-DWIDGET_USE_NAMESPACE
-
 ToolBar::ToolBar(QWidget *parent)
     : QWidget(parent)
 {
-    const qreal ratio = devicePixelRatioF();
-    QPixmap iconPixmap = DSvgRenderer::render(":/images/redict.svg", QSize(22, 22) * ratio);
+    QPixmap iconPixmap = Utils::renderSVG(":/images/redict.svg", QSize(22, 22));
     QLabel *iconLabel = new QLabel;
-    iconPixmap.setDevicePixelRatio(ratio);
     iconLabel->setPixmap(iconPixmap);
 
     tabbar = new QTabBar;

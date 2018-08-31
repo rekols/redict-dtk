@@ -92,6 +92,7 @@ void EventMonitor::handleEvent(XRecordInterceptData* data)
             Q_EMIT buttonPress(event->u.keyButtonPointer.rootX,
                                event->u.keyButtonPointer.rootY);
 
+            // 鼠标左键点击
             if (event->u.u.detail == 1) {
                 m_hoverFlag = false;
 
@@ -105,6 +106,8 @@ void EventMonitor::handleEvent(XRecordInterceptData* data)
             break;
 
         case ButtonRelease:
+
+            // 鼠标左键释放
             if (event->u.u.detail == 1) {
                 m_doubleClickCounter += 1;
 
@@ -114,7 +117,6 @@ void EventMonitor::handleEvent(XRecordInterceptData* data)
                 }
 
                 if (m_hoverFlag || m_doubleClickFlag) {
-                    qDebug() << "!!!!";
                     Q_EMIT selectionChanged();
                 }
 
@@ -123,6 +125,8 @@ void EventMonitor::handleEvent(XRecordInterceptData* data)
             break;
 
         case MotionNotify:
+
+            // 鼠标移动
             m_hoverFlag = true;
             break;
         }

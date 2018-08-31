@@ -31,6 +31,7 @@ public:
     ~Utils();
 
     static QString getQssContent(const QString &filePath);
+    static QPixmap renderSVG(const QString &path, const QSize &size);
 };
 
 #endif
