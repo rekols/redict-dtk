@@ -66,11 +66,10 @@ HomePage::HomePage(QWidget *parent)
         m_queryEdit->pressEnter();
     });
 
-    connect(m_dailyPage, &DailyPage::loadFinished, this,
-            [=] {
-                m_layout->setCurrentIndex(0);
-                m_loadPage->stop();
-            });
+    connect(m_dailyPage, &DailyPage::loadFinished, this, [=] {
+        m_layout->setCurrentIndex(0);
+        m_loadPage->stop();
+    });
 }
 
 HomePage::~HomePage()

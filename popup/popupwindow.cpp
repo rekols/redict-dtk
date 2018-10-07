@@ -24,13 +24,18 @@
 #include <QPainter>
 #include <QDebug>
 
+#include "eventmonitor.h"
+
 PopupWindow::PopupWindow(QWidget *parent)
     : QWidget(parent),
       m_layout(new QStackedLayout(this)),
       m_content(new PopupContent),
-      m_regionInter(new DRegionMonitor(this)),
       m_api(new YoudaoAPI)
 {
+    EventMonitor *eventMonitor = new EventMonitor;
+    connect(eventMonitor, &EventMonitor::buttonPress, this, &PopupWindow::onGlobMousePress, Qt::QueuedConnection);
+    eventMonitor->start();
+
     m_iconPixmap = Utils::renderSVG(":/images/redict.svg", QSize(30, 30));
 
     setWindowFlags(Qt::FramelessWindowHint | Qt::ToolTip);
@@ -40,7 +45,6 @@ PopupWindow::PopupWindow(QWidget *parent)
 
     QWidget::hide();
 
-    connect(m_regionInter, &DRegionMonitor::buttonPress, this, &PopupWindow::onGlobMousePress);
     connect(m_api, &YoudaoAPI::searchFinished, m_content, &PopupContent::updateContent);
 }
 
@@ -77,12 +81,6 @@ void PopupWindow::popup(const QPoint &pos)
     QWidget::move(QPoint(pos.x(), pos.y() - 40));
     QWidget::show();
 
-    if (m_regionInter->registered()) {
-        m_regionInter->unregisterRegion();
-    } else {
-        m_regionInter->registerRegion();
-    }
-
     m_content->hide();
 }
 
@@ -91,9 +89,9 @@ void PopupWindow::query(const QString &text)
     m_api->queryWord(text);
 }
 
-void PopupWindow::onGlobMousePress(const QPoint &mousePos, const int flag)
+void PopupWindow::onGlobMousePress(const int &x, const int &y)
 {
-    Q_UNUSED(flag);
+    QPoint mousePos(x, y);
 
     if (m_content->isVisible()) {
         const QRect rect = QRect(m_content->pos(), m_content->size());
@@ -104,11 +102,6 @@ void PopupWindow::onGlobMousePress(const QPoint &mousePos, const int flag)
     const QRect rect = QRect(pos(), size());
     if (rect.contains(mousePos))
         return;
-
-    if (m_regionInter->registered()) {
-        m_regionInter->unregisterRegion();
-    }
-
 
     m_content->hide();
     QWidget::hide();

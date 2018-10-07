@@ -22,7 +22,6 @@
 
 #include <QWidget>
 #include <QStackedLayout>
-#include "dregionmonitor.h"
 #include "popupcontent.h"
 #include "youdaoapi.h"
 
@@ -45,12 +44,11 @@ public slots:
     void query(const QString &text);
 
 private:
-    void onGlobMousePress(const QPoint &mousePos, const int flag);
+    void onGlobMousePress(const int &x, const int &y);
 
 private:
     QStackedLayout *m_layout;
     PopupContent *m_content;
-    DRegionMonitor *m_regionInter;
     YoudaoAPI *m_api;
     QPixmap m_iconPixmap;
 };

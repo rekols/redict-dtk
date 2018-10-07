@@ -23,10 +23,6 @@
 EventMonitor::EventMonitor(QObject *parent)
     : QThread(parent)
 {
-    m_hoverFlag = false;
-    m_doubleClickFlag = false;
-    m_doubleClickTimeout = true;
-    m_doubleClickCounter = 0;
 }
 
 EventMonitor::~EventMonitor()
@@ -41,7 +37,7 @@ void EventMonitor::run()
     if (isInterruptionRequested())
         return;
 
-    Display *display = XOpenDisplay(0);
+    auto *display = QX11Info::display();
 
     // unable to open display.
     if (display == 0) {
@@ -94,50 +90,27 @@ void EventMonitor::handleEvent(XRecordInterceptData* data)
 
             // 鼠标左键点击
             if (event->u.u.detail == 1) {
-                m_hoverFlag = false;
 
-                if (m_doubleClickTimeout) {
-                    m_doubleClickFlag = false;
-                    m_doubleClickTimeout = false;
-                    m_doubleClickCounter = 0;
-                }
             }
 
             break;
 
         case ButtonRelease:
+            Q_EMIT buttonRelease(event->u.keyButtonPointer.rootX,
+                                 event->u.keyButtonPointer.rootY);
 
             // 鼠标左键释放
             if (event->u.u.detail == 1) {
-                m_doubleClickCounter += 1;
 
-                if (m_doubleClickCounter == 2) {
-                    m_doubleClickFlag = true;
-                    m_doubleClickTimeout = true;;
-                }
-
-                if (m_hoverFlag || m_doubleClickFlag) {
-                    Q_EMIT selectionChanged();
-                }
-
-                m_hoverFlag = false;
             }
             break;
 
         case MotionNotify:
-
             // 鼠标移动
-            m_hoverFlag = true;
             break;
         }
     }
 
     fflush(stdout);
     XRecordFreeData(data);
-}
-
-void EventMonitor::resetDoubleClick()
-{
-    m_doubleClickFlag = false;
-    m_doubleClickTimeout = true;
 }

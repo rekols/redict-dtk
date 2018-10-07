@@ -26,6 +26,7 @@
 #include <QDebug>
 #include <QTimer>
 
+#include <QX11Info>
 #include <X11/Xlib.h>
 #include <X11/extensions/record.h>
 
@@ -39,21 +40,12 @@ public:
 
 signals:
     void buttonPress(const int x, const int y);
-    void selectionChanged();
+    void buttonRelease(const int x, const int y);
 
 protected:
     void run();
     static void callback(XPointer trash, XRecordInterceptData* data);
     void handleEvent(XRecordInterceptData* data);
-
-private:
-    void resetDoubleClick();
-
-private:
-    bool m_hoverFlag;
-    bool m_doubleClickFlag;
-    bool m_doubleClickTimeout;
-    int m_doubleClickCounter;
 };
 
 #endif
