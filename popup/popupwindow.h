@@ -27,6 +27,7 @@
 
 DWIDGET_USE_NAMESPACE
 
+class EventMonitor;
 class PopupWindow : public QWidget
 {
     Q_OBJECT
@@ -50,6 +51,7 @@ private:
     QStackedLayout *m_layout;
     PopupContent *m_content;
     YoudaoAPI *m_api;
+    EventMonitor *m_eventMonitor;
     QPixmap m_iconPixmap;
 };
 

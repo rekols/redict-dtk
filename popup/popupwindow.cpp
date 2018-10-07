@@ -30,11 +30,10 @@ PopupWindow::PopupWindow(QWidget *parent)
     : QWidget(parent),
       m_layout(new QStackedLayout(this)),
       m_content(new PopupContent),
-      m_api(new YoudaoAPI)
+      m_api(new YoudaoAPI),
+      m_eventMonitor(new EventMonitor)
 {
-    EventMonitor *eventMonitor = new EventMonitor;
-    connect(eventMonitor, &EventMonitor::buttonPress, this, &PopupWindow::onGlobMousePress, Qt::QueuedConnection);
-    eventMonitor->start();
+    connect(m_eventMonitor, &EventMonitor::buttonPress, this, &PopupWindow::onGlobMousePress, Qt::QueuedConnection);
 
     m_iconPixmap = Utils::renderSVG(":/images/redict.svg", QSize(30, 30));
 
@@ -81,6 +80,10 @@ void PopupWindow::popup(const QPoint &pos)
     QWidget::move(QPoint(pos.x(), pos.y() - 40));
     QWidget::show();
 
+    if (!m_eventMonitor->isRunning()) {
+        m_eventMonitor->start();
+    }
+
     m_content->hide();
 }
 
@@ -102,6 +105,10 @@ void PopupWindow::onGlobMousePress(const int &x, const int &y)
     const QRect rect = QRect(pos(), size());
     if (rect.contains(mousePos))
         return;
+
+    if (m_eventMonitor->isRunning()) {
+        m_eventMonitor->quit();
+    }
 
     m_content->hide();
     QWidget::hide();
