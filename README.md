@@ -8,6 +8,8 @@
 
 ![](https://github.com/rekols/redict/blob/master/screenshot/20180803040353.png)
 
+最新 [开发动态](https://github.com/rekols/redict/projects/1) 可以在这查看。
+
 ## 编译依赖
 
 `sudo apt install g++ qt5-default libdtkcore-dev libdtkwidget-dev libqt5svg5-dev`
