@@ -2,13 +2,13 @@
 
 一款 Deepin 平台下的词典，基于 Qt / DTK 开发，占用内存小，使用有道词典 API，内容版权归网易有道公司所有。
 
+最新 [开发动态](https://github.com/rekols/redict/projects/1) 可以在这查看。
+
 ![](https://github.com/rekols/redict/blob/master/screenshot/20180803040329.png)
 
 ![](https://github.com/rekols/redict/blob/master/screenshot/20180803040320.png)
 
 ![](https://github.com/rekols/redict/blob/master/screenshot/20180803040353.png)
-
-最新 [开发动态](https://github.com/rekols/redict/projects/1) 可以在这查看。
 
 ## 编译依赖
 
