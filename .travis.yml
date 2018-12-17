@@ -9,3 +9,4 @@ script:
  - cd build
  - qmake ..
  - make
+ - sudo make install
