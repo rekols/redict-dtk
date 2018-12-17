@@ -1,0 +1,11 @@
+language: c++
+sudo: required
+dist: trusty
+os: linux
+
+script:
+ - sudo apt-get install -y g++ qt5-default libdtkwidget-dev qttools5-dev-tools libqt5svg5-dev
+ - mkdir -p build
+ - cd build
+ - qmake ..
+ - make
